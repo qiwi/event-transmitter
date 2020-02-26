@@ -1,0 +1,74 @@
+{
+  "name": "event-transmitter",
+  "version": "0.0.1",
+  "description": "Async adapter to save & deliver reasonable events to some endpoint",
+  "main": "target/es5/index.js",
+  "source": "target/ts/index.ts",
+  "types": "target/es5/index.d.ts",
+  "typescript": {
+    "definition": "target/es5/index.d.ts"
+  },
+  "files": [
+    "README.md",
+    "CHANGELOG.md",
+    "target",
+    "typings",
+    "flow-typed"
+  ],
+  "scripts": {
+    "jest": "jest -w 2 --config=jest.config.json",
+    "lint": "tslint -p tsconfig.test.json src/**/*.ts",
+    "lint:fix": "yarn lint --fix",
+    "test": "yarn lint && yarn jest",
+    "clean": "rimraf target typings",
+    "build": "yarn clean && yarn build:es5 && yarn build:es6 && yarn build:ts && yarn libdef && yarn docs && yarn uglify",
+    "build:es5": "mkdir -p target/es5 && tsc -p tsconfig.es5.json",
+    "build:es6": "mkdir -p target/es6 && tsc -p tsconfig.es6.json",
+    "build:ts": "cp -r src/main/ts/ target/ts/",
+    "dtsgen": "dts-generator --project ./ --out typings/index.d.ts --prefix event-transmitter/target/es5 --name event-transmitter --main event-transmitter/target/es5/index --moduleResolution node",
+    "flowgen": "flowgen typings/index.d.ts --output-file flow-typed/index.flow.js",
+    "libdef": "yarn dtsgen && yarn libdeffix && yarn flowgen",
+    "libdeffix": "node -r esm ./scripts/js/libdef-fix.js --dts=./typings/index.d.ts",
+    "test:report": "yarn test && yarn push:report",
+    "push:report": "yarn coveralls:push",
+    "coveralls:push": "cat ./coverage/lcov.info | coveralls",
+    "docs": "typedoc --readme README.md --tsconfig tsconfig.json src/main --ignoreCompilerErrors || exit 0",
+    "uglify": "for f in $(find target -name '*.js'); do short=${f%.js}; terser -c -m -o $short.js -- $f; done",
+    "postupdate": "yarn && yarn build && yarn test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qiwi/event-transmitter"
+  },
+  "keywords": ["pipe", "event"],
+  "author": "Anton Golub <mailbox@antongolub.ru>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/qiwi/event-transmitter/issues"
+  },
+  "homepage": "https://github.com/qiwi/event-transmitter#readme",
+  "dependencies": {
+    "@qiwi/substrate": "^1.18.8",
+    "tslib": "^1.11.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.1.3",
+    "@types/jest-json-schema": "^2.1.1",
+    "coveralls": "^3.0.9",
+    "dts-generator": "^3.0.0",
+    "eslint-plugin-typescript": "^0.14.0",
+    "esm": "^3.2.25",
+    "flowgen": "1.10.0",
+    "jest": "^25.1.0",
+    "replace-in-file": "^5.0.2",
+    "rimraf": "^3.0.2",
+    "terser": "^4.6.4",
+    "ts-jest": "^25.2.1",
+    "tslint": "^6.0.0",
+    "tslint-config-qiwi": "^1.3.2",
+    "typedoc": "^0.16.10",
+    "typedoc-plugin-external-module-name": "^3.0.0",
+    "typescript": "^3.8.2",
+    "typescript-eslint-parser": "^22.0.0"
+  }
+}
