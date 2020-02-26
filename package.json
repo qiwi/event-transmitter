@@ -1,7 +1,8 @@
 {
-  "name": "event-transmitter",
-  "version": "0.0.1",
+  "name": "@qiwi/event-transmitter",
+  "version": "0.0.0",
   "description": "Async adapter to save & deliver reasonable events to some endpoint",
+  "private": false,
   "main": "target/es5/index.js",
   "source": "target/ts/index.ts",
   "types": "target/es5/index.d.ts",
@@ -25,10 +26,10 @@
     "build:es5": "mkdir -p target/es5 && tsc -p tsconfig.es5.json",
     "build:es6": "mkdir -p target/es6 && tsc -p tsconfig.es6.json",
     "build:ts": "cp -r src/main/ts/ target/ts/",
-    "dtsgen": "dts-generator --project ./ --out typings/index.d.ts --prefix event-transmitter/target/es5 --name event-transmitter --main event-transmitter/target/es5/index --moduleResolution node",
+    "dtsgen": "dts-generator --project ./ --out typings/index.d.ts --prefix @qiwi/event-transmitter/target/es5 --name @qiwi/event-transmitter --main @qiwi/event-transmitter/target/es5/index --moduleResolution node",
     "flowgen": "flowgen typings/index.d.ts --output-file flow-typed/index.flow.js",
     "libdef": "yarn dtsgen && yarn libdeffix && yarn flowgen",
-    "libdeffix": "node -r esm ./scripts/js/libdef-fix.js --dts=./typings/index.d.ts",
+    "libdeffix": "node -r esm ./scripts/js/libdef-fix.js --dts=./typings/index.d.ts --prefix=@qiwi/event-transmitter/target/es5",
     "test:report": "yarn test && yarn push:report",
     "push:report": "yarn coveralls:push",
     "coveralls:push": "cat ./coverage/lcov.info | coveralls",
@@ -41,7 +42,7 @@
     "url": "git+https://github.com/qiwi/event-transmitter"
   },
   "keywords": ["pipe", "event"],
-  "author": "Anton Golub <mailbox@antongolub.ru>",
+  "author": "Qiwibot <opensource@qiwibot.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/qiwi/event-transmitter/issues"
