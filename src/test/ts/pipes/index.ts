@@ -30,9 +30,10 @@ describe('pipes', () => {
       const upper: IPipe = {
         type: 'upper',
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        async execute (data, _next: Function) {
+        async execute (data, next: Function) {
           data.data.message = data.data.message.toUpperCase()
-
+          await next([null, data])
+          data.data.message = data.data.message.toUpperCase()
           return Promise.resolve([null, data])
         }
       }
@@ -46,13 +47,20 @@ describe('pipes', () => {
         }
       }
 
-      const pipeline: TPipeline = [foo, upper]
+      /*      const pipeline1: TPipeline = [foo, [upper]]
 
       const [err, data] = await execute(createTransmittable({
         message: 'bar'
-      }), pipeline)
+      }), pipeline1)
+      console.log(err, data) */
 
-      console.log(err, data)
+      const pipeline2: TPipeline = [upper, foo]
+
+      const [err, data] = await execute(createTransmittable({
+        message: 'baz'
+      }), pipeline2)
+
+      console.log(err, JSON.stringify(data))
 
       done()
     })
