@@ -1,7 +1,5 @@
-import { foo } from '../../main/ts'
-
 describe('index', () => {
-  it('foo', ()=>{
-    expect(foo).not.toBeUndefined()
+  it('foo', () => {
+    expect(true).toBe(true)
   })
 })

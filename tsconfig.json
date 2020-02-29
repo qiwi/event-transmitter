@@ -5,7 +5,8 @@
     "moduleResolution": "node",
     "target": "es5",
     "lib": [
-      "esnext"
+      "esnext",
+      "dom"
     ],
     "strict": true,
     "sourceMap": false,
@@ -18,6 +19,7 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "experimentalDecorators": true,
+    "esModuleInterop": true,
 
     "incremental": true,
     "tsBuildInfoFile": "./buildcache/.tsbuildinfo"
