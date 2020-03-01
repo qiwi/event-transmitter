@@ -1,5 +1,5 @@
 import { IPipe, TPipeline, createTransmittable } from '../../../main/ts'
-import { execute,  getPipelineId } from '../../../main/ts/pipes'
+import { execute, getPipelineId } from '../../../main/ts/pipes'
 
 describe('pipes', () => {
   describe('getPipelineId', () => {
