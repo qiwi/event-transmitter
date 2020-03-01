@@ -8,14 +8,14 @@ yarn add @qiwi/event-transmitter
 
 ## Usage
 ```typescript
-import {createTransmitter, createFetchPusher, IEventTransmitterPipe} from '@qiwi/event-transmitter'
+import {createTransmitter, createHttpPipe, IPipe} from '@qiwi/event-transmitter'
 
-const pusher: IEventTransmitterPipe = createFetchPusher({
+const httpPipe: IPipe = createFetchPusher({
   url: 'https://example.qiwi.com/event',
-  batchUrl: 'https://example.qiwi.com/event'
+  method: 'POST'
 })
 const transmitter = createTransmitter({
-  pipeline: [pusher]
+  pipeline: [httpPipe]
 })
 const event: IClientEventDto = {...}
 

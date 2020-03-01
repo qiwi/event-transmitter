@@ -1,0 +1,46 @@
+import {HttpMethod} from '@qiwi/substrate-types'
+import {httpPipeFactory} from '../../../main/ts/pipes/http'
+import {ITransmittable} from '../../../main/ts/pipes'
+
+import 'cross-fetch/polyfill'
+
+describe('httpPipe', () => {
+  it('factory returns IPipe', () => {
+    const httpPipe = httpPipeFactory({url: 'https://reqres.in/api/users/2', method: HttpMethod.GET})
+
+    expect(httpPipe.type).toBe('http')
+    expect(httpPipe.execute).toEqual(expect.any(Function))
+  })
+
+  it('returns remote data if succeeds', () => {
+    const httpPipe = httpPipeFactory({url: 'https://reqres.in/api/users/2', method: HttpMethod.GET})
+    const transittable: ITransmittable = {data: null, meta: {history: []}}
+
+    return expect(httpPipe.execute(transittable, () => {}))
+      .resolves.toEqual([null, {
+      data: {
+        id: 2,
+        email: 'janet.weaver@reqres.in',
+        first_name: 'Janet',
+        last_name: 'Weaver',
+        avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg',
+      },
+    }])
+  })
+
+  it('handles 4** status as error', () => {
+    const httpPipe = httpPipeFactory({url: 'https://github.com', method: HttpMethod.POST})
+    const transittable: ITransmittable = {data: 'test', meta: {history: []}}
+
+    return expect(httpPipe.execute(transittable, () => {}))
+      .resolves.toEqual([new Error('Not Found'), null])
+  })
+
+  it('returns an error otherwise', () => {
+    const httpPipe = httpPipeFactory({url: 'foobar', method: HttpMethod.GET})
+    const transittable: ITransmittable = {data: null, meta: {history: []}}
+
+    return expect(httpPipe.execute(transittable, () => {}))
+      .resolves.toEqual([new TypeError('Only absolute URLs are supported'), null])
+  })
+})
