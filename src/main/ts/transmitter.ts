@@ -2,15 +2,14 @@ import {
   ITransmitter,
   ITransmittable,
   TPipeline,
-  IPipeOutput,
+  IPipeOutput
 } from './interfaces'
 
-import {IPromise} from '@qiwi/substrate'
+import { IPromise } from '@qiwi/substrate'
 
 import {
   execute
 } from './pipes'
-
 
 export type ITransmitterOpts = {
   pipeline: TPipeline
@@ -21,8 +20,8 @@ export const createTransmittable = (event: any): ITransmittable => ({
   meta: { history: [] }
 })
 
-export const createTransmitter = ({pipeline}: ITransmitterOpts): ITransmitter => ({
-  push(data: any): IPromise<IPipeOutput> {
+export const createTransmitter = ({ pipeline }: ITransmitterOpts): ITransmitter => ({
+  push (data: any): IPromise<IPipeOutput> {
     const transmittable = createTransmittable(data)
 
     return execute(transmittable, pipeline)

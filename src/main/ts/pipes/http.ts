@@ -1,5 +1,5 @@
-import {IPipe, IPipeOutput, ITransmittable} from '../interfaces'
-import {HttpMethod, IPromise} from '@qiwi/substrate'
+import { IPipe, IPipeOutput, ITransmittable } from '../interfaces'
+import { HttpMethod, IPromise } from '@qiwi/substrate'
 
 export interface IHttpPipeOpts {
   method: HttpMethod,
@@ -8,10 +8,10 @@ export interface IHttpPipeOpts {
 
 export const type = 'http'
 
-export const createHttpPipe = ({url, method}: IHttpPipeOpts): IPipe => ({
+export const createHttpPipe = ({ url, method }: IHttpPipeOpts): IPipe => ({
   type,
-  execute({data}: ITransmittable): IPromise<IPipeOutput> {
-    return fetch(url, {method, body: data})
+  execute ({ data }: ITransmittable): IPromise<IPipeOutput> {
+    return fetch(url, { method, body: data })
       .then(async (res) => {
         if (!res.ok) {
           throw new Error(res.statusText)
