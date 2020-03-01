@@ -1,9 +1,15 @@
+import {IPromise} from '@qiwi/substrate'
+
 export interface ITransmittable {
   data: any
   meta: {
     history: Array<IHistoryEntry>
 
   }
+}
+
+export interface ITransmitter {
+  push(input: any): IPromise<IPipeOutput>
 }
 
 export interface IHistoryEntry {

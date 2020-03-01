@@ -1,19 +1,18 @@
 import {HttpMethod} from '@qiwi/substrate-types'
-import {httpPipeFactory} from '../../../main/ts/pipes/http'
-import {ITransmittable} from '../../../main/ts/pipes'
+import {createHttpPipe, ITransmittable} from '../../../main/ts'
 
 import 'cross-fetch/polyfill'
 
 describe('httpPipe', () => {
   it('factory returns IPipe', () => {
-    const httpPipe = httpPipeFactory({url: 'https://reqres.in/api/users/2', method: HttpMethod.GET})
+    const httpPipe = createHttpPipe({url: 'https://reqres.in/api/users/2', method: HttpMethod.GET})
 
     expect(httpPipe.type).toBe('http')
     expect(httpPipe.execute).toEqual(expect.any(Function))
   })
 
   it('returns remote data if succeeds', () => {
-    const httpPipe = httpPipeFactory({url: 'https://reqres.in/api/users/2', method: HttpMethod.GET})
+    const httpPipe = createHttpPipe({url: 'https://reqres.in/api/users/2', method: HttpMethod.GET})
     const transittable: ITransmittable = {data: null, meta: {history: []}}
 
     return expect(httpPipe.execute(transittable, () => {}))
@@ -29,7 +28,7 @@ describe('httpPipe', () => {
   })
 
   it('handles 4** status as error', () => {
-    const httpPipe = httpPipeFactory({url: 'https://github.com', method: HttpMethod.POST})
+    const httpPipe = createHttpPipe({url: 'https://github.com', method: HttpMethod.POST})
     const transittable: ITransmittable = {data: 'test', meta: {history: []}}
 
     return expect(httpPipe.execute(transittable, () => {}))
@@ -37,7 +36,7 @@ describe('httpPipe', () => {
   })
 
   it('returns an error otherwise', () => {
-    const httpPipe = httpPipeFactory({url: 'foobar', method: HttpMethod.GET})
+    const httpPipe = createHttpPipe({url: 'foobar', method: HttpMethod.GET})
     const transittable: ITransmittable = {data: null, meta: {history: []}}
 
     return expect(httpPipe.execute(transittable, () => {}))

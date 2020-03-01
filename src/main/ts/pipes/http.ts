@@ -1,4 +1,4 @@
-import {IPipe, IPipeOutput, ITransmittable} from './interfaces'
+import {IPipe, IPipeOutput, ITransmittable} from '../interfaces'
 import {HttpMethod, IPromise} from '@qiwi/substrate'
 
 export interface IHttpPipeOpts {
@@ -8,7 +8,7 @@ export interface IHttpPipeOpts {
 
 export const type = 'http'
 
-export const httpPipeFactory = ({url, method}: IHttpPipeOpts): IPipe => ({
+export const createHttpPipe = ({url, method}: IHttpPipeOpts): IPipe => ({
   type,
   execute({data}: ITransmittable): IPromise<IPipeOutput> {
     return fetch(url, {method, body: data})

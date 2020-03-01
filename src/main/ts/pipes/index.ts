@@ -1,6 +1,6 @@
 import once from 'lodash.once'
 
-import { TPipeline, ITransmittable, IPipeOutput } from './interfaces'
+import { TPipeline, ITransmittable, IPipeOutput } from '../interfaces'
 
 export const getPipelineId = (pipeline: TPipeline): string => {
   return pipeline.reduce((acc, pipe, index) => {
@@ -43,5 +43,3 @@ export const execute = async (transmittable: ITransmittable, pipeline: TPipeline
     return output
   })
 }
-
-export * from './interfaces'
