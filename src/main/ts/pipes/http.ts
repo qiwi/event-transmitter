@@ -1,5 +1,5 @@
-import { IPipe, IPipeOutput, ITransmittable } from '../interfaces'
 import { HttpMethod, IPromise } from '@qiwi/substrate'
+import { IPipe, IPipeOutput, ITransmittable } from '../interfaces'
 
 export interface IHttpPipeOpts {
   method: HttpMethod,

@@ -10,11 +10,6 @@ export const getPipelineId = (pipeline: TPipeline): string => {
   }, '')
 }
 
-export const createTransmittable = (event: any): ITransmittable => ({
-  data: event,
-  meta: { history: [] }
-})
-
 export const execute = async (transmittable: ITransmittable, pipeline: TPipeline, prefix = 0, pipelineId = getPipelineId(pipeline)): Promise<IPipeOutput> => {
   const pipe = pipeline[0]
 
