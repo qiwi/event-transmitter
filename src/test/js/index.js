@@ -1,9 +1,9 @@
-import {
+const {
   createTransmitter,
   createHttpPipe
-} from '../../main/ts'
+} = require('../../../target/es5')
 
-describe('index', () => {
+describe('index.js (target)', () => {
   it('has proper export', () => {
     expect(createTransmitter).toEqual(expect.any(Function))
     expect(createHttpPipe).toEqual(expect.any(Function))
