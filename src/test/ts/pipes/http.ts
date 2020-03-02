@@ -29,6 +29,32 @@ describe('httpPipe', () => {
       }])
   })
 
+  it('execute functions passed in header', async () => {
+    const spy = jest.spyOn(window, 'fetch')
+
+    const httpPipe = createHttpPipe({
+      url: 'https://reqres.in/api/users/1',
+      method: HttpMethod.GET,
+      headers: {
+        a: 'foo',
+        b: () => 'bar'
+      }
+    })
+    const transittable: ITransmittable = { data: null, meta: { history: [] } }
+
+    await httpPipe.execute(transittable, noop)
+    expect(spy).toHaveBeenCalledWith('https://reqres.in/api/users/1', {
+      method: HttpMethod.GET,
+      body: null,
+      headers: {
+        a: 'foo',
+        b: 'bar'
+      }
+    })
+
+    spy.mockClear()
+  })
+
   it('handles 4** status as error', () => {
     const httpPipe = createHttpPipe({ url: 'https://github.com', method: HttpMethod.POST })
     const transittable: ITransmittable = { data: 'test', meta: { history: [] } }
