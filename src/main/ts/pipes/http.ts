@@ -1,3 +1,4 @@
+import safeJsonStringify from 'safe-json-stringify'
 import { HttpMethod, IPromise } from '@qiwi/substrate'
 import { IPipe, IPipeOutput, ITransmittable } from '../interfaces'
 
@@ -20,10 +21,17 @@ const getPlainHeaders = (headers: IHttpHeaders): Record<string, string> =>
 export const createHttpPipe = ({ url, method, headers }: IHttpPipeOpts): IPipe => ({
   type,
   execute ({ data }: ITransmittable): IPromise<IPipeOutput> {
+    const defaultHeaders = {
+      'Content-Type': 'application/json'
+    }
+
     return fetch(url, {
       method,
-      headers: headers && getPlainHeaders(headers),
-      body: data
+      headers: {
+        ...defaultHeaders,
+        ...(headers && getPlainHeaders(headers))
+      },
+      body: data && safeJsonStringify(data)
     })
       .then(async (res) => {
         if (!res.ok) {
