@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/qiwi/event-transmitter/compare/v1.0.0...v1.1.0) (2020-03-03)
+
+
+### Features
+
+* add headers to http pipe ([ea8d0c5](https://github.com/qiwi/event-transmitter/commit/ea8d0c566d9a1428d354cce80ad6de27253e8910))
+
 # 1.0.0 (2020-03-02)
 
 
