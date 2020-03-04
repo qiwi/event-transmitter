@@ -54,6 +54,7 @@
   "dependencies": {
     "@qiwi/substrate": "^1.18.11",
     "@types/lodash.once": "^4.1.6",
+    "fast-luhn": "^1.0.4",
     "lodash.once": "^4.1.1",
     "safe-json-stringify": "^1.2.0",
     "tslib": "^1.11.1"
