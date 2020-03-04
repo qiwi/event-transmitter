@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/qiwi/event-transmitter/compare/v1.1.0...v1.2.0) (2020-03-04)
+
+
+### Features
+
+* use safe-json-stringify for http pipe ([e2517db](https://github.com/qiwi/event-transmitter/commit/e2517dba748487faae90a9bd46ddf45ff2513e85))
+
 # [1.1.0](https://github.com/qiwi/event-transmitter/compare/v1.0.0...v1.1.0) (2020-03-03)
 
 
