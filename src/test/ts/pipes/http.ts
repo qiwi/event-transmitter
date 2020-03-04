@@ -15,9 +15,9 @@ describe('httpPipe', () => {
 
   it('returns remote data if succeeds', () => {
     const httpPipe = createHttpPipe({ url: 'https://reqres.in/api/users/2', method: HttpMethod.GET })
-    const transittable: ITransmittable = { data: null, meta: { history: [] } }
+    const transmittable: ITransmittable = { data: null, meta: { history: [] } }
 
-    return expect(httpPipe.execute(transittable, noop))
+    return expect(httpPipe.execute(transmittable, noop))
       .resolves.toEqual([null, {
         data: {
           id: 2,
