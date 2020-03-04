@@ -48,13 +48,6 @@ describe('pipes', () => {
         }
       }
 
-      /*      const pipeline1: TPipeline = [foo, [upper]]
-
-      const [err, data] = await execute(createTransmittable({
-        message: 'bar'
-      }), pipeline1)
-      console.log(err, data) */
-
       const pipeline2: TPipeline = [upper, foo]
 
       const [err, data] = await execute(createTransmittable({
