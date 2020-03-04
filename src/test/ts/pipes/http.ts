@@ -40,13 +40,14 @@ describe('httpPipe', () => {
         b: () => 'bar'
       }
     })
-    const transittable: ITransmittable = { data: null, meta: { history: [] } }
+    const transittable: ITransmittable = { data: { message: 'bar' }, meta: { history: [] } }
 
     await httpPipe.execute(transittable, noop)
     expect(spy).toHaveBeenCalledWith('https://reqres.in/api/users/1', {
       method: HttpMethod.GET,
-      body: null,
+      body: '{"message":"bar"}',
       headers: {
+        'Content-Type': 'application/json',
         a: 'foo',
         b: 'bar'
       }
