@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/qiwi/event-transmitter/compare/v1.2.0...v1.3.0) (2020-03-04)
+
+
+### Features
+
+* add maskerPipe ([231d6ed](https://github.com/qiwi/event-transmitter/commit/231d6ed47f10e600f4998d2ce3e77d26a2d3aba5)), closes [#4](https://github.com/qiwi/event-transmitter/issues/4)
+
 # [1.2.0](https://github.com/qiwi/event-transmitter/compare/v1.1.0...v1.2.0) (2020-03-04)
 
 
