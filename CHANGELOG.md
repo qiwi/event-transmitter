@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/qiwi/event-transmitter/compare/v1.4.0...v1.5.0) (2020-03-05)
+
+
+### Features
+
+* expose flp pipeline from index ([c470196](https://github.com/qiwi/event-transmitter/commit/c470196ce677351a470b987b10dedd25abb9c967)), closes [#5](https://github.com/qiwi/event-transmitter/issues/5)
+
 # [1.4.0](https://github.com/qiwi/event-transmitter/compare/v1.3.0...v1.4.0) (2020-03-05)
 
 
