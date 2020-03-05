@@ -1,26 +1,18 @@
-import {eventifyPipe, createFlpPipeline} from '../../../main/ts/pipes/flp'
-import {createTransmittable, createTransmitter} from '../../../main/ts'
-import {HttpMethod} from '@qiwi/substrate'
+import { eventifyPipe, createFlpPipeline } from '../../../main/ts/pipes/flp'
+import { createTransmittable, createTransmitter } from '../../../main/ts'
+import { HttpMethod } from '@qiwi/substrate'
 
 import 'cross-fetch/polyfill'
 
-describe('eventifyPipe', () => {
-  const noop = () => { /* noop */ }
+const noop = () => { /* noop */ }
 
+describe('eventifyPipe', () => {
   const cases: Array<[string, any, any, any]> = [
-    ['processes string input', 'foo', null, {
-      level: 'info',
-      message: 'foo',
-      meta: {},
-    }],
-    ['processes error as input', new Error('foobar'), null, {
-      level: 'error',
-      message: 'foobar',
-      meta: {},
-    }],
+    ['processes string input', 'foo', null, { level: 'info', message: 'foo', meta: {} }],
+    ['processes error as input', new Error('foobar'), null, { level: 'error', message: 'foobar', meta: {} }],
     ['returns err if no arg passed', undefined, new Error('Event message must not be empty'), null],
     ['does not processes arrays', [], new Error('Event batches are not supported yet'), null],
-    ['assures message not to be empty', '', new Error('Event message must not be empty'), null],
+    ['assures message not to be empty', '', new Error('Event message must not be empty'), null]
   ]
 
   cases.forEach(([name, input, err, data]) => {
@@ -31,7 +23,6 @@ describe('eventifyPipe', () => {
 })
 
 describe('flpPipeline', () => {
-
   it('createFlpPipeline factory returns a pipeline', () => {
     expect(createFlpPipeline({ url: 'https://reqres.in/api/users/2', method: HttpMethod.GET })).toEqual(expect.any(Array))
   })
@@ -53,7 +44,7 @@ describe('flpPipeline', () => {
       body: JSON.stringify({
         message: '0000 **** **** 0000',
         meta: {},
-        level: 'info',
+        level: 'info'
       }),
       headers: {
         'Content-Type': 'application/json'

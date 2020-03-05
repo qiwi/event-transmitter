@@ -20,7 +20,7 @@ export const execute = async (transmittable: ITransmittable, pipeline: TPipeline
     return [null, null]
   }
 
-  const next = once(([_err, data]: IPipeOutput) => execute({...transmittable, data}, pipeline.slice(1), prefix + 1, pipelineId))
+  const next = once(([err, data]: IPipeOutput) => execute({ ...transmittable, data, err }, pipeline.slice(1), prefix + 1, pipelineId))
 
   return pipe.execute(transmittable, next).then(async (output) => {
     transmittable.meta.history.push({
