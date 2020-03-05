@@ -12,6 +12,7 @@ export type ITransmitterOpts = {
 
 export const createTransmittable = (event: any): ITransmittable => ({
   data: event,
+  err: null,
   meta: { history: [] }
 })
 

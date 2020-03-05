@@ -1,5 +1,7 @@
 import {IClientEventDto, LogLevel} from '@qiwi/substrate'
-import {IPipe, ITransmittable} from '../interfaces'
+import {IPipe, ITransmittable, TPipeline} from '../interfaces'
+import {panMaskerPipe} from './masker'
+import {createHttpPipe, IHttpPipeOpts} from './http'
 
 const DEFAULT_LEVEL = LogLevel.INFO
 
@@ -7,9 +9,7 @@ export const type = 'flp-eventify'
 
 export const eventifyPipe: IPipe = {
   type,
-  async execute (transmittable: ITransmittable) {
-    const { data } = transmittable
-
+  async execute ({ data }: ITransmittable) {
     const event: IClientEventDto = {
       message: '',
       meta: {}
@@ -40,4 +40,10 @@ export const eventifyPipe: IPipe = {
 
     return [null, event]
   }
+}
+
+export const createFlpPipeline = (opts: IHttpPipeOpts): TPipeline => {
+  const httpPipe = createHttpPipe(opts)
+
+  return [panMaskerPipe, eventifyPipe, httpPipe]
 }

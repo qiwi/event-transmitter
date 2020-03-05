@@ -2,6 +2,7 @@ import { IPromise } from '@qiwi/substrate'
 
 export interface ITransmittable {
   data: any
+  err?: any
   meta: {
     history: Array<IHistoryEntry>
 
