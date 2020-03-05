@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/qiwi/event-transmitter/compare/v1.3.0...v1.4.0) (2020-03-05)
+
+
+### Bug Fixes
+
+* extend transmittable with the last pipe output ([a66f59f](https://github.com/qiwi/event-transmitter/commit/a66f59fc5239d2f278c184e86ae5b7315b6003b0))
+
+
+### Features
+
+* add flp pipeline ([450c347](https://github.com/qiwi/event-transmitter/commit/450c347421f4ab36da6a9e07ee0506bf36ed353b))
+
 # [1.3.0](https://github.com/qiwi/event-transmitter/compare/v1.2.0...v1.3.0) (2020-03-04)
 
 
