@@ -26,7 +26,6 @@ export interface ITransmittable {
   err?: any
   meta: {
     history: Array<IHistoryEntry>
-    deviceInfo?: IDeviceInfo
   }
 }
 
