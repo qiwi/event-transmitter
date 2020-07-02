@@ -12,15 +12,13 @@ export interface IOperationalSystemInfo {
   version?: string | null
 }
 
-export interface IEnvironmentInfo {
-  device?: string | null
-  manufacturer?: string | null
-  os?: IOperationalSystemInfo
-}
-
 export interface IDeviceInfo {
   browser: IBrowserInfo
-  environment: IEnvironmentInfo
+  model: {
+    product?: string | null,
+    manufacturer?: string | null
+  },
+  os?: IOperationalSystemInfo
 }
 
 export interface ITransmittable {

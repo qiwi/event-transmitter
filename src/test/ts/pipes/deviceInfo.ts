@@ -18,14 +18,14 @@ describe('getDeviceInfo', () => {
         version: '83.0.4103.116',
         layout: 'Blink'
       },
-      environment: {
-        device: null,
-        manufacturer: null,
-        os: {
-          architecture: 64,
-          family: 'OS X',
-          version: '10.14.6'
-        }
+      model: {
+        product: null,
+        manufacturer: null
+      },
+      os: {
+        architecture: 64,
+        family: 'OS X',
+        version: '10.14.6'
       }
     }
     expect<IDeviceInfo>(getDeviceInfo(userAgent)).toMatchObject(expected)

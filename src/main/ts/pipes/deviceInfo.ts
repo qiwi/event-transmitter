@@ -1,29 +1,36 @@
-import { IDeviceInfo, IPipe, IPipeOutput, ITransmittable } from '../interfaces'
+import { IDeviceInfo, IPipe, IPipeOutput } from '../interfaces'
 import { IPromise } from '@qiwi/substrate'
 import platform from 'platform'
+import { IClientEventDto } from './flp'
 
 export const type = 'device-info'
 
 export const getDeviceInfo = (userAgent?: string): IDeviceInfo => {
-  const parser = userAgent ? platform.parse(userAgent) : platform
+  const parsedData = userAgent ? platform.parse(userAgent) : platform
+  const { name, version, layout, product, manufacturer, os } = parsedData
   return {
     browser: {
-      name: parser.name,
-      version: parser.version,
-      layout: parser.layout
+      name,
+      version,
+      layout
     },
-    environment: {
-      device: parser.product,
-      manufacturer: parser.manufacturer,
-      os: parser.os
-    }
+    model: {
+      product,
+      manufacturer
+    },
+    os
   }
 }
 
 export const createDeviceInfoPipe = (): IPipe => ({
   type,
-  execute ({ data }: ITransmittable): IPromise<IPipeOutput> {
-    data.meta.deviceInfo = getDeviceInfo()
-    return Promise.resolve([null, data])
+  execute (): IPromise<IPipeOutput> {
+    const event: IClientEventDto = {
+      message: '',
+      meta: {
+        deviceInfo: getDeviceInfo()
+      }
+    }
+    return Promise.resolve([null, event])
   }
 })
