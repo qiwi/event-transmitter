@@ -18,7 +18,7 @@ describe('httpPipe', () => {
     const transmittable: ITransmittable = { data: null, meta: { history: [] } }
 
     return expect(httpPipe.execute(transmittable, noop))
-      .resolves.toEqual([null, {
+      .resolves.toMatchObject([null, {
         data: {
           id: 2,
           email: 'janet.weaver@reqres.in',
