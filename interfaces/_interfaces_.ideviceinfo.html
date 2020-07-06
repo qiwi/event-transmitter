@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;interfaces&quot; | event-transmitter</title>
+	<title>IDeviceInfo | event-transmitter</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,61 +54,82 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_interfaces_.html">&quot;interfaces&quot;</a>
+					<a href="../modules/_interfaces_.html">&quot;interfaces&quot;</a>
+				</li>
+				<li>
+					<a href="_interfaces_.ideviceinfo.html">IDeviceInfo</a>
 				</li>
 			</ul>
-			<h1>External module &quot;interfaces&quot;</h1>
+			<h1>Interface IDeviceInfo</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">IDeviceInfo</span>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Interfaces</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_interfaces_.ibrowserinfo.html" class="tsd-kind-icon">IBrowser<wbr>Info</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_interfaces_.ideviceinfo.html" class="tsd-kind-icon">IDevice<wbr>Info</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_interfaces_.ihistoryentry.html" class="tsd-kind-icon">IHistory<wbr>Entry</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_interfaces_.ioperationalsysteminfo.html" class="tsd-kind-icon">IOperational<wbr>System<wbr>Info</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_interfaces_.ipipe.html" class="tsd-kind-icon">IPipe</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_interfaces_.itransmittable.html" class="tsd-kind-icon">ITransmittable</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_interfaces_.itransmitter.html" class="tsd-kind-icon">ITransmitter</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Type aliases</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_interfaces_.html#ipipeoutput" class="tsd-kind-icon">IPipe<wbr>Output</a></li>
-								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_interfaces_.html#tpipeline" class="tsd-kind-icon">TPipeline</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.ideviceinfo.html#browser" class="tsd-kind-icon">browser</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.ideviceinfo.html#model" class="tsd-kind-icon">model</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_interfaces_.ideviceinfo.html#os" class="tsd-kind-icon">os</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Type aliases</h2>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
-					<a name="ipipeoutput" class="tsd-anchor"></a>
-					<h3>IPipe<wbr>Output</h3>
-					<div class="tsd-signature tsd-kind-icon">IPipe<wbr>Output<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span></div>
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="browser" class="tsd-anchor"></a>
+					<h3>browser</h3>
+					<div class="tsd-signature tsd-kind-icon">browser<span class="tsd-signature-symbol">:</span> <a href="_interfaces_.ibrowserinfo.html" class="tsd-signature-type">IBrowserInfo</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/06e868b/src/main/ts/interfaces.ts#L44">src/main/ts/interfaces.ts:44</a></li>
+							<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/06e868b/src/main/ts/interfaces.ts#L16">src/main/ts/interfaces.ts:16</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
-					<a name="tpipeline" class="tsd-anchor"></a>
-					<h3>TPipeline</h3>
-					<div class="tsd-signature tsd-kind-icon">TPipeline<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interfaces_.ipipe.html" class="tsd-signature-type">IPipe</a><span class="tsd-signature-symbol"> | </span><a href="_interfaces_.html#tpipeline" class="tsd-signature-type">TPipeline</a><span class="tsd-signature-symbol">&gt;</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="model" class="tsd-anchor"></a>
+					<h3>model</h3>
+					<div class="tsd-signature tsd-kind-icon">model<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>manufacturer<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>product<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/06e868b/src/main/ts/interfaces.ts#L51">src/main/ts/interfaces.ts:51</a></li>
+							<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/06e868b/src/main/ts/interfaces.ts#L17">src/main/ts/interfaces.ts:17</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> manufacturer<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> product<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="os" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> os</h3>
+					<div class="tsd-signature tsd-kind-icon">os<span class="tsd-signature-symbol">:</span> <a href="_interfaces_.ioperationalsysteminfo.html" class="tsd-signature-type">IOperationalSystemInfo</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/06e868b/src/main/ts/interfaces.ts#L21">src/main/ts/interfaces.ts:21</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -121,68 +142,83 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_index_.html">&quot;index&quot;</a>
+						<a href="../modules/_index_.html">&quot;index&quot;</a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="_interfaces_.html">&quot;interfaces&quot;</a>
+						<a href="../modules/_interfaces_.html">&quot;interfaces&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_pipes_deviceinfo_.html">&quot;pipes/device<wbr>Info&quot;</a>
+						<a href="../modules/_pipes_deviceinfo_.html">&quot;pipes/device<wbr>Info&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_pipes_flp_.html">&quot;pipes/flp&quot;</a>
+						<a href="../modules/_pipes_flp_.html">&quot;pipes/flp&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_pipes_http_.html">&quot;pipes/http&quot;</a>
+						<a href="../modules/_pipes_http_.html">&quot;pipes/http&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_pipes_index_.html">&quot;pipes/index&quot;</a>
+						<a href="../modules/_pipes_index_.html">&quot;pipes/index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_pipes_masker_.html">&quot;pipes/masker&quot;</a>
+						<a href="../modules/_pipes_masker_.html">&quot;pipes/masker&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_transmitter_.html">&quot;transmitter&quot;</a>
+						<a href="../modules/_transmitter_.html">&quot;transmitter&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_utils_clone_.html">&quot;utils/clone&quot;</a>
+						<a href="../modules/_utils_clone_.html">&quot;utils/clone&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_utils_deepmap_.html">&quot;utils/deepmap&quot;</a>
+						<a href="../modules/_utils_deepmap_.html">&quot;utils/deepmap&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_utils_index_.html">&quot;utils/index&quot;</a>
+						<a href="../modules/_utils_index_.html">&quot;utils/index&quot;</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_interfaces_.ibrowserinfo.html" class="tsd-kind-icon">IBrowser<wbr>Info</a>
+						<a href="_interfaces_.ibrowserinfo.html" class="tsd-kind-icon">IBrowser<wbr>Info</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_interfaces_.ideviceinfo.html" class="tsd-kind-icon">IDevice<wbr>Info</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_interfaces_.ideviceinfo.html#browser" class="tsd-kind-icon">browser</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_interfaces_.ideviceinfo.html#model" class="tsd-kind-icon">model</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_interfaces_.ideviceinfo.html#os" class="tsd-kind-icon">os</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_interfaces_.ihistoryentry.html" class="tsd-kind-icon">IHistory<wbr>Entry</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_interfaces_.ideviceinfo.html" class="tsd-kind-icon">IDevice<wbr>Info</a>
+						<a href="_interfaces_.ioperationalsysteminfo.html" class="tsd-kind-icon">IOperational<wbr>System<wbr>Info</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_interfaces_.ihistoryentry.html" class="tsd-kind-icon">IHistory<wbr>Entry</a>
+						<a href="_interfaces_.ipipe.html" class="tsd-kind-icon">IPipe</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_interfaces_.ioperationalsysteminfo.html" class="tsd-kind-icon">IOperational<wbr>System<wbr>Info</a>
+						<a href="_interfaces_.itransmittable.html" class="tsd-kind-icon">ITransmittable</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_interfaces_.ipipe.html" class="tsd-kind-icon">IPipe</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_interfaces_.itransmittable.html" class="tsd-kind-icon">ITransmittable</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_interfaces_.itransmitter.html" class="tsd-kind-icon">ITransmitter</a>
+						<a href="_interfaces_.itransmitter.html" class="tsd-kind-icon">ITransmitter</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="_interfaces_.html#ipipeoutput" class="tsd-kind-icon">IPipe<wbr>Output</a>
+						<a href="../modules/_interfaces_.html#ipipeoutput" class="tsd-kind-icon">IPipe<wbr>Output</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="_interfaces_.html#tpipeline" class="tsd-kind-icon">TPipeline</a>
+						<a href="../modules/_interfaces_.html#tpipeline" class="tsd-kind-icon">TPipeline</a>
 					</li>
 				</ul>
 			</nav>
