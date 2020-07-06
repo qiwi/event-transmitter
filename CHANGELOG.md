@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/qiwi/event-transmitter/compare/v1.5.0...v1.6.0) (2020-07-06)
+
+
+### Features
+
+* introduce device info pipe ([06e868b](https://github.com/qiwi/event-transmitter/commit/06e868ba01304b6a2664120b0e712dc96a32aa33)), closes [#6](https://github.com/qiwi/event-transmitter/issues/6)
+
 # [1.5.0](https://github.com/qiwi/event-transmitter/compare/v1.4.0...v1.5.0) (2020-03-05)
 
 
