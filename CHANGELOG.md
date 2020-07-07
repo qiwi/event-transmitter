@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/qiwi/event-transmitter/compare/v1.6.0...v1.6.1) (2020-07-07)
+
+
+### Performance Improvements
+
+* **package:** up deps ([56e861d](https://github.com/qiwi/event-transmitter/commit/56e861d0bbe868d68a8f6bb7b9aaebdf5f1ec950))
+
 # [1.6.0](https://github.com/qiwi/event-transmitter/compare/v1.5.0...v1.6.0) (2020-07-06)
 
 
