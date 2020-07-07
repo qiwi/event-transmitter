@@ -22,16 +22,16 @@ export const createHttpPipe = ({ url, method, headers }: IHttpPipeOpts): IPipe =
   type,
   execute ({ data }: ITransmittable): IPromise<IPipeOutput> {
     const defaultHeaders = {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     }
 
     return fetch(url, {
       method,
       headers: {
         ...defaultHeaders,
-        ...(headers && getPlainHeaders(headers))
+        ...(headers && getPlainHeaders(headers)),
       },
-      body: data && safeJsonStringify(data)
+      body: data && safeJsonStringify(data),
     })
       .then(async (res) => {
         if (!res.ok) {
@@ -41,5 +41,5 @@ export const createHttpPipe = ({ url, method, headers }: IHttpPipeOpts): IPipe =
         return [null, await res.json()]
       })
       .catch(err => ([err, null])) as IPromise<IPipeOutput>
-  }
+  },
 })

@@ -12,13 +12,13 @@ export const getDeviceInfo = (userAgent?: string): IDeviceInfo => {
     browser: {
       name,
       version,
-      layout
+      layout,
     },
     model: {
       name: product,
-      manufacturer
+      manufacturer,
     },
-    os
+    os,
   }
 }
 
@@ -28,5 +28,5 @@ export const createDeviceInfoPipe = (): IPipe => ({
     const output = set(clone(data), 'meta.deviceInfo', getDeviceInfo())
 
     return Promise.resolve([null, output])
-  }
+  },
 })

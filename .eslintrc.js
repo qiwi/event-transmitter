@@ -8,6 +8,9 @@ module.exports = {
   extends: [
     'eslint-config-qiwi',
   ],
+  rules: {
+    '@typescript-eslint/explicit-module-boundary-types': 'off'
+  },
   root: true,
   env: {
     node: true,

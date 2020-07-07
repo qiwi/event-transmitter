@@ -3,7 +3,7 @@ import {
   createHttpPipe,
   createFlpPipeline,
   createTransmittable,
-  createMaskerPipe
+  createMaskerPipe,
 } from '../../main/ts'
 
 describe('index', () => {

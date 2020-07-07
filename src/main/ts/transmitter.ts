@@ -1,7 +1,7 @@
 import {
   ITransmitter,
   ITransmittable,
-  TPipeline
+  TPipeline,
 } from './interfaces'
 
 import { execute } from './pipes'
@@ -13,7 +13,7 @@ export type ITransmitterOpts = {
 export const createTransmittable = (event: any): ITransmittable => ({
   data: event,
   err: null,
-  meta: { history: [] }
+  meta: { history: [] },
 })
 
 export const createTransmitter = (opts: ITransmitterOpts): ITransmitter => ({
@@ -21,5 +21,5 @@ export const createTransmitter = (opts: ITransmitterOpts): ITransmitter => ({
     const transmittable = createTransmittable(data)
 
     return execute(transmittable, opts.pipeline)
-  }
+  },
 })

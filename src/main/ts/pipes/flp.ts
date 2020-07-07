@@ -12,7 +12,7 @@ export const eventifyPipe: IPipe = {
   async execute ({ data }: ITransmittable) {
     const event: IClientEventDto = {
       message: '',
-      meta: {}
+      meta: {},
     }
 
     if (data === null || data === undefined) {
@@ -35,7 +35,7 @@ export const eventifyPipe: IPipe = {
     }
 
     return [null, event]
-  }
+  },
 }
 
 export const createFlpPipeline = (opts: IHttpPipeOpts): TPipeline => {

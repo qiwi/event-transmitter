@@ -12,7 +12,7 @@ describe('eventifyPipe', () => {
     ['processes error as input', new Error('foobar'), null, { level: 'error', message: 'foobar', meta: {} }],
     ['returns err if no arg passed', undefined, new Error('Event message must not be empty'), null],
     ['does not processes arrays', [], new Error('Event batches are not supported yet'), null],
-    ['assures message not to be empty', '', new Error('Event message must not be empty'), null]
+    ['assures message not to be empty', '', new Error('Event message must not be empty'), null],
   ]
 
   cases.forEach(([name, input, err, data]) => {
@@ -31,10 +31,10 @@ describe('flpPipeline', () => {
     const spy = jest.spyOn(window, 'fetch')
     const flpPipeline = createFlpPipeline({
       url: 'https://reqres.in/api/users/',
-      method: HttpMethod.POST
+      method: HttpMethod.POST,
     })
     const transmitter = createTransmitter({
-      pipeline: flpPipeline
+      pipeline: flpPipeline,
     })
     const res = await transmitter.push('0000000000000000')
 
@@ -44,11 +44,11 @@ describe('flpPipeline', () => {
       body: JSON.stringify({
         message: '0000 **** **** 0000',
         meta: {},
-        level: 'info'
+        level: 'info',
       }),
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     })
 
     spy.mockClear()

@@ -17,17 +17,17 @@ describe('getDeviceInfo', () => {
       browser: {
         name: 'Chrome',
         version: '83.0.4103.116',
-        layout: 'Blink'
+        layout: 'Blink',
       },
       model: {
         name: null,
-        manufacturer: null
+        manufacturer: null,
       },
       os: {
         architecture: 64,
         family: 'OS X',
-        version: '10.14.6'
-      }
+        version: '10.14.6',
+      },
     }
     expect<IDeviceInfo>(getDeviceInfo(userAgent)).toMatchObject(expected)
   })

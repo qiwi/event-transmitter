@@ -24,8 +24,8 @@ describe('httpPipe', () => {
           email: 'janet.weaver@reqres.in',
           first_name: 'Janet',
           last_name: 'Weaver',
-          avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg'
-        }
+          avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg',
+        },
       }])
   })
 
@@ -37,8 +37,8 @@ describe('httpPipe', () => {
       method: HttpMethod.GET,
       headers: {
         a: 'foo',
-        b: () => 'bar'
-      }
+        b: () => 'bar',
+      },
     })
     const transittable: ITransmittable = { data: { message: 'bar' }, meta: { history: [] } }
 
@@ -49,8 +49,8 @@ describe('httpPipe', () => {
       headers: {
         'Content-Type': 'application/json',
         a: 'foo',
-        b: 'bar'
-      }
+        b: 'bar',
+      },
     })
 
     spy.mockClear()

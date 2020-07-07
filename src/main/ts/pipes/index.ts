@@ -28,7 +28,7 @@ export const execute = async (transmittable: ITransmittable, pipeline: TPipeline
       pipeId: '' + prefix,
       pipeType: pipe.type,
       err: output[0],
-      res: !!output[1]
+      res: !!output[1],
     })
 
     await next(output)

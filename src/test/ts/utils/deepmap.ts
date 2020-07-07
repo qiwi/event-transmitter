@@ -11,10 +11,10 @@ describe('deepMap', () => {
           c: 4,
           d: {
             e: 6,
-            f: [7, 8]
-          }
-        }
-      ]
+            f: [7, 8],
+          },
+        },
+      ],
     }
 
     expect(deepMap(testObj, el => Number(el) * 10)).toMatchObject({
@@ -26,23 +26,23 @@ describe('deepMap', () => {
           c: 40,
           d: {
             e: 60,
-            f: [70, 80]
-          }
-        }
-      ]
+            f: [70, 80],
+          },
+        },
+      ],
     })
   })
 
   it('handle circular deps', () => {
     const testObj: Record<string, any> = {
       a: 1,
-      b: 2
+      b: 2,
     }
     testObj.foo = testObj
 
     const resObj: Record<string, any> = {
       a: 10,
-      b: 20
+      b: 20,
     }
     resObj.foo = resObj
 

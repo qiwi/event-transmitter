@@ -1,7 +1,7 @@
 import {
   createMaskerPipe,
   panMaskerPipe,
-  ITransmittable
+  ITransmittable,
 } from '../../../main/ts'
 
 const noop = () => { /* noop */ }
@@ -18,11 +18,11 @@ describe('maskerPipe', () => {
     const maskerPipe = createMaskerPipe(el => el.toString() + 'masked')
     const transmittable: ITransmittable = {
       data: ['foo', 'bar', ['foo2', ['foo3']]],
-      meta: { history: [] }
+      meta: { history: [] },
     }
     expect(await maskerPipe.execute(transmittable, noop)).toStrictEqual([
       null,
-      ['foomasked', 'barmasked', ['foo2masked', ['foo3masked']]]
+      ['foomasked', 'barmasked', ['foo2masked', ['foo3masked']]],
     ])
   })
 
@@ -31,17 +31,17 @@ describe('maskerPipe', () => {
       data: [
         '4111111111111111',
         'bar',
-        ['4111111111111111', ['foo3', '0000000000000000']]
+        ['4111111111111111', ['foo3', '0000000000000000']],
       ],
-      meta: { history: [] }
+      meta: { history: [] },
     }
     expect(await panMaskerPipe.execute(transmittable, noop)).toStrictEqual([
       null,
       [
         '4111 **** **** 1111',
         'bar',
-        ['4111 **** **** 1111', ['foo3', '0000 **** **** 0000']]
-      ]
+        ['4111 **** **** 1111', ['foo3', '0000 **** **** 0000']],
+      ],
     ])
   })
 })

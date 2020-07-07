@@ -1,5 +1,6 @@
 import { IPipe, TPipeline, createTransmittable } from '../../../main/ts'
 import { execute, getPipelineId } from '../../../main/ts/pipes'
+import { ICallable } from '@qiwi/substrate'
 
 describe('pipes', () => {
   describe('getPipelineId', () => {
@@ -7,13 +8,13 @@ describe('pipes', () => {
       const pipe1: IPipe = {
         type: 'pipe1',
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        execute (data, _pipeid) { return Promise.resolve([null, data]) }
+        execute (data, _pipeid) { return Promise.resolve([null, data]) },
       }
 
       const pipe2: IPipe = {
         type: 'pipe2',
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        execute (data, _pipeid) { return Promise.resolve([null, data]) }
+        execute (data, _pipeid) { return Promise.resolve([null, data]) },
       }
 
       const pipeline1: TPipeline = [pipe1, pipe2]
@@ -31,27 +32,27 @@ describe('pipes', () => {
       const upper: IPipe = {
         type: 'upper',
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        async execute (data, next: Function) {
+        async execute (data, next: ICallable) {
           data.data.message = data.data.message.toUpperCase()
           await next([null, data])
           data.data.message = data.data.message.toUpperCase()
           return Promise.resolve([null, data])
-        }
+        },
       }
 
       const foo: IPipe = {
         type: 'foo',
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        async execute (data, next: Function) {
+        async execute (data, next: ICallable) {
           data.data.message = 'foo'
           return next([null, data])
-        }
+        },
       }
 
       const pipeline2: TPipeline = [upper, foo]
 
       const [err, data] = await execute(createTransmittable({
-        message: 'baz'
+        message: 'baz',
       }), pipeline2)
 
       console.log(err, JSON.stringify(data))

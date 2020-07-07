@@ -8,18 +8,18 @@ describe('transmitter', () => {
   it('processes input through a pipeline', async () => {
     const httpPipe = createHttpPipe({ url: 'https://reqres.in/api/users', method: HttpMethod.POST })
     const transmitter = createTransmitter({
-      pipeline: [httpPipe]
+      pipeline: [httpPipe],
     })
     const data = {
       name: 'morpheus',
-      job: 'leader'
+      job: 'leader',
     }
     const [err, json] = await transmitter.push(data)
 
     expect(err).toBeNull()
     expect(json).toMatchObject({
       id: expect.any(String),
-      createdAt: expect.any(String)
+      createdAt: expect.any(String),
     })
   })
 })
