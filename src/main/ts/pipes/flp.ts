@@ -1,17 +1,11 @@
-import { IClientEventDto as ISubstrateClientEventDto, IClientEventMeta, LogLevel } from '@qiwi/substrate'
-import { IDeviceInfo, IPipe, ITransmittable, TPipeline } from '../interfaces'
+import { IClientEventDto, LogLevel } from '@qiwi/substrate'
+import { IPipe, ITransmittable, TPipeline } from '../interfaces'
 import { panMaskerPipe } from './masker'
 import { createHttpPipe, IHttpPipeOpts } from './http'
 
 const DEFAULT_LEVEL = LogLevel.INFO
 
 export const type = 'flp-eventify'
-
-export interface IClientEventDto extends ISubstrateClientEventDto {
-  meta?: IClientEventMeta & {
-    deviceInfo?: IDeviceInfo & Record<string, any>
-  }
-}
 
 export const eventifyPipe: IPipe = {
   type,

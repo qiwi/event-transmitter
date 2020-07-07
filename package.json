@@ -52,7 +52,7 @@
   },
   "homepage": "https://github.com/qiwi/event-transmitter#readme",
   "dependencies": {
-    "@qiwi/substrate": "^1.18.13",
+    "@qiwi/substrate": "^1.18.34",
     "@types/lodash.once": "^4.1.6",
     "fast-luhn": "^1.1.0",
     "lodash.once": "^4.1.1",

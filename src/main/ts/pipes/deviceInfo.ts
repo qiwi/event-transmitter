@@ -1,5 +1,5 @@
-import { IDeviceInfo, IPipe, IPipeOutput, ITransmittable } from '../interfaces'
-import { IPromise } from '@qiwi/substrate'
+import { IPipe, IPipeOutput, ITransmittable } from '../interfaces'
+import { IPromise, IDeviceInfo } from '@qiwi/substrate'
 import platform from 'platform'
 import { set, clone } from '../utils'
 
@@ -15,7 +15,7 @@ export const getDeviceInfo = (userAgent?: string): IDeviceInfo => {
       layout
     },
     model: {
-      product,
+      name: product,
       manufacturer
     },
     os

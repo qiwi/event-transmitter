@@ -1,4 +1,5 @@
-import { createDeviceInfoPipe, getDeviceInfo, IDeviceInfo } from '../../../main/ts'
+import { createDeviceInfoPipe, getDeviceInfo } from '../../../main/ts'
+import { IDeviceInfo } from '@qiwi/substrate-types'
 
 describe('deviceInfoPipe', () => {
   it('is returned by factory', () => {
@@ -19,7 +20,7 @@ describe('getDeviceInfo', () => {
         layout: 'Blink'
       },
       model: {
-        product: null,
+        name: null,
         manufacturer: null
       },
       os: {
