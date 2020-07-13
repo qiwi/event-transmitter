@@ -1,6 +1,7 @@
 import { eventifyPipe, createFlpPipeline } from '../../../main/ts/pipes/flp'
 import { createTransmittable, createTransmitter } from '../../../main/ts'
 import { HttpMethod } from '@qiwi/substrate'
+import StackTrace from 'stacktrace-js'
 
 import 'cross-fetch/polyfill'
 
@@ -17,8 +18,20 @@ describe('eventifyPipe', () => {
 
   cases.forEach(([name, input, err, data]) => {
     it(name, async () => {
-      expect(await eventifyPipe.execute(createTransmittable(input), noop)).toEqual([err, data])
+      expect(await eventifyPipe.execute(createTransmittable(input), noop)).toMatchObject([err, data])
     })
+  })
+
+  it('adds stack trace when processes error', async () => {
+    const spy = jest.spyOn(StackTrace, 'fromError')
+
+    const error = new Error('bar')
+    const [, output] = await eventifyPipe.execute(createTransmittable(error), noop)
+    expect(output.stacktrace).toBeDefined()
+    expect(output.stacktrace).not.toHaveLength(0)
+    expect(spy).toHaveBeenCalledWith(error)
+
+    spy.mockClear()
   })
 })
 
