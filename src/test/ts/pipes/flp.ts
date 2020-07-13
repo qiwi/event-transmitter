@@ -27,7 +27,7 @@ describe('eventifyPipe', () => {
 
     const error = new Error('bar')
     const [, output] = await eventifyPipe.execute(createTransmittable(error), noop)
-    expect(output.stacktrace).toBeTruthy()
+    expect(output.stacktrace).toBeDefined()
     expect(output.stacktrace).not.toHaveLength(0)
     expect(spy).toHaveBeenCalledWith(error)
 
