@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/qiwi/event-transmitter/compare/v1.6.1...v1.7.0) (2020-07-13)
+
+
+### Features
+
+* **flp:** add stacktrace processing ([#15](https://github.com/qiwi/event-transmitter/issues/15)) ([bd3a498](https://github.com/qiwi/event-transmitter/commit/bd3a498212a70b4085cd4995ca076936f720d37b)), closes [#9](https://github.com/qiwi/event-transmitter/issues/9)
+
 ## [1.6.1](https://github.com/qiwi/event-transmitter/compare/v1.6.0...v1.6.1) (2020-07-07)
 
 
