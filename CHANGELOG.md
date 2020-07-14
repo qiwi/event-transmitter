@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/qiwi/event-transmitter/compare/v1.7.0...v1.7.1) (2020-07-14)
+
+
+### Bug Fixes
+
+* **package:** fix vulnerable deps ([3071ae3](https://github.com/qiwi/event-transmitter/commit/3071ae3b2a3a9fcb008d9fbc71609f5ef96c5f93))
+
 # [1.7.0](https://github.com/qiwi/event-transmitter/compare/v1.6.1...v1.7.0) (2020-07-13)
 
 

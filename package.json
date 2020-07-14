@@ -1,6 +1,6 @@
 {
   "name": "@qiwi/event-transmitter",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "Async adapter to save & deliver reasonable events to some endpoint",
   "private": false,
   "main": "target/es5/index.js",
