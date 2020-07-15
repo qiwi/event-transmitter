@@ -18,7 +18,32 @@ export const eventifyPipe: IPipe = {
 
     if (data === null || data === undefined) {
       return [new Error('Event message must not be empty'), null]
-    } else if (typeof data === 'string' || typeof data === 'number') {
+    }
+
+    if (Array.isArray(data)) {
+      if (data.length === 0) {
+        return [new Error('Events array must not be empty'), null]
+      }
+
+      const batched = await Promise.all(data
+        // @ts-ignore
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        .map((data) => eventifyPipe.execute({ data }, () => {})))
+
+      const [arrayRejected, arrayResolved] = batched.reduce((acc, [res, rej]) => {
+        res && acc[0].push(res)
+        rej && acc[1].push(rej)
+        return acc
+      }, [[], []])
+
+      if (arrayRejected.length > 0) {
+        return [arrayRejected, null]
+      }
+
+      return [null, arrayResolved]
+    }
+
+    if (typeof data === 'string' || typeof data === 'number') {
       event.level = DEFAULT_LEVEL
       event.message = '' + data
     } else if (data instanceof Error) {
@@ -28,8 +53,6 @@ export const eventifyPipe: IPipe = {
         const frames = await StackTrace.fromError(data)
         event.stacktrace = frames.map(v => v.toString()).join('\n')
       } catch {} // eslint-disable-line no-empty
-    } else if (Array.isArray(data)) {
-      return [new Error('Event batches are not supported yet'), null]
     } else if (typeof data === 'object') {
       Object.assign(event, data)
     }

@@ -9,7 +9,8 @@ module.exports = {
     'eslint-config-qiwi',
   ],
   rules: {
-    '@typescript-eslint/explicit-module-boundary-types': 'off'
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'sonarjs/no-duplicate-string': 'off'
   },
   root: true,
   env: {
