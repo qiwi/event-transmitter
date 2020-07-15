@@ -1,3 +1,10 @@
+## [1.7.2](https://github.com/qiwi/event-transmitter/compare/v1.7.1...v1.7.2) (2020-07-15)
+
+
+### Bug Fixes
+
+* **package.json:** typings path ([838c787](https://github.com/qiwi/event-transmitter/commit/838c7873dac8f2681256eba87fa27ccac7c80f12))
+
 ## [1.7.1](https://github.com/qiwi/event-transmitter/compare/v1.7.0...v1.7.1) (2020-07-14)
 
 
