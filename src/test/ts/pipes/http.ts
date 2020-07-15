@@ -6,15 +6,17 @@ import 'cross-fetch/polyfill'
 const noop = () => { /* noop */ }
 
 describe('httpPipe', () => {
+  const batchUrl = 'https://reqres.in/api/unknown'
+
   it('factory returns IPipe', () => {
-    const httpPipe = createHttpPipe({ url: 'https://reqres.in/api/users/2', method: HttpMethod.GET })
+    const httpPipe = createHttpPipe({ url: 'https://reqres.in/api/users/2', batchUrl, method: HttpMethod.GET })
 
     expect(httpPipe.type).toBe('http')
     expect(httpPipe.execute).toEqual(expect.any(Function))
   })
 
   it('returns remote data if succeeds', () => {
-    const httpPipe = createHttpPipe({ url: 'https://reqres.in/api/users/2', method: HttpMethod.GET })
+    const httpPipe = createHttpPipe({ url: 'https://reqres.in/api/users/2', batchUrl, method: HttpMethod.GET })
     const transmittable: ITransmittable = { data: null, meta: { history: [] } }
 
     return expect(httpPipe.execute(transmittable, noop))
@@ -34,6 +36,7 @@ describe('httpPipe', () => {
 
     const httpPipe = createHttpPipe({
       url: 'https://reqres.in/api/users/1',
+      batchUrl,
       method: HttpMethod.GET,
       headers: {
         a: 'foo',
@@ -57,7 +60,7 @@ describe('httpPipe', () => {
   })
 
   it('handles 4** status as error', () => {
-    const httpPipe = createHttpPipe({ url: 'https://github.com', method: HttpMethod.POST })
+    const httpPipe = createHttpPipe({ url: 'https://github.com', batchUrl, method: HttpMethod.POST })
     const transittable: ITransmittable = { data: 'test', meta: { history: [] } }
 
     return expect(httpPipe.execute(transittable, noop))
@@ -65,7 +68,7 @@ describe('httpPipe', () => {
   })
 
   it('returns an error otherwise', () => {
-    const httpPipe = createHttpPipe({ url: 'foobar', method: HttpMethod.GET })
+    const httpPipe = createHttpPipe({ url: 'foobar', batchUrl, method: HttpMethod.GET })
     const transittable: ITransmittable = { data: null, meta: { history: [] } }
 
     return expect(httpPipe.execute(transittable, noop))

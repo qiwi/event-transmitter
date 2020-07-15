@@ -44,15 +44,18 @@ describe('eventifyPipe', () => {
 })
 
 describe('flpPipeline', () => {
+  const url = 'https://reqres.in/api/users/'
+  const batchUrl = 'https://reqres.in/api/unknown'
+
   it('createFlpPipeline factory returns a pipeline', () => {
-    expect(createFlpPipeline({ url: 'https://reqres.in/api/users/2', method: HttpMethod.GET })).toEqual(expect.any(Array))
+    expect(createFlpPipeline({ url: 'https://reqres.in/api/users/2', batchUrl, method: HttpMethod.GET })).toEqual(expect.any(Array))
   })
 
-  const url = 'https://reqres.in/api/users/'
   it('executes eventify, masker and http pipes consequentially with batch', async () => {
     const spy = jest.spyOn(window, 'fetch')
     const flpPipeline = createFlpPipeline({
       url,
+      batchUrl,
       method: HttpMethod.POST,
     })
     const transmitter = createTransmitter({
@@ -60,9 +63,8 @@ describe('flpPipeline', () => {
     })
     const res = await transmitter.push(['4539246180805047', '5101754226671617'])
 
-    // eslint-disable-next-line sonarjs/no-duplicate-string
     expect(res).toEqual([null, ['4539 **** **** 5047', '5101 **** **** 1617']])
-    expect(spy).toHaveBeenCalledWith(url, {
+    expect(spy).toHaveBeenCalledWith(batchUrl, {
       method: HttpMethod.POST,
       body: JSON.stringify({
         events: [{
@@ -87,6 +89,7 @@ describe('flpPipeline', () => {
     const spy = jest.spyOn(window, 'fetch')
     const flpPipeline = createFlpPipeline({
       url,
+      batchUrl,
       method: HttpMethod.POST,
     })
     const transmitter = createTransmitter({
