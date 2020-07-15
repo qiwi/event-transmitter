@@ -25,13 +25,17 @@ export const createHttpPipe = ({ url, method, headers }: IHttpPipeOpts): IPipe =
       'Content-Type': 'application/json',
     }
 
+    const body = data && safeJsonStringify(Array.isArray(data)
+      ? { events: data }
+      : data)
+
     return fetch(url, {
       method,
       headers: {
         ...defaultHeaders,
         ...(headers && getPlainHeaders(headers)),
       },
-      body: data && safeJsonStringify(data),
+      body,
     })
       .then(async (res) => {
         if (!res.ok) {

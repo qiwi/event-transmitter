@@ -49,7 +49,7 @@ describe('flpPipeline', () => {
   })
 
   const url = 'https://reqres.in/api/users/'
-  it('executes eventify, masker and http pipes consequentially', async () => {
+  it('executes eventify, masker and http pipes consequentially with batch', async () => {
     const spy = jest.spyOn(window, 'fetch')
     const flpPipeline = createFlpPipeline({
       url,
@@ -64,15 +64,17 @@ describe('flpPipeline', () => {
     expect(res).toEqual([null, ['4539 **** **** 5047', '5101 **** **** 1617']])
     expect(spy).toHaveBeenCalledWith(url, {
       method: HttpMethod.POST,
-      body: JSON.stringify([{
-        message: '4539 **** **** 5047',
-        meta: {},
-        level: 'info',
-      }, {
-        message: '5101 **** **** 1617',
-        meta: {},
-        level: 'info',
-      }]),
+      body: JSON.stringify({
+        events: [{
+          message: '4539 **** **** 5047',
+          meta: {},
+          level: 'info',
+        }, {
+          message: '5101 **** **** 1617',
+          meta: {},
+          level: 'info',
+        }],
+      }),
       headers: {
         'Content-Type': 'application/json',
       },
