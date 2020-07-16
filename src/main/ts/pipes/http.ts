@@ -7,7 +7,6 @@ export type IHttpHeaders = Record<string, string | (() => string)>
 export interface IHttpPipeOpts {
   method: HttpMethod,
   url: string,
-  batchUrl: string
   headers?: IHttpHeaders,
 }
 
@@ -19,24 +18,20 @@ const getPlainHeaders = (headers: IHttpHeaders): Record<string, string> =>
     return acc
   }, {})
 
-export const createHttpPipe = ({ url, batchUrl, method, headers }: IHttpPipeOpts): IPipe => ({
+export const createHttpPipe = ({ url, method, headers }: IHttpPipeOpts): IPipe => ({
   type,
   execute ({ data }: ITransmittable): IPromise<IPipeOutput> {
     const defaultHeaders = {
       'Content-Type': 'application/json',
     }
 
-    const body = data && safeJsonStringify(Array.isArray(data)
-      ? { events: data }
-      : data)
-
-    return fetch(Array.isArray(data) ? batchUrl : url, {
+    return fetch(url, {
       method,
       headers: {
         ...defaultHeaders,
         ...(headers && getPlainHeaders(headers)),
       },
-      body,
+      body: data && safeJsonStringify(data),
     })
       .then(async (res) => {
         if (!res.ok) {

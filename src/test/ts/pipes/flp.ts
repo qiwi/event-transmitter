@@ -17,10 +17,12 @@ describe('eventifyPipe', () => {
       new Error('Event message must not be empty'),
       new Error('Events array must not be empty'),
     ], null],
-    ['processes array input', ['foo', { level: 'info', message: 'bar', meta: {} }], null, [
-      { level: 'info', message: 'foo', meta: {} },
-      { level: 'info', message: 'bar', meta: {} },
-    ]],
+    ['processes array input', ['foo', { level: 'info', message: 'bar', meta: {} }], null, {
+      events: [
+        { level: 'info', message: 'foo', meta: {} },
+        { level: 'info', message: 'bar', meta: {} },
+      ],
+    }],
     ['assures message not to be empty', '', new Error('Event message must not be empty'), null],
   ]
 
@@ -48,16 +50,15 @@ describe('flpPipeline', () => {
   const batchUrl = 'https://reqres.in/api/unknown'
 
   it('createFlpPipeline factory returns a pipeline', () => {
-    expect(createFlpPipeline({ url: 'https://reqres.in/api/users/2', batchUrl, method: HttpMethod.GET })).toEqual(expect.any(Array))
+    expect(createFlpPipeline({ url: 'https://reqres.in/api/users/2', method: HttpMethod.GET }, batchUrl)).toEqual(expect.any(Array))
   })
 
   it('executes eventify, masker and http pipes consequentially with batch', async () => {
     const spy = jest.spyOn(window, 'fetch')
     const flpPipeline = createFlpPipeline({
       url,
-      batchUrl,
       method: HttpMethod.POST,
-    })
+    }, batchUrl)
     const transmitter = createTransmitter({
       pipeline: flpPipeline,
     })
@@ -89,9 +90,8 @@ describe('flpPipeline', () => {
     const spy = jest.spyOn(window, 'fetch')
     const flpPipeline = createFlpPipeline({
       url,
-      batchUrl,
       method: HttpMethod.POST,
-    })
+    }, batchUrl)
     const transmitter = createTransmitter({
       pipeline: flpPipeline,
     })

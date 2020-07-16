@@ -40,7 +40,7 @@ export const eventifyPipe: IPipe = {
         return [arrayRejected, null]
       }
 
-      return [null, arrayResolved]
+      return [null, { events: arrayResolved }]
     }
 
     if (typeof data === 'string' || typeof data === 'number') {
@@ -65,8 +65,18 @@ export const eventifyPipe: IPipe = {
   },
 }
 
-export const createFlpPipeline = (opts: IHttpPipeOpts): TPipeline => {
+export const createFlpPipeline = (opts: IHttpPipeOpts, batchUrl?: string): TPipeline => {
   const httpPipe = createHttpPipe(opts)
+  const httpPipeBatch = batchUrl ? createHttpPipe({ ...opts, url: batchUrl }) : httpPipe
 
-  return [panMaskerPipe, eventifyPipe, httpPipe]
+  const httpPipeResolver: IPipe = ({
+    type: httpPipe.type,
+    execute (...args) {
+      return Array.isArray(args[0].data.events)
+        ? httpPipeBatch.execute(...args)
+        : httpPipe.execute(...args)
+    },
+  })
+
+  return [panMaskerPipe, eventifyPipe, httpPipeResolver]
 }
