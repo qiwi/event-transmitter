@@ -12,12 +12,12 @@ describe('eventifyPipe', () => {
     ['processes string input', 'foo', null, { level: 'info', message: 'foo', meta: {} }],
     ['processes error as input', new Error('foobar'), null, { level: 'error', message: 'foobar', meta: {} }],
     ['returns err if no arg passed', undefined, new Error('Event message must not be empty'), null],
-    ['does not processes arrays', [], new Error('Events array must not be empty'), null],
+    ['verifies events batch not to be empty', [], new Error('Events array must not be empty'), null],
     ['errors in array', [undefined, []], [
       new Error('Event message must not be empty'),
       new Error('Events array must not be empty'),
     ], null],
-    ['processes array input', ['foo', { level: 'info', message: 'bar', meta: {} }], null, {
+    ['supports events batches', ['foo', { level: 'info', message: 'bar', meta: {} }], null, {
       events: [
         { level: 'info', message: 'foo', meta: {} },
         { level: 'info', message: 'bar', meta: {} },

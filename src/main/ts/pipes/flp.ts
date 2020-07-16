@@ -27,8 +27,7 @@ export const eventifyPipe: IPipe = {
 
       const batched = await Promise.all(data
         // @ts-ignore
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
-        .map((data) => eventifyPipe.execute({ data }, () => {})))
+        .map((data) => eventifyPipe.execute({ data })))
 
       const [arrayRejected, arrayResolved] = batched.reduce((acc, [res, rej]) => {
         res && acc[0].push(res)

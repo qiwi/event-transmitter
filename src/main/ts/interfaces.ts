@@ -24,7 +24,7 @@ export type IPipeOutput = [any, any]
 
 export interface IPipe {
   type: string
-  execute: (data: ITransmittable, next: any) => Promise<IPipeOutput>
+  execute: (data: ITransmittable, next?: any) => Promise<IPipeOutput>
 }
 
 export type TPipeline = Array<IPipe | TPipeline>
