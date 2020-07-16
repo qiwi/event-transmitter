@@ -3,6 +3,7 @@ import { IClientEventDto, LogLevel } from '@qiwi/substrate'
 import { IPipe, ITransmittable, TPipeline } from '../interfaces'
 import { panMaskerPipe } from './masker'
 import { createHttpPipe, IHttpPipeOpts } from './http'
+import { identity } from '../utils'
 
 const DEFAULT_LEVEL = LogLevel.INFO
 
@@ -18,7 +19,31 @@ export const eventifyPipe: IPipe = {
 
     if (data === null || data === undefined) {
       return [new Error('Event message must not be empty'), null]
-    } else if (typeof data === 'string' || typeof data === 'number') {
+    }
+
+    if (Array.isArray(data)) {
+      if (data.length === 0) {
+        return [new Error('Events array must not be empty'), null]
+      }
+
+      const batched = await Promise.all(data
+        // @ts-ignore
+        .map((data) => eventifyPipe.execute({ data }, identity)))
+
+      const [arrayRejected, arrayResolved] = batched.reduce((acc, [res, rej]) => {
+        res && acc[0].push(res)
+        rej && acc[1].push(rej)
+        return acc
+      }, [[], []])
+
+      if (arrayRejected.length > 0) {
+        return [arrayRejected, null]
+      }
+
+      return [null, { events: arrayResolved }]
+    }
+
+    if (typeof data === 'string' || typeof data === 'number') {
       event.level = DEFAULT_LEVEL
       event.message = '' + data
     } else if (data instanceof Error) {
@@ -28,8 +53,6 @@ export const eventifyPipe: IPipe = {
         const frames = await StackTrace.fromError(data)
         event.stacktrace = frames.map(v => v.toString()).join('\n')
       } catch {} // eslint-disable-line no-empty
-    } else if (Array.isArray(data)) {
-      return [new Error('Event batches are not supported yet'), null]
     } else if (typeof data === 'object') {
       Object.assign(event, data)
     }
@@ -42,8 +65,18 @@ export const eventifyPipe: IPipe = {
   },
 }
 
-export const createFlpPipeline = (opts: IHttpPipeOpts): TPipeline => {
+export const createFlpPipeline = (opts: IHttpPipeOpts, batchUrl?: string): TPipeline => {
   const httpPipe = createHttpPipe(opts)
+  const httpPipeBatch = batchUrl ? createHttpPipe({ ...opts, url: batchUrl }) : httpPipe
 
-  return [panMaskerPipe, eventifyPipe, httpPipe]
+  const httpPipeResolver: IPipe = ({
+    type: httpPipe.type,
+    execute (...args) {
+      return Array.isArray(args[0].data.events)
+        ? httpPipeBatch.execute(...args)
+        : httpPipe.execute(...args)
+    },
+  })
+
+  return [panMaskerPipe, eventifyPipe, httpPipeResolver]
 }

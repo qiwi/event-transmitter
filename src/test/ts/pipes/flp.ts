@@ -12,7 +12,17 @@ describe('eventifyPipe', () => {
     ['processes string input', 'foo', null, { level: 'info', message: 'foo', meta: {} }],
     ['processes error as input', new Error('foobar'), null, { level: 'error', message: 'foobar', meta: {} }],
     ['returns err if no arg passed', undefined, new Error('Event message must not be empty'), null],
-    ['does not processes arrays', [], new Error('Event batches are not supported yet'), null],
+    ['verifies events batch not to be empty', [], new Error('Events array must not be empty'), null],
+    ['errors in array', [undefined, []], [
+      new Error('Event message must not be empty'),
+      new Error('Events array must not be empty'),
+    ], null],
+    ['supports events batches', ['foo', { level: 'info', message: 'bar', meta: {} }], null, {
+      events: [
+        { level: 'info', message: 'foo', meta: {} },
+        { level: 'info', message: 'bar', meta: {} },
+      ],
+    }],
     ['assures message not to be empty', '', new Error('Event message must not be empty'), null],
   ]
 
@@ -36,23 +46,59 @@ describe('eventifyPipe', () => {
 })
 
 describe('flpPipeline', () => {
+  const url = 'https://reqres.in/api/users/'
+  const batchUrl = 'https://reqres.in/api/unknown'
+
   it('createFlpPipeline factory returns a pipeline', () => {
-    expect(createFlpPipeline({ url: 'https://reqres.in/api/users/2', method: HttpMethod.GET })).toEqual(expect.any(Array))
+    expect(createFlpPipeline({ url: 'https://reqres.in/api/users/2', method: HttpMethod.GET }, batchUrl)).toEqual(expect.any(Array))
+  })
+
+  it('executes eventify, masker and http pipes consequentially with batch', async () => {
+    const spy = jest.spyOn(window, 'fetch')
+    const flpPipeline = createFlpPipeline({
+      url,
+      method: HttpMethod.POST,
+    }, batchUrl)
+    const transmitter = createTransmitter({
+      pipeline: flpPipeline,
+    })
+    const res = await transmitter.push(['4539246180805047', '5101754226671617'])
+
+    expect(res).toEqual([null, ['4539 **** **** 5047', '5101 **** **** 1617']])
+    expect(spy).toHaveBeenCalledWith(batchUrl, {
+      method: HttpMethod.POST,
+      body: JSON.stringify({
+        events: [{
+          message: '4539 **** **** 5047',
+          meta: {},
+          level: 'info',
+        }, {
+          message: '5101 **** **** 1617',
+          meta: {},
+          level: 'info',
+        }],
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    spy.mockClear()
   })
 
   it('executes eventify, masker and http pipes consequentially', async () => {
     const spy = jest.spyOn(window, 'fetch')
     const flpPipeline = createFlpPipeline({
-      url: 'https://reqres.in/api/users/',
+      url,
       method: HttpMethod.POST,
-    })
+    }, batchUrl)
     const transmitter = createTransmitter({
       pipeline: flpPipeline,
     })
     const res = await transmitter.push('0000000000000000')
 
     expect(res).toEqual([null, '0000 **** **** 0000'])
-    expect(spy).toHaveBeenCalledWith('https://reqres.in/api/users/', {
+    expect(spy).toHaveBeenCalledWith(url, {
       method: HttpMethod.POST,
       body: JSON.stringify({
         message: '0000 **** **** 0000',
