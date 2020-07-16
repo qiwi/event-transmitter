@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/qiwi/event-transmitter/compare/v1.8.0...v1.9.0) (2020-07-16)
+
+
+### Features
+
+* **index:** export http interfaces from index ([4391b32](https://github.com/qiwi/event-transmitter/commit/4391b3291867907d7ab450e633475fb701675119))
+
 # [1.8.0](https://github.com/qiwi/event-transmitter/compare/v1.7.2...v1.8.0) (2020-07-16)
 
 
