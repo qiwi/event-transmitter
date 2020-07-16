@@ -1,4 +1,4 @@
-import { IPromise } from '@qiwi/substrate'
+import { IPromise, ICallable } from '@qiwi/substrate'
 
 export interface ITransmittable {
   data: any
@@ -24,7 +24,7 @@ export type IPipeOutput = [any, any]
 
 export interface IPipe {
   type: string
-  execute: (data: ITransmittable, next?: any) => Promise<IPipeOutput>
+  execute: (data: ITransmittable, next: ICallable) => Promise<IPipeOutput>
 }
 
 export type TPipeline = Array<IPipe | TPipeline>
