@@ -6,8 +6,7 @@ import 'cross-fetch/polyfill'
 
 describe('transmitter', () => {
   it('processes input through a pipeline', async () => {
-    const batchUrl = 'https://reqres.in/api/unknown'
-    const httpPipe = createHttpPipe({ url: 'https://reqres.in/api/users', batchUrl, method: HttpMethod.POST })
+    const httpPipe = createHttpPipe({ url: 'https://reqres.in/api/users', method: HttpMethod.POST })
     const transmitter = createTransmitter({
       pipeline: [httpPipe],
     })
