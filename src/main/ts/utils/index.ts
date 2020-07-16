@@ -3,4 +3,4 @@ export { deepMap } from './deepmap'
 export { clone } from './clone'
 export { set }
 
-export const echo = (...args: any[]) => args
+export const identity = <T>(v:T):T => v

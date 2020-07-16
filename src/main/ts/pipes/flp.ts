@@ -3,7 +3,7 @@ import { IClientEventDto, LogLevel } from '@qiwi/substrate'
 import { IPipe, ITransmittable, TPipeline } from '../interfaces'
 import { panMaskerPipe } from './masker'
 import { createHttpPipe, IHttpPipeOpts } from './http'
-import { echo } from '../utils'
+import { identity } from '../utils'
 
 const DEFAULT_LEVEL = LogLevel.INFO
 
@@ -28,7 +28,7 @@ export const eventifyPipe: IPipe = {
 
       const batched = await Promise.all(data
         // @ts-ignore
-        .map((data) => eventifyPipe.execute({ data }, echo)))
+        .map((data) => eventifyPipe.execute({ data }, identity)))
 
       const [arrayRejected, arrayResolved] = batched.reduce((acc, [res, rej]) => {
         res && acc[0].push(res)
