@@ -1,7 +1,7 @@
 import { IPipe, IPipeOutput, ITransmittable } from '../interfaces'
 import { identity } from '.'
 
-export async function executePipeline (transmittable: ITransmittable, pipeline: IPipe[]): Promise<IPipeOutput> {
+export async function executeFailproof (transmittable: ITransmittable, pipeline: IPipe[]): Promise<IPipeOutput> {
   const pipe = pipeline.shift() as IPipe
   const [err, succ] = await pipe.execute(transmittable, identity)
 
@@ -11,5 +11,5 @@ export async function executePipeline (transmittable: ITransmittable, pipeline: 
       : [err, null]
   }
 
-  return executePipeline(transmittable, pipeline)
+  return executeFailproof(transmittable, pipeline)
 }

@@ -1,6 +1,6 @@
 import set from 'lodash.set'
 export { deepMap } from './deepmap'
-export { executePipeline } from './executePipeline'
+export { executeFailproof } from './executeFailproof'
 export { clone } from './clone'
 export { set }
 
