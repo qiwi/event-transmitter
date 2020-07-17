@@ -87,6 +87,7 @@
 								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="pipes.html#type" class="tsd-kind-icon">type</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="pipes.html#type-1" class="tsd-kind-icon">type</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="pipes.html#type-2" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="pipes.html#type-3" class="tsd-kind-icon">type</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -95,6 +96,7 @@
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="pipes.html#createdeviceinfopipe" class="tsd-kind-icon">create<wbr>Device<wbr>Info<wbr>Pipe</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="pipes.html#createflppipeline" class="tsd-kind-icon">create<wbr>Flp<wbr>Pipeline</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="pipes.html#createhttppipe" class="tsd-kind-icon">create<wbr>Http<wbr>Pipe</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="pipes.html#createhttppipefallback" class="tsd-kind-icon">create<wbr>Http<wbr>Pipe<wbr>Fallback</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="pipes.html#createmaskerpipe" class="tsd-kind-icon">create<wbr>Masker<wbr>Pipe</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="pipes.html#execute" class="tsd-kind-icon">execute</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="pipes.html#getdeviceinfo" class="tsd-kind-icon">get<wbr>Device<wbr>Info</a></li>
@@ -119,7 +121,7 @@
 					<div class="tsd-signature tsd-kind-icon">IHttp<wbr>Headers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/4391b32/src/main/ts/pipes/http.ts#L5">pipes/http.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/73473a6/src/main/ts/pipes/http.ts#L5">pipes/http.ts:5</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -129,10 +131,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
 					<a name="panmaskerpipe" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> pan<wbr>Masker<wbr>Pipe</h3>
-					<div class="tsd-signature tsd-kind-icon">pan<wbr>Masker<wbr>Pipe<span class="tsd-signature-symbol">:</span> <a href="../interfaces/reflection-140.reflection-1.ipipe-1.html" class="tsd-signature-type">IPipe</a><span class="tsd-signature-symbol"> = createMaskerPipe(panMaskerFn)</span></div>
+					<div class="tsd-signature tsd-kind-icon">pan<wbr>Masker<wbr>Pipe<span class="tsd-signature-symbol">:</span> <a href="../interfaces/reflection-152.reflection-1.ipipe-1.html" class="tsd-signature-type">IPipe</a><span class="tsd-signature-symbol"> = createMaskerPipe(panMaskerFn)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/4391b32/src/main/ts/pipes/masker.ts#L28">pipes/masker.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/73473a6/src/main/ts/pipes/masker.ts#L28">pipes/masker.ts:28</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -142,27 +144,37 @@
 					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"http"</span><span class="tsd-signature-symbol"> = &quot;http&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/4391b32/src/main/ts/pipes/http.ts#L13">pipes/http.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/73473a6/src/main/ts/pipes/http.ts#L13">pipes/http.ts:13</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
 					<a name="type-1" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"flp-eventify"</span><span class="tsd-signature-symbol"> = &quot;flp-eventify&quot;</span></div>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"http-fallback"</span><span class="tsd-signature-symbol"> = &quot;http-fallback&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/4391b32/src/main/ts/pipes/flp.ts#L10">pipes/flp.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/73473a6/src/main/ts/pipes/httpFallback.ts#L6">pipes/httpFallback.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
 					<a name="type-2" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> type</h3>
+					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"flp-eventify"</span><span class="tsd-signature-symbol"> = &quot;flp-eventify&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/73473a6/src/main/ts/pipes/flp.ts#L10">pipes/flp.ts:10</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="type-3" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> type</h3>
 					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"device-info"</span><span class="tsd-signature-symbol"> = &quot;device-info&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/4391b32/src/main/ts/pipes/deviceInfo.ts#L6">pipes/deviceInfo.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/73473a6/src/main/ts/pipes/deviceInfo.ts#L6">pipes/deviceInfo.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -173,16 +185,16 @@
 					<a name="createdeviceinfopipe" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> create<wbr>Device<wbr>Info<wbr>Pipe</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Device<wbr>Info<wbr>Pipe<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/reflection-140.reflection-1.ipipe-1.html" class="tsd-signature-type">IPipe</a></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Device<wbr>Info<wbr>Pipe<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/reflection-152.reflection-1.ipipe-1.html" class="tsd-signature-type">IPipe</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/4391b32/src/main/ts/pipes/deviceInfo.ts#L25">pipes/deviceInfo.ts:25</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/73473a6/src/main/ts/pipes/deviceInfo.ts#L25">pipes/deviceInfo.ts:25</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/reflection-140.reflection-1.ipipe-1.html" class="tsd-signature-type">IPipe</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/reflection-152.reflection-1.ipipe-1.html" class="tsd-signature-type">IPipe</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -190,13 +202,13 @@
 					<a name="createflppipeline" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> create<wbr>Flp<wbr>Pipeline</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Flp<wbr>Pipeline<span class="tsd-signature-symbol">(</span>opts<span class="tsd-signature-symbol">: </span><a href="../interfaces/pipes.ihttppipeopts.html" class="tsd-signature-type">IHttpPipeOpts</a>, batchUrl<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="reflection-140.reflection-1.html#tpipeline-1" class="tsd-signature-type">TPipeline</a></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Flp<wbr>Pipeline<span class="tsd-signature-symbol">(</span>opts<span class="tsd-signature-symbol">: </span><a href="../interfaces/pipes.ihttppipeopts.html" class="tsd-signature-type">IHttpPipeOpts</a>, batchUrl<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="reflection-152.reflection-1.html#tpipeline-1" class="tsd-signature-type">TPipeline</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/4391b32/src/main/ts/pipes/flp.ts#L68">pipes/flp.ts:68</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/73473a6/src/main/ts/pipes/flp.ts#L68">pipes/flp.ts:68</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -208,7 +220,7 @@
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> batchUrl: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="reflection-140.reflection-1.html#tpipeline-1" class="tsd-signature-type">TPipeline</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="reflection-152.reflection-1.html#tpipeline-1" class="tsd-signature-type">TPipeline</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -216,13 +228,13 @@
 					<a name="createhttppipe" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> create<wbr>Http<wbr>Pipe</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Http<wbr>Pipe<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>headers<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">; </span>method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HttpMethod</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/reflection-140.reflection-1.ipipe-1.html" class="tsd-signature-type">IPipe</a></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Http<wbr>Pipe<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>headers<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">; </span>method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HttpMethod</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/reflection-152.reflection-1.ipipe-1.html" class="tsd-signature-type">IPipe</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/4391b32/src/main/ts/pipes/http.ts#L21">pipes/http.ts:21</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/73473a6/src/main/ts/pipes/http.ts#L21">pipes/http.ts:21</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -242,7 +254,30 @@
 									</ul>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/reflection-140.reflection-1.ipipe-1.html" class="tsd-signature-type">IPipe</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/reflection-152.reflection-1.ipipe-1.html" class="tsd-signature-type">IPipe</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="createhttppipefallback" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> create<wbr>Http<wbr>Pipe<wbr>Fallback</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Http<wbr>Pipe<wbr>Fallback<span class="tsd-signature-symbol">(</span>opts<span class="tsd-signature-symbol">: </span><a href="../interfaces/pipes.ihttppipeopts.html" class="tsd-signature-type">IHttpPipeOpts</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/reflection-152.reflection-1.ipipe-1.html" class="tsd-signature-type">IPipe</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/73473a6/src/main/ts/pipes/httpFallback.ts#L8">pipes/httpFallback.ts:8</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>opts: <a href="../interfaces/pipes.ihttppipeopts.html" class="tsd-signature-type">IHttpPipeOpts</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/reflection-152.reflection-1.ipipe-1.html" class="tsd-signature-type">IPipe</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -250,13 +285,13 @@
 					<a name="createmaskerpipe" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> create<wbr>Masker<wbr>Pipe</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Masker<wbr>Pipe<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>el<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, key<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/reflection-140.reflection-1.ipipe-1.html" class="tsd-signature-type">IPipe</a></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Masker<wbr>Pipe<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>el<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, key<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/reflection-152.reflection-1.ipipe-1.html" class="tsd-signature-type">IPipe</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/4391b32/src/main/ts/pipes/masker.ts#L6">pipes/masker.ts:6</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/73473a6/src/main/ts/pipes/masker.ts#L6">pipes/masker.ts:6</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -286,7 +321,7 @@
 									</ul>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/reflection-140.reflection-1.ipipe-1.html" class="tsd-signature-type">IPipe</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/reflection-152.reflection-1.ipipe-1.html" class="tsd-signature-type">IPipe</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -294,22 +329,22 @@
 					<a name="execute" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> execute</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">execute<span class="tsd-signature-symbol">(</span>transmittable<span class="tsd-signature-symbol">: </span><a href="../interfaces/reflection-140.reflection-1.itransmittable-1.html" class="tsd-signature-type">ITransmittable</a>, pipeline<span class="tsd-signature-symbol">: </span><a href="reflection-140.reflection-1.html#tpipeline-1" class="tsd-signature-type">TPipeline</a>, prefix<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, pipelineId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="reflection-140.reflection-1.html#ipipeoutput-1" class="tsd-signature-type">IPipeOutput</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">execute<span class="tsd-signature-symbol">(</span>transmittable<span class="tsd-signature-symbol">: </span><a href="../interfaces/reflection-152.reflection-1.itransmittable-1.html" class="tsd-signature-type">ITransmittable</a>, pipeline<span class="tsd-signature-symbol">: </span><a href="reflection-152.reflection-1.html#tpipeline-1" class="tsd-signature-type">TPipeline</a>, prefix<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, pipelineId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="reflection-152.reflection-1.html#ipipeoutput-1" class="tsd-signature-type">IPipeOutput</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/4391b32/src/main/ts/pipes/index.ts#L12">pipes/index.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/73473a6/src/main/ts/pipes/index.ts#L12">pipes/index.ts:12</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>transmittable: <a href="../interfaces/reflection-140.reflection-1.itransmittable-1.html" class="tsd-signature-type">ITransmittable</a></h5>
+									<h5>transmittable: <a href="../interfaces/reflection-152.reflection-1.itransmittable-1.html" class="tsd-signature-type">ITransmittable</a></h5>
 								</li>
 								<li>
-									<h5>pipeline: <a href="reflection-140.reflection-1.html#tpipeline-1" class="tsd-signature-type">TPipeline</a></h5>
+									<h5>pipeline: <a href="reflection-152.reflection-1.html#tpipeline-1" class="tsd-signature-type">TPipeline</a></h5>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> prefix: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></h5>
@@ -318,7 +353,7 @@
 									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> pipelineId: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = getPipelineId(pipeline)</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="reflection-140.reflection-1.html#ipipeoutput-1" class="tsd-signature-type">IPipeOutput</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="reflection-152.reflection-1.html#ipipeoutput-1" class="tsd-signature-type">IPipeOutput</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -332,7 +367,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/4391b32/src/main/ts/pipes/deviceInfo.ts#L8">pipes/deviceInfo.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/73473a6/src/main/ts/pipes/deviceInfo.ts#L8">pipes/deviceInfo.ts:8</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -349,19 +384,19 @@
 					<a name="getpipelineid" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>Pipeline<wbr>Id</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Pipeline<wbr>Id<span class="tsd-signature-symbol">(</span>pipeline<span class="tsd-signature-symbol">: </span><a href="reflection-140.reflection-1.html#tpipeline-1" class="tsd-signature-type">TPipeline</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Pipeline<wbr>Id<span class="tsd-signature-symbol">(</span>pipeline<span class="tsd-signature-symbol">: </span><a href="reflection-152.reflection-1.html#tpipeline-1" class="tsd-signature-type">TPipeline</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/4391b32/src/main/ts/pipes/index.ts#L4">pipes/index.ts:4</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/73473a6/src/main/ts/pipes/index.ts#L4">pipes/index.ts:4</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>pipeline: <a href="reflection-140.reflection-1.html#tpipeline-1" class="tsd-signature-type">TPipeline</a></h5>
+									<h5>pipeline: <a href="reflection-152.reflection-1.html#tpipeline-1" class="tsd-signature-type">TPipeline</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -378,7 +413,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/4391b32/src/main/ts/pipes/masker.ts#L20">pipes/masker.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/73473a6/src/main/ts/pipes/masker.ts#L20">pipes/masker.ts:20</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -400,16 +435,16 @@
 					<div class="tsd-signature tsd-kind-icon">eventify<wbr>Pipe<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/4391b32/src/main/ts/pipes/flp.ts#L12">pipes/flp.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/73473a6/src/main/ts/pipes/flp.ts#L12">pipes/flp.ts:12</a></li>
 						</ul>
 					</aside>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
-						<a name="eventifypipe.type-3" class="tsd-anchor"></a>
+						<a name="eventifypipe.type-4" class="tsd-anchor"></a>
 						<h3>type</h3>
 						<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/4391b32/src/main/ts/pipes/flp.ts#L13">pipes/flp.ts:13</a></li>
+								<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/73473a6/src/main/ts/pipes/flp.ts#L13">pipes/flp.ts:13</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -423,7 +458,7 @@
 							<li class="tsd-description">
 								<aside class="tsd-sources">
 									<ul>
-										<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/4391b32/src/main/ts/pipes/flp.ts#L14">pipes/flp.ts:14</a></li>
+										<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/73473a6/src/main/ts/pipes/flp.ts#L14">pipes/flp.ts:14</a></li>
 									</ul>
 								</aside>
 								<h4 class="tsd-parameters-title">Parameters</h4>
@@ -451,7 +486,7 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-module tsd-is-not-exported">
-						<a href="reflection-140.html">&lt;em&gt;<wbr>Module&lt;/em&gt;</a>
+						<a href="reflection-152.html">&lt;em&gt;<wbr>Module&lt;/em&gt;</a>
 					</li>
 					<li class="current tsd-kind-module">
 						<a href="pipes.html">pipes</a>
@@ -481,6 +516,9 @@
 					<li class=" tsd-kind-variable tsd-parent-kind-module">
 						<a href="pipes.html#type-2" class="tsd-kind-icon">type</a>
 					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="pipes.html#type-3" class="tsd-kind-icon">type</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="pipes.html#createdeviceinfopipe" class="tsd-kind-icon">create<wbr>Device<wbr>Info<wbr>Pipe</a>
 					</li>
@@ -489,6 +527,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="pipes.html#createhttppipe" class="tsd-kind-icon">create<wbr>Http<wbr>Pipe</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="pipes.html#createhttppipefallback" class="tsd-kind-icon">create<wbr>Http<wbr>Pipe<wbr>Fallback</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="pipes.html#createmaskerpipe" class="tsd-kind-icon">create<wbr>Masker<wbr>Pipe</a>
