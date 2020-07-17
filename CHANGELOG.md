@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/qiwi/event-transmitter/compare/v1.9.0...v1.10.0) (2020-07-17)
+
+
+### Features
+
+* add httpFallback ([73473a6](https://github.com/qiwi/event-transmitter/commit/73473a6771aa57df9f33c8d86176148cb380691a))
+
 # [1.9.0](https://github.com/qiwi/event-transmitter/compare/v1.8.0...v1.9.0) (2020-07-16)
 
 
