@@ -57,10 +57,11 @@ describe('httpPipe', () => {
     const transmittable: ITransmittable = { data: null, meta: { history: [] } }
 
     return expect(httpPipe.execute(transmittable, noop))
-      .resolves.toEqual([[
-        new Error('Not Found'),
-        new Error('Not Found'),
-        new Error('Not Found'),
-      ], null])
+      .resolves.toEqual([new Error('Not Found'), null])
+  })
+
+  it('throw error when opts is empty', () => {
+    return expect(() => createHttpPipeFallback([]))
+      .toThrow(new Error('createHttpPipeFallback opts must not be empty'))
   })
 })

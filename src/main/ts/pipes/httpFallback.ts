@@ -6,10 +6,18 @@ import { executePipeline } from '../utils'
 export const type = 'http-fallback'
 
 export const createHttpPipeFallback = (opts: IHttpPipeOpts[]): IPipe => {
+  if (opts.length === 0) {
+    throw new Error('createHttpPipeFallback opts must not be empty')
+  }
+
   const httpPipes = opts.map(createHttpPipe)
   return {
     type,
     execute (transmittable : ITransmittable): IPromise<IPipeOutput> {
+      if (!httpPipes) {
+        return Promise.resolve([new Error('createHttpPipeFallback opts must not be empty'), null])
+      }
+
       return executePipeline(transmittable, httpPipes)
     },
   }
