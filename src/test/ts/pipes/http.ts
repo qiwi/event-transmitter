@@ -13,7 +13,7 @@ describe('httpPipe', () => {
     expect(httpPipe.execute).toEqual(expect.any(Function))
   })
 
-  it('returns remote data if succeeds', () => {
+  it('returns remote data if succeeds', async () => {
     const httpPipe = createHttpPipe({ url: 'https://reqres.in/api/users/2', method: HttpMethod.GET })
     const transmittable: ITransmittable = { data: null, meta: { history: [] } }
 

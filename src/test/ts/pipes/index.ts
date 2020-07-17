@@ -28,13 +28,13 @@ describe('pipes', () => {
 
 describe('pipes', () => {
   describe('execute', () => {
-    it('execute works correctly', async (done) => {
+    it('execute works correctly', async () => {
       const upper: IPipe = {
         type: 'upper',
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         async execute (data, next: ICallable) {
           data.data.message = data.data.message.toUpperCase()
-          await next([null, data])
+          await next([null, data.data])
           data.data.message = data.data.message.toUpperCase()
           return Promise.resolve([null, data])
         },
@@ -51,13 +51,24 @@ describe('pipes', () => {
 
       const pipeline2: TPipeline = [upper, foo]
 
-      const [err, data] = await execute(createTransmittable({
+      const res = await execute(createTransmittable({
         message: 'baz',
       }), pipeline2)
 
-      console.log(err, JSON.stringify(data))
-
-      done()
+      expect(res).toMatchObject([
+        null,
+        {
+          data: { message: 'FOO' },
+          err: null,
+          meta:
+            {
+              history:
+                [
+                  { pipelineId: '{0-upper}{1-foo}', pipeId: '1', pipeType: 'foo', err: null, res: false },
+                  { pipelineId: '{0-upper}{1-foo}', pipeId: '0', pipeType: 'upper', err: null, res: true }],
+            },
+        },
+      ])
     })
   })
 })
