@@ -14,10 +14,6 @@ export const createHttpPipeFallback = (opts: IHttpPipeOpts[]): IPipe => {
   return {
     type,
     execute (transmittable : ITransmittable): IPromise<IPipeOutput> {
-      if (!httpPipes) {
-        return Promise.resolve([new Error('createHttpPipeFallback opts must not be empty'), null])
-      }
-
       return executePipeline(transmittable, httpPipes)
     },
   }
