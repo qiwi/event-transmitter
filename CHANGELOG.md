@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/qiwi/event-transmitter/compare/v1.10.0...v1.11.0) (2020-07-20)
+
+
+### Features
+
+* add fallback to flp-pipe ([#20](https://github.com/qiwi/event-transmitter/issues/20)) ([1bf8cb9](https://github.com/qiwi/event-transmitter/commit/1bf8cb95093a43f7c1739c97d6c77984c63da473))
+
 # [1.10.0](https://github.com/qiwi/event-transmitter/compare/v1.9.0...v1.10.0) (2020-07-17)
 
 
