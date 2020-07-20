@@ -23,6 +23,7 @@ export const eventifyPipe: IPipe = {
     const event: IClientEventDto = {
       message: '',
       meta: {},
+      level: DEFAULT_LEVEL,
     }
 
     if (data === null || data === undefined) {

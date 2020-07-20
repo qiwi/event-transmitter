@@ -4,6 +4,10 @@ export function deepMap (
   refs = new WeakMap(),
   key?: string
 ) {
+  if (input instanceof Error) {
+    return input
+  }
+
   if (typeof input === 'object' && input !== null) {
     const ref = refs.get(input)
     if (ref) {

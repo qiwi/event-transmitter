@@ -107,4 +107,38 @@ describe('flpPipeline', () => {
 
     spy.mockClear()
   })
+
+  it('executes eventify, masker and http pipes consequentially with object', async () => {
+    const spy = jest.spyOn(window, 'fetch')
+    const flpPipeline = createFlpPipeline({ url, method: HttpMethod.POST, batchUrl })
+    const transmitter = createTransmitter({
+      pipeline: flpPipeline,
+    })
+    const res = await transmitter.push({ data: 'data', message: 'message' })
+
+    expect(res).toEqual([null, { data: 'data', message: 'message' }])
+    expect(spy).toHaveBeenCalledWith(url, {
+      method: HttpMethod.POST,
+      body: JSON.stringify({
+        message: 'message',
+        meta: {},
+        level: 'info',
+        data: 'data',
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+
+    spy.mockClear()
+  })
+
+  it('executes eventify, masker and http pipes consequentially with Error', async () => {
+    const flpPipeline = createFlpPipeline({ url, method: HttpMethod.POST, batchUrl })
+    const transmitter = createTransmitter({
+      pipeline: flpPipeline,
+    })
+    const res = await transmitter.push(new Error('test error'))
+    expect(res).toMatchObject([null, new Error('test error')])
+  })
 })
