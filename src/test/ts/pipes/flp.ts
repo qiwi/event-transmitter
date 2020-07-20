@@ -51,16 +51,12 @@ describe('flpPipeline', () => {
 
   it('createFlpPipeline factory returns a pipeline', () => {
     expect(createFlpPipeline(
-      { url: 'https://reqres.in/api/users/2', method: HttpMethod.GET },
-      { url: batchUrl, method: HttpMethod.GET })).toEqual(expect.any(Array))
+      { url: 'https://reqres.in/api/users/2', method: HttpMethod.GET, batchUrl })).toEqual(expect.any(Array))
   })
 
   it('executes eventify, masker and http pipes consequentially with batch', async () => {
     const spy = jest.spyOn(window, 'fetch')
-    const flpPipeline = createFlpPipeline(
-      { url, method: HttpMethod.POST },
-      { url: batchUrl, method: HttpMethod.POST }
-    )
+    const flpPipeline = createFlpPipeline({ url, method: HttpMethod.POST, batchUrl })
     const transmitter = createTransmitter({
       pipeline: flpPipeline,
     })
@@ -90,9 +86,7 @@ describe('flpPipeline', () => {
 
   it('executes eventify, masker and http pipes consequentially', async () => {
     const spy = jest.spyOn(window, 'fetch')
-    const flpPipeline = createFlpPipeline(
-      { url, method: HttpMethod.POST },
-      { url: batchUrl, method: HttpMethod.GET })
+    const flpPipeline = createFlpPipeline({ url, method: HttpMethod.POST, batchUrl })
     const transmitter = createTransmitter({
       pipeline: flpPipeline,
     })
