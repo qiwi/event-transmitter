@@ -74,10 +74,18 @@ export const eventifyPipe: IPipe = {
 }
 
 export const createFlpPipeline = ({ url, batchUrl, headers, method }: IFlpOptions): TPipeline => {
-  const httpPipe = createHttpPipeFallback(([] as string[]).concat(url).map(url => ({ url, headers, method })))
-  const httpPipeBatch = batchUrl
-    ? createHttpPipeFallback(([] as string[]).concat(batchUrl).map(url => ({ url, headers, method })))
-    : httpPipe
+  const opts = ([] as string[])
+    .concat(url)
+    .map(url => ({ url, headers, method }))
+
+  const batchOpts = batchUrl
+    ? ([] as string[])
+      .concat(batchUrl)
+      .map(url => ({ url, headers, method }))
+    : opts
+
+  const httpPipe = createHttpPipeFallback(opts)
+  const httpPipeBatch = createHttpPipeFallback(batchOpts)
 
   const httpPipeResolver: IPipe = ({
     type: httpPipe.type,
