@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/qiwi/event-transmitter/compare/v1.11.0...v1.12.0) (2020-07-20)
+
+
+### Features
+
+* update flp interface ([39a9e30](https://github.com/qiwi/event-transmitter/commit/39a9e30074af1a2bec50bf33deca45e9b32e500e))
+
 # [1.11.0](https://github.com/qiwi/event-transmitter/compare/v1.10.0...v1.11.0) (2020-07-20)
 
 
