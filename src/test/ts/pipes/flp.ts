@@ -1,5 +1,5 @@
-import { eventifyPipe, createFlpPipeline } from '../../../main/ts/pipes/flp'
-import { createTransmittable, createTransmitter } from '../../../main/ts'
+import { eventifyPipe, createFlpPipeline, createTransmittable, createTransmitter } from '../../../main/ts'
+
 import { HttpMethod } from '@qiwi/substrate'
 import StackTrace from 'stacktrace-js'
 
@@ -50,15 +50,17 @@ describe('flpPipeline', () => {
   const batchUrl = 'https://reqres.in/api/unknown'
 
   it('createFlpPipeline factory returns a pipeline', () => {
-    expect(createFlpPipeline({ url: 'https://reqres.in/api/users/2', method: HttpMethod.GET }, batchUrl)).toEqual(expect.any(Array))
+    expect(createFlpPipeline(
+      { url: 'https://reqres.in/api/users/2', method: HttpMethod.GET },
+      { url: batchUrl, method: HttpMethod.GET })).toEqual(expect.any(Array))
   })
 
   it('executes eventify, masker and http pipes consequentially with batch', async () => {
     const spy = jest.spyOn(window, 'fetch')
-    const flpPipeline = createFlpPipeline({
-      url,
-      method: HttpMethod.POST,
-    }, batchUrl)
+    const flpPipeline = createFlpPipeline(
+      { url, method: HttpMethod.POST },
+      { url: batchUrl, method: HttpMethod.POST }
+    )
     const transmitter = createTransmitter({
       pipeline: flpPipeline,
     })
@@ -88,10 +90,9 @@ describe('flpPipeline', () => {
 
   it('executes eventify, masker and http pipes consequentially', async () => {
     const spy = jest.spyOn(window, 'fetch')
-    const flpPipeline = createFlpPipeline({
-      url,
-      method: HttpMethod.POST,
-    }, batchUrl)
+    const flpPipeline = createFlpPipeline(
+      { url, method: HttpMethod.POST },
+      { url: batchUrl, method: HttpMethod.GET })
     const transmitter = createTransmitter({
       pipeline: flpPipeline,
     })

@@ -2,7 +2,8 @@ import StackTrace from 'stacktrace-js'
 import { IClientEventDto, LogLevel } from '@qiwi/substrate'
 import { IPipe, ITransmittable, TPipeline } from '../interfaces'
 import { panMaskerPipe } from './masker'
-import { createHttpPipe, IHttpPipeOpts } from './http'
+import { IHttpPipeOpts } from './http'
+import { createHttpPipeFallback } from './httpFallback'
 import { identity } from '../utils'
 
 const DEFAULT_LEVEL = LogLevel.INFO
@@ -65,9 +66,11 @@ export const eventifyPipe: IPipe = {
   },
 }
 
-export const createFlpPipeline = (opts: IHttpPipeOpts, batchUrl?: string): TPipeline => {
-  const httpPipe = createHttpPipe(opts)
-  const httpPipeBatch = batchUrl ? createHttpPipe({ ...opts, url: batchUrl }) : httpPipe
+export const createFlpPipeline = (opts: IHttpPipeOpts[] | IHttpPipeOpts, batchUrl?: IHttpPipeOpts[] | IHttpPipeOpts): TPipeline => {
+  const httpPipe = createHttpPipeFallback(([] as IHttpPipeOpts[]).concat(opts))
+  const httpPipeBatch = batchUrl
+    ? createHttpPipeFallback(([] as IHttpPipeOpts[]).concat(batchUrl))
+    : httpPipe
 
   const httpPipeResolver: IPipe = ({
     type: httpPipe.type,
