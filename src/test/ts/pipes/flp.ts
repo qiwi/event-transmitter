@@ -138,7 +138,7 @@ describe('flpPipeline', () => {
     const transmitter = createTransmitter({
       pipeline: flpPipeline,
     })
-    const res = await transmitter.push(new Error('test error'))
-    expect(res).toMatchObject([null, new Error('test error')])
+    const res = await transmitter.push(new Error('0000000000000000'))
+    expect(res).toMatchObject([null, new Error('0000 **** **** 0000')])
   })
 })

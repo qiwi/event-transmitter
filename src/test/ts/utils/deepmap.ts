@@ -48,4 +48,10 @@ describe('deepMap', () => {
 
     expect(deepMap(testObj, el => Number(el) * 10)).toMatchObject(resObj)
   })
+
+  it('handle error objects', () => {
+    const testObj = new Error('1')
+
+    expect(deepMap(testObj, el => Number(el) * 10)).toMatchObject(new Error('10'))
+  })
 })
