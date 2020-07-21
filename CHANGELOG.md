@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/qiwi/event-transmitter/compare/v1.12.1...v1.13.0) (2020-07-21)
+
+
+### Features
+
+* add deviceInfo to flpPipe, extraction httpBatch ([f63a664](https://github.com/qiwi/event-transmitter/commit/f63a664563d925eec400800d2c38db106c5dddf8))
+
 ## [1.12.1](https://github.com/qiwi/event-transmitter/compare/v1.12.0...v1.12.1) (2020-07-21)
 
 
