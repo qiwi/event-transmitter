@@ -4,6 +4,7 @@ describe('deepMap', () => {
   it('handle object', () => {
     const testObj = {
       a: 1,
+      length: 9,
       b: [
         1,
         2,
@@ -19,6 +20,7 @@ describe('deepMap', () => {
 
     expect(deepMap(testObj, el => Number(el) * 10)).toMatchObject({
       a: 10,
+      length: 90,
       b: [
         10,
         20,

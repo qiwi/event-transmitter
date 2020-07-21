@@ -10,20 +10,19 @@ export function deepMap (
       return ref
     }
 
-    if (input instanceof Error) {
-      const n = new Error()
-      n.message = deepMap(input.message, fn, refs, 'message')
-      n.stack = deepMap(input.stack, fn, refs, 'stack')
-      return n
-    }
-
     const n: Record<string, any> = Array.isArray(input) ? [] : {}
     refs.set(input, n)
-    for (const i in input) {
-      if (Object.prototype.hasOwnProperty.call(input, i)) {
-        n[i] = deepMap(input[i], fn, refs, i)
-      }
-    }
+    const descriptors = Object.getOwnPropertyDescriptors(input)
+    Object.entries(descriptors)
+      .filter(([key]) => Array.isArray(input)
+        ? key !== 'length'
+        : true)
+      .forEach(([key, descriptor]) => {
+        Object.defineProperty(n, key, { ...descriptor, value: deepMap(descriptor.value, fn, refs, key) })
+      })
+
+    Object.setPrototypeOf(n, Object.getPrototypeOf(input))
+
     return n
   }
   return fn(input, key)
