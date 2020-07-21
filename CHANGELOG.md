@@ -1,3 +1,10 @@
+## [1.12.1](https://github.com/qiwi/event-transmitter/compare/v1.12.0...v1.12.1) (2020-07-21)
+
+
+### Bug Fixes
+
+* apply deepmap masking to errors ([f0826ad](https://github.com/qiwi/event-transmitter/commit/f0826adc6e92186158176921490711bd67a50bb8))
+
 # [1.12.0](https://github.com/qiwi/event-transmitter/compare/v1.11.0...v1.12.0) (2020-07-20)
 
 
