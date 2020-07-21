@@ -3,7 +3,8 @@ import { HttpMethod, IClientEventDto, LogLevel } from '@qiwi/substrate'
 import { IPipe, ITransmittable, TPipeline } from '../interfaces'
 import { panMaskerPipe } from './masker'
 import { IHttpHeaders } from './http'
-import { createHttpPipeFallback } from './httpFallback'
+import { createHttpBatchPipe } from './httpBatch'
+import { createDeviceInfoPipe } from './deviceInfo'
 import { identity } from '../utils'
 
 export type IFlpOptions = {
@@ -74,28 +75,10 @@ export const eventifyPipe: IPipe = {
   },
 }
 
-export const createFlpPipeline = ({ url, batchUrl, headers, method }: IFlpOptions): TPipeline => {
-  const opts = ([] as string[])
-    .concat(url)
-    .map(url => ({ url, headers, method }))
-
-  const batchOpts = batchUrl
-    ? ([] as string[])
-      .concat(batchUrl)
-      .map(url => ({ url, headers, method }))
-    : opts
-
-  const httpPipe = createHttpPipeFallback(opts)
-  const httpPipeBatch = createHttpPipeFallback(batchOpts)
-
-  const httpPipeResolver: IPipe = ({
-    type: httpPipe.type,
-    execute (...args) {
-      return Array.isArray(args[0].data.events)
-        ? httpPipeBatch.execute(...args)
-        : httpPipe.execute(...args)
-    },
-  })
-
-  return [panMaskerPipe, eventifyPipe, httpPipeResolver]
-}
+export const createFlpPipeline =
+  ({ url, batchUrl, headers, method }: IFlpOptions): TPipeline => [
+    panMaskerPipe,
+    eventifyPipe,
+    createDeviceInfoPipe(),
+    createHttpBatchPipe({ url, batchUrl, headers, method }),
+  ]

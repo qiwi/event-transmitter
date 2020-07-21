@@ -63,22 +63,20 @@ describe('flpPipeline', () => {
     const res = await transmitter.push(['4539246180805047', '5101754226671617'])
 
     expect(res).toEqual([null, ['4539 **** **** 5047', '5101 **** **** 1617']])
-    expect(spy).toHaveBeenCalledWith(batchUrl, {
-      method: HttpMethod.POST,
-      body: JSON.stringify({
-        events: [{
-          message: '4539 **** **** 5047',
-          meta: {},
-          level: 'info',
-        }, {
-          message: '5101 **** **** 1617',
-          meta: {},
-          level: 'info',
-        }],
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    expect(spy.mock.calls[0][0]).toBe(batchUrl)
+    expect(spy.mock.calls[0][1]?.method).toBe(HttpMethod.POST)
+    expect(spy.mock.calls[0][1]?.headers).toMatchObject({ 'Content-Type': 'application/json' })
+    // @ts-ignore
+    expect(JSON.parse(spy.mock.calls[0][1].body)).toMatchObject({
+      events: [{
+        message: '4539 **** **** 5047',
+        meta: {},
+        level: 'info',
+      }, {
+        message: '5101 **** **** 1617',
+        meta: {},
+        level: 'info',
+      }],
     })
 
     spy.mockClear()
@@ -93,16 +91,20 @@ describe('flpPipeline', () => {
     const res = await transmitter.push('0000000000000000')
 
     expect(res).toEqual([null, '0000 **** **** 0000'])
-    expect(spy).toHaveBeenCalledWith(url, {
-      method: HttpMethod.POST,
-      body: JSON.stringify({
-        message: '0000 **** **** 0000',
-        meta: {},
-        level: 'info',
-      }),
-      headers: {
-        'Content-Type': 'application/json',
+    expect(spy.mock.calls[0][0]).toBe(url)
+    expect(spy.mock.calls[0][1]?.method).toBe(HttpMethod.POST)
+    expect(spy.mock.calls[0][1]?.headers).toMatchObject({ 'Content-Type': 'application/json' })
+    // @ts-ignore
+    expect(JSON.parse(spy.mock.calls[0][1].body)).toMatchObject({
+      message: '0000 **** **** 0000',
+      meta: {
+        deviceInfo: {
+          browser: expect.any(Object),
+          model: expect.any(Object),
+          os: expect.any(Object),
+        },
       },
+      level: 'info',
     })
 
     spy.mockClear()
@@ -117,19 +119,23 @@ describe('flpPipeline', () => {
     const res = await transmitter.push({ data: 'data', message: 'message' })
 
     expect(res).toEqual([null, { data: 'data', message: 'message' }])
-    expect(spy).toHaveBeenCalledWith(url, {
-      method: HttpMethod.POST,
-      body: JSON.stringify({
-        message: 'message',
-        meta: {},
-        level: 'info',
-        data: 'data',
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
 
+    expect(spy.mock.calls[0][0]).toBe(url)
+    expect(spy.mock.calls[0][1]?.method).toBe(HttpMethod.POST)
+    expect(spy.mock.calls[0][1]?.headers).toMatchObject({ 'Content-Type': 'application/json' })
+    // @ts-ignore
+    expect(JSON.parse(spy.mock.calls[0][1].body)).toMatchObject({
+      message: 'message',
+      meta: {
+        deviceInfo: {
+          browser: expect.any(Object),
+          model: expect.any(Object),
+          os: expect.any(Object),
+        },
+      },
+      level: 'info',
+      data: 'data',
+    })
     spy.mockClear()
   })
 

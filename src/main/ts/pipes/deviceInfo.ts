@@ -26,7 +26,6 @@ export const createDeviceInfoPipe = (): IPipe => ({
   type,
   execute ({ data }: ITransmittable): IPromise<IPipeOutput> {
     const output = set(clone(data), 'meta.deviceInfo', getDeviceInfo())
-
     return Promise.resolve([null, output])
   },
 })
