@@ -1,8 +1,16 @@
 import { IPipe } from '../interfaces'
 import { createHttpPipeFallback } from './httpFallback'
-import { IFlpOptions } from './flp'
+import { HttpMethod } from '@qiwi/substrate'
+import { IHttpHeaders } from './http'
 
-export const createHttpBatchPipe = ({ url, batchUrl, headers, method }: IFlpOptions): IPipe => {
+export type IHttpBatchPipeOpts = {
+  url: string | string[],
+  method: HttpMethod,
+  batchUrl?: string | string [],
+  headers?: IHttpHeaders,
+}
+
+export const createHttpBatchPipe = ({ url, batchUrl, headers, method }: IHttpBatchPipeOpts): IPipe => {
   const opts = ([] as string[])
     .concat(url)
     .map(url => ({ url, headers, method }))

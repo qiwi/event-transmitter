@@ -1,18 +1,10 @@
 import StackTrace from 'stacktrace-js'
-import { HttpMethod, IClientEventDto, LogLevel } from '@qiwi/substrate'
+import { IClientEventDto, LogLevel } from '@qiwi/substrate'
 import { IPipe, ITransmittable, TPipeline } from '../interfaces'
 import { panMaskerPipe } from './masker'
-import { IHttpHeaders } from './http'
-import { createHttpBatchPipe } from './httpBatch'
+import { createHttpBatchPipe, IHttpBatchPipeOpts } from './httpBatch'
 import { createDeviceInfoPipe } from './deviceInfo'
 import { identity } from '../utils'
-
-export type IFlpOptions = {
-  url: string | string[],
-  method: HttpMethod,
-  batchUrl?: string | string [],
-  headers?: IHttpHeaders,
-}
 
 const DEFAULT_LEVEL = LogLevel.INFO
 
@@ -76,7 +68,7 @@ export const eventifyPipe: IPipe = {
 }
 
 export const createFlpPipeline =
-  ({ url, batchUrl, headers, method }: IFlpOptions): TPipeline => [
+  ({ url, batchUrl, headers, method }: IHttpBatchPipeOpts): TPipeline => [
     panMaskerPipe,
     eventifyPipe,
     createDeviceInfoPipe(),
