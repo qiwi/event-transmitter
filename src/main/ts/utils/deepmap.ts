@@ -10,14 +10,17 @@ export function deepMap (
       return ref
     }
 
+    const isArr = Array.isArray(input)
     const n: Record<string, any> = Array.isArray(input) ? [] : {}
     refs.set(input, n)
     const descriptors = Object.getOwnPropertyDescriptors(input)
+
     Object.entries(descriptors)
-      .filter(([key]) => Array.isArray(input)
-        ? key !== 'length'
-        : true)
       .forEach(([key, descriptor]) => {
+        if (isArr && key === 'length') {
+          return
+        }
+
         Object.defineProperty(n, key, { ...descriptor, value: deepMap(descriptor.value, fn, refs, key) })
       })
 
