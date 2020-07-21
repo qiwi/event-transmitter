@@ -1,17 +1,10 @@
 import StackTrace from 'stacktrace-js'
-import { HttpMethod, IClientEventDto, LogLevel } from '@qiwi/substrate'
+import { IClientEventDto, LogLevel } from '@qiwi/substrate'
 import { IPipe, ITransmittable, TPipeline } from '../interfaces'
 import { panMaskerPipe } from './masker'
-import { IHttpHeaders } from './http'
-import { createHttpPipeFallback } from './httpFallback'
+import { createHttpBatchPipe, IHttpBatchPipeOpts } from './httpBatch'
+import { createDeviceInfoPipe } from './deviceInfo'
 import { identity } from '../utils'
-
-export type IFlpOptions = {
-  url: string | string[],
-  method: HttpMethod,
-  batchUrl?: string | string [],
-  headers?: IHttpHeaders,
-}
 
 const DEFAULT_LEVEL = LogLevel.INFO
 
@@ -74,28 +67,10 @@ export const eventifyPipe: IPipe = {
   },
 }
 
-export const createFlpPipeline = ({ url, batchUrl, headers, method }: IFlpOptions): TPipeline => {
-  const opts = ([] as string[])
-    .concat(url)
-    .map(url => ({ url, headers, method }))
-
-  const batchOpts = batchUrl
-    ? ([] as string[])
-      .concat(batchUrl)
-      .map(url => ({ url, headers, method }))
-    : opts
-
-  const httpPipe = createHttpPipeFallback(opts)
-  const httpPipeBatch = createHttpPipeFallback(batchOpts)
-
-  const httpPipeResolver: IPipe = ({
-    type: httpPipe.type,
-    execute (...args) {
-      return Array.isArray(args[0].data.events)
-        ? httpPipeBatch.execute(...args)
-        : httpPipe.execute(...args)
-    },
-  })
-
-  return [panMaskerPipe, eventifyPipe, httpPipeResolver]
-}
+export const createFlpPipeline =
+  ({ url, batchUrl, headers, method }: IHttpBatchPipeOpts): TPipeline => [
+    panMaskerPipe,
+    eventifyPipe,
+    createDeviceInfoPipe(),
+    createHttpBatchPipe({ url, batchUrl, headers, method }),
+  ]
