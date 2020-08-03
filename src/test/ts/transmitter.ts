@@ -1,6 +1,6 @@
 import { createTransmitter } from '../../main/ts/transmitter'
 import { createHttpPipe } from '../../main/ts/pipes/http'
-import { HttpMethod } from '@qiwi/substrate-types'
+import { HttpMethod } from '@qiwi/substrate'
 
 import 'cross-fetch/polyfill'
 

@@ -1,4 +1,4 @@
-import { HttpMethod } from '@qiwi/substrate-types'
+import { HttpMethod } from '@qiwi/substrate'
 import { createHttpPipe, ITransmittable } from '../../../main/ts'
 
 import 'cross-fetch/polyfill'
