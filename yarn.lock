@@ -637,6 +637,13 @@
   dependencies:
     "@qiwi/substrate-types" "1.43.0"
 
+"@qiwi/substrate-abstract@1.17.50":
+  version "1.17.50"
+  resolved "https://registry.yarnpkg.com/@qiwi/substrate-abstract/-/substrate-abstract-1.17.50.tgz#b3681e3534d72113b77e1e5d5ef547633c39285e"
+  integrity sha512-N6gLtWA1LNJ4akO24qddvZWn+u0lA32YSEsjagm/X0ET1qAPVt1FFJVdznVb/rcG57BLZAhzYDNryKaHJ+sfRg==
+  dependencies:
+    "@qiwi/substrate-types" "1.44.0"
+
 "@qiwi/substrate-std@1.0.36":
   version "1.0.36"
   resolved "https://registry.yarnpkg.com/@qiwi/substrate-std/-/substrate-std-1.0.36.tgz#8a40f03c5aca1245b319b0991b4cee279c17cf45"
@@ -644,12 +651,24 @@
   dependencies:
     "@qiwi/substrate-types" "1.43.0"
 
+"@qiwi/substrate-std@1.0.38":
+  version "1.0.38"
+  resolved "https://registry.yarnpkg.com/@qiwi/substrate-std/-/substrate-std-1.0.38.tgz#c7822e249db21fad1fe695a505eb12a529a15f7a"
+  integrity sha512-aYUfOXXPG3yFNHnGCi81WeNAPaJJHKUcSAt94gA6Haaw9U0wu+1vEaiJXgsC5JZpAJu6gINDuqR6RdIl0aiX9w==
+  dependencies:
+    "@qiwi/substrate-types" "1.44.0"
+
 "@qiwi/substrate-types@1.43.0":
   version "1.43.0"
   resolved "https://registry.yarnpkg.com/@qiwi/substrate-types/-/substrate-types-1.43.0.tgz#aeb6ea4e5c71b6295273b0912f6c96521447efc9"
   integrity sha512-MhOaoc36ERjD32wmf07XlWpVm+ZKqU6ObSwKAkcHPl/HO/JI7XxrX8TpjuqJXuER+DmCxUFmwFMveqe9o80yUQ==
 
-"@qiwi/substrate@^1.18.28", "@qiwi/substrate@^1.18.35":
+"@qiwi/substrate-types@1.44.0":
+  version "1.44.0"
+  resolved "https://registry.yarnpkg.com/@qiwi/substrate-types/-/substrate-types-1.44.0.tgz#76874fc73b55f57c8c9ba07c592463dfa26ea92a"
+  integrity sha512-6EA4U3Hq9od/jUNUaxJH+7FEO/LEMo+PNT2zRA9j1PSVRSstGcjDWcxOHBCDsb40p+0ZzyNWpGIyuwqufsrQHg==
+
+"@qiwi/substrate@^1.18.28":
   version "1.18.35"
   resolved "https://registry.yarnpkg.com/@qiwi/substrate/-/substrate-1.18.35.tgz#5de0f71b6b227c1c1d03bdbbc33fe088c6cb114e"
   integrity sha512-CWBXwjeIjebp28/OFDHX7BopXq2O+M8XsU1ywxwBlRGOAtnu2FpymmxZNohCE87zyLQNF7PjovfxDK80Z2TVTQ==
@@ -657,6 +676,15 @@
     "@qiwi/substrate-abstract" "1.17.48"
     "@qiwi/substrate-std" "1.0.36"
     "@qiwi/substrate-types" "1.43.0"
+
+"@qiwi/substrate@^1.18.37":
+  version "1.18.37"
+  resolved "https://registry.yarnpkg.com/@qiwi/substrate/-/substrate-1.18.37.tgz#057e9a6f50aed84242450eec95847a95e68eaee2"
+  integrity sha512-96Gb6Ti1TlHCAoy1wxfpETFLhCPltoELo1fqW0RciaYtn7IBkFMhYVwXNCWyVdr/m42+jyDHwLI0wxi0yubVCw==
+  dependencies:
+    "@qiwi/substrate-abstract" "1.17.50"
+    "@qiwi/substrate-std" "1.0.38"
+    "@qiwi/substrate-types" "1.44.0"
 
 "@semantic-release/changelog@^5.0.1":
   version "5.0.1"
@@ -990,6 +1018,11 @@
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-1.0.1.tgz#0a851d3bd96498fa25c33ab7278ed3bd65f06c3e"
   integrity sha512-l42BggppR6zLmpfU6fq9HEa2oGPEI8yrSPL3GITjfRInppYFahObbIQOQK3UGxEnyQpltZLaPe75046NOZQikw==
+
+"@types/user-agents@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@types/user-agents/-/user-agents-1.0.0.tgz#aeb7546f50cea28358a019a70ab3ce8827ecf937"
+  integrity sha512-oOSdQ9CULdFN2SJ9NNHvPrkP9aJ6oAz7BiiAeMC4vca+AzFqktlGdetMjlbCA0J3AemMn7ToU3U74VgrMecHtA==
 
 "@types/yargs-parser@*":
   version "15.0.0"
@@ -2307,6 +2340,11 @@ detect-indent@~5.0.0:
   resolved "https://registry.yarnpkg.com/detect-indent/-/detect-indent-5.0.0.tgz#3871cc0a6a002e8c3e5b3cf7f336264675f06b9d"
   integrity sha1-OHHMCmoALow+Wzz38zYmRnXwa50=
 
+detect-indent@~6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/detect-indent/-/detect-indent-6.0.0.tgz#0abd0f549f69fc6659a254fe96786186b6f528fd"
+  integrity sha512-oSyFlqaTHCItVRGK5RmrmjB+CmaMOW7IaNA/kdxqhoa6d17j/5ce9O9eWXmV/KEdRwqpQA+Vqe8a8Bsybu4YnA==
+
 detect-newline@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/detect-newline/-/detect-newline-2.1.0.tgz#f41f1c10be4b00e87b5f13da680759f2c5bfd3e2"
@@ -2342,6 +2380,11 @@ dir-glob@^3.0.0, dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
+docopt@~0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/docopt/-/docopt-0.6.2.tgz#b28e9e2220da5ec49f7ea5bb24a47787405eeb11"
+  integrity sha1-so6eIiDaXsSffqW7JKR3h0Be6xE=
+
 doctrine@1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/doctrine/-/doctrine-1.5.0.tgz#379dce730f6166f76cefa4e6707a159b02c5a6fa"
@@ -2370,6 +2413,15 @@ domexception@^2.0.1:
   integrity sha512-yxJ2mFy/sibVQlu5qHjOkf9J3K6zgmCxgJ94u2EdvDOV09H+32LtRswEcUsmUWN72pVLOEnTSRaIVVzVQgS0dg==
   dependencies:
     webidl-conversions "^5.0.0"
+
+dot-json@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/dot-json/-/dot-json-1.2.0.tgz#16f62bbb15b0b834f5c8de299cfb9e4d494f2ac1"
+  integrity sha512-4bEM7KHFl/U9gAI5nIvU0/fwVzNnE713K339vcxAMtxd2D9mZP6o65UwlcXigJL4rfk90UM0J+D7IPIFYZMQ8Q==
+  dependencies:
+    detect-indent "~6.0.0"
+    docopt "~0.6.2"
+    underscore-keypath "~0.0.22"
 
 dot-prop@^3.0.0:
   version "3.0.0"
@@ -8174,6 +8226,18 @@ umask@^1.1.0, umask@~1.1.0:
   resolved "https://registry.yarnpkg.com/umask/-/umask-1.1.0.tgz#f29cebf01df517912bb58ff9c4e50fde8e33320d"
   integrity sha1-8pzr8B31F5ErtY/5xOUP3o4zMg0=
 
+underscore-keypath@~0.0.22:
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/underscore-keypath/-/underscore-keypath-0.0.22.tgz#48a528392bb6efc424be1caa56da4b5faccf264d"
+  integrity sha1-SKUoOSu278QkvhyqVtpLX6zPJk0=
+  dependencies:
+    underscore "*"
+
+underscore@*:
+  version "1.10.2"
+  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.10.2.tgz#73d6aa3668f3188e4adb0f1943bd12cfd7efaaaf"
+  integrity sha512-N4P+Q/BuyuEKFJ43B9gYuOj4TQUHXX+j2FqguVOpjkssLUUrnJofCcBccJSCoeturDoZU6GorDTHSvUDlSQbTg==
+
 union-value@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/union-value/-/union-value-1.0.1.tgz#0b6fe7b835aecda61c6ea4d4f02c14221e109847"
@@ -8291,6 +8355,14 @@ use@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"
   integrity sha512-cwESVXlO3url9YWlFW/TA9cshCEhtu7IKJ/p5soJ/gGpj7vbvFrAY/eIioQ6Dw23KjZhYgiIo8HOs1nQ2vr/oQ==
+
+user-agents@^1.0.559:
+  version "1.0.559"
+  resolved "https://registry.yarnpkg.com/user-agents/-/user-agents-1.0.559.tgz#389817f79dff667d9e5c8803631c41043e8eccd8"
+  integrity sha512-HdAlNS3vDxOGMRwmv8or05xL96MV3CEwQhUSFTCRoOvTOEnWhTEBPAHRry/xZpVTTOtx77UHMal8YKcx6fs7Lg==
+  dependencies:
+    dot-json "^1.2.0"
+    lodash.clonedeep "^4.5.0"
 
 util-deprecate@^1.0.1, util-deprecate@~1.0.1:
   version "1.0.2"

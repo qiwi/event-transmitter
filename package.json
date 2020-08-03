@@ -49,7 +49,7 @@
   },
   "homepage": "https://github.com/qiwi/event-transmitter#readme",
   "dependencies": {
-    "@qiwi/substrate": "^1.18.35",
+    "@qiwi/substrate": "^1.18.37",
     "@types/lodash.once": "^4.1.6",
     "fast-luhn": "^1.1.1",
     "lodash.once": "^4.1.1",
@@ -71,6 +71,7 @@
     "@types/lodash.set": "^4.3.6",
     "@types/platform": "^1.3.2",
     "@types/safe-json-stringify": "^1.1.1",
+    "@types/user-agents": "^1.0.0",
     "@typescript-eslint/eslint-plugin": "^3.6.1",
     "@typescript-eslint/parser": "^3.6.1",
     "coveralls": "^3.1.0",
@@ -87,7 +88,8 @@
     "typedoc": "^0.17.8",
     "typedoc-plugin-external-module-name": "^4.0.3",
     "typescript": "^3.9.6",
-    "typescript-eslint-parser": "^22.0.0"
+    "typescript-eslint-parser": "^22.0.0",
+    "user-agents": "^1.0.559"
   },
   "release": {
     "branch": "master",
