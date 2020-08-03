@@ -1,5 +1,5 @@
 import { createDeviceInfoPipe, getDeviceInfo } from '../../../main/ts'
-import { IDeviceInfo } from '@qiwi/substrate-types'
+import { IDeviceInfo } from '@qiwi/substrate'
 
 describe('deviceInfoPipe', () => {
   it('is returned by factory', () => {
@@ -23,6 +23,7 @@ describe('getDeviceInfo', () => {
         name: null,
         manufacturer: null,
       },
+      isMobile: false,
       os: {
         architecture: 64,
         family: 'OS X',

@@ -1,7 +1,7 @@
 import { IPipe, IPipeOutput, ITransmittable } from '../interfaces'
 import { IPromise, IDeviceInfo } from '@qiwi/substrate'
 import platform from 'platform'
-import { set, clone } from '../utils'
+import { set, clone, isMobile } from '../utils'
 
 export const type = 'device-info'
 
@@ -14,6 +14,7 @@ export const getDeviceInfo = (userAgent?: string): IDeviceInfo => {
       version,
       layout,
     },
+    isMobile: isMobile(userAgent || window.navigator.userAgent),
     model: {
       name: product,
       manufacturer,
