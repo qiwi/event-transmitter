@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/qiwi/event-transmitter/compare/v1.13.0...v1.14.0) (2020-08-03)
+
+
+### Features
+
+* **deviceInfo:** add isMobile flag ([bfd90b6](https://github.com/qiwi/event-transmitter/commit/bfd90b6aa73f6fed31c1a8ea21425d9403c637bf))
+
 # [1.13.0](https://github.com/qiwi/event-transmitter/compare/v1.12.1...v1.13.0) (2020-07-21)
 
 
