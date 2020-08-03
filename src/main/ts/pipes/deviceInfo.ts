@@ -14,7 +14,7 @@ export const getDeviceInfo = (userAgent?: string): IDeviceInfo => {
       version,
       layout,
     },
-    isMobile: isMobile(userAgent || platform.ua || window.navigator.userAgent),
+    isMobile: isMobile(userAgent || window.navigator.userAgent),
     model: {
       name: product,
       manufacturer,
