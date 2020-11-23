@@ -1,10 +1,11 @@
-import StackTrace from 'stacktrace-js'
 import { IClientEventDto, LogLevel } from '@qiwi/substrate'
+import StackTrace from 'stacktrace-js'
+
 import { IPipe, ITransmittable, TPipeline } from '../interfaces'
-import { panMaskerPipe } from './masker'
-import { createHttpBatchPipe, IHttpBatchPipeOpts } from './httpBatch'
-import { createDeviceInfoPipe } from './deviceInfo'
 import { identity } from '../utils'
+import { createDeviceInfoPipe } from './deviceInfo'
+import { createHttpBatchPipe, IHttpBatchPipeOpts } from './httpBatch'
+import { panMaskerPipe } from './masker'
 
 const DEFAULT_LEVEL = LogLevel.INFO
 

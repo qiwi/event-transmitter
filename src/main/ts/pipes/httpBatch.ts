@@ -1,7 +1,8 @@
-import { IPipe } from '../interfaces'
-import { createHttpPipeFallback } from './httpFallback'
 import { HttpMethod } from '@qiwi/substrate'
+
+import { IPipe } from '../interfaces'
 import { IHttpHeaders } from './http'
+import { createHttpPipeFallback } from './httpFallback'
 
 export type IHttpBatchPipeOpts = {
   url: string | string[],
@@ -17,8 +18,8 @@ export const createHttpBatchPipe = ({ url, batchUrl, headers, method }: IHttpBat
 
   const batchOpts = batchUrl
     ? ([] as string[])
-      .concat(batchUrl)
-      .map(url => ({ url, headers, method }))
+        .concat(batchUrl)
+        .map(url => ({ url, headers, method }))
     : opts
 
   const httpPipe = createHttpPipeFallback(opts)

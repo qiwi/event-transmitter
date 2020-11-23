@@ -1,8 +1,9 @@
-import { createTransmitter } from '../../main/ts/transmitter'
-import { createHttpPipe } from '../../main/ts/pipes/http'
+import 'cross-fetch/polyfill'
+
 import { HttpMethod } from '@qiwi/substrate'
 
-import 'cross-fetch/polyfill'
+import { createHttpPipe } from '../../main/ts/pipes/http'
+import { createTransmitter } from '../../main/ts/transmitter'
 
 describe('transmitter', () => {
   it('processes input through a pipeline', async () => {

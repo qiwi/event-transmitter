@@ -10,7 +10,8 @@ module.exports = {
   ],
   rules: {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    'sonarjs/no-duplicate-string': 'off'
+    'sonarjs/no-duplicate-string': 'off',
+    'unicorn/no-null': 'off',
   },
   root: true,
   env: {

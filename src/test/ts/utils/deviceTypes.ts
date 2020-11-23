@@ -1,4 +1,5 @@
 import UserAgent from 'user-agents'
+
 import { isMobile } from '../../../main/ts/utils'
 
 interface ITestCase {

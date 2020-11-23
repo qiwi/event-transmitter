@@ -1,4 +1,4 @@
-import { IPromise, ICallable } from '@qiwi/substrate'
+import { ICallable, IPromise } from '@qiwi/substrate'
 
 export interface ITransmittable {
   data: any
