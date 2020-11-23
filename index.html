@@ -76,11 +76,11 @@
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {createTransmitter, createHttpPipe, IPipe} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@qiwi/event-transmitter&#x27;</span>
 
 <span class="hljs-keyword">const</span> httpPipe: IPipe = createFetchPusher({
-  url: <span class="hljs-string">&#x27;https://example.qiwi.com/event&#x27;</span>,
-  method: <span class="hljs-string">&#x27;POST&#x27;</span>
+  <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;https://example.qiwi.com/event&#x27;</span>,
+  <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>
 })
 <span class="hljs-keyword">const</span> transmitter = createTransmitter({
-  pipeline: [httpPipe]
+  <span class="hljs-attr">pipeline</span>: [httpPipe]
 })
 <span class="hljs-keyword">const</span> event: IClientEventDto = {...}
 
@@ -94,7 +94,7 @@ transmitter.push(event)</code></pre>
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-module tsd-is-not-exported">
-						<a href="modules/reflection-179.html">&lt;em&gt;<wbr>Module&lt;/em&gt;</a>
+						<a href="modules/reflection-182.html">&lt;em&gt;<wbr>Module&lt;/em&gt;</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="modules/pipes.html">pipes</a>
