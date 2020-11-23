@@ -1,9 +1,9 @@
-import { eventifyPipe, createFlpPipeline, createTransmittable, createTransmitter } from '../../../main/ts'
+import 'cross-fetch/polyfill'
 
 import { HttpMethod } from '@qiwi/substrate'
 import StackTrace from 'stacktrace-js'
 
-import 'cross-fetch/polyfill'
+import { createFlpPipeline, createTransmittable, createTransmitter, eventifyPipe } from '../../../main/ts'
 
 const noop = () => { /* noop */ }
 

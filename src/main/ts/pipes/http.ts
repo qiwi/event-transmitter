@@ -1,5 +1,6 @@
-import safeJsonStringify from 'safe-json-stringify'
 import { HttpMethod, IPromise } from '@qiwi/substrate'
+import safeJsonStringify from 'safe-json-stringify'
+
 import { IPipe, IPipeOutput, ITransmittable } from '../interfaces'
 
 export type IHttpHeaders = Record<string, string | (() => string)>

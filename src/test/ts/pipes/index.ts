@@ -1,6 +1,7 @@
-import { IPipe, TPipeline, createTransmittable } from '../../../main/ts'
-import { execute, getPipelineId } from '../../../main/ts/pipes'
 import { ICallable } from '@qiwi/substrate'
+
+import { createTransmittable, IPipe, TPipeline } from '../../../main/ts'
+import { execute, getPipelineId } from '../../../main/ts/pipes'
 
 describe('pipes', () => {
   describe('getPipelineId', () => {

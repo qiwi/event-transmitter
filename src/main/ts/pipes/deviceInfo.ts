@@ -1,7 +1,8 @@
-import { IPipe, IPipeOutput, ITransmittable } from '../interfaces'
-import { IPromise, IDeviceInfo } from '@qiwi/substrate'
+import { IDeviceInfo, IPromise } from '@qiwi/substrate'
 import platform from 'platform'
-import { set, clone, isMobile } from '../utils'
+
+import { IPipe, IPipeOutput, ITransmittable } from '../interfaces'
+import { clone, isMobile, set } from '../utils'
 
 export const type = 'device-info'
 

@@ -1,5 +1,6 @@
-import { createDeviceInfoPipe, getDeviceInfo } from '../../../main/ts'
 import { IDeviceInfo } from '@qiwi/substrate'
+
+import { createDeviceInfoPipe, getDeviceInfo } from '../../../main/ts'
 
 describe('deviceInfoPipe', () => {
   it('is returned by factory', () => {

@@ -1,7 +1,8 @@
-import { HttpMethod } from '@qiwi/substrate'
-import { createHttpPipeFallback, ITransmittable } from '../../../main/ts'
-
 import 'cross-fetch/polyfill'
+
+import { HttpMethod } from '@qiwi/substrate'
+
+import { createHttpPipeFallback, ITransmittable } from '../../../main/ts'
 
 const noop = () => { /* noop */ }
 

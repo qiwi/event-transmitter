@@ -1,7 +1,8 @@
-import { IPipe, IPipeOutput, ITransmittable } from '../interfaces'
 import { IPromise } from '@qiwi/substrate'
-import { createHttpPipe, IHttpPipeOpts } from './http'
+
+import { IPipe, IPipeOutput, ITransmittable } from '../interfaces'
 import { executeFailproof } from '../utils'
+import { createHttpPipe, IHttpPipeOpts } from './http'
 
 export const type = 'http-fallback'
 

@@ -1,9 +1,9 @@
 import {
-  createTransmitter,
-  createHttpPipe,
   createFlpPipeline,
-  createTransmittable,
+  createHttpPipe,
   createMaskerPipe,
+  createTransmittable,
+  createTransmitter,
 } from '../../main/ts'
 
 describe('index', () => {

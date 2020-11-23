@@ -1,9 +1,8 @@
 import {
-  ITransmitter,
   ITransmittable,
+  ITransmitter,
   TPipeline,
 } from './interfaces'
-
 import { execute } from './pipes'
 
 export type ITransmitterOpts = {

@@ -1,7 +1,7 @@
 import {
   createMaskerPipe,
-  panMaskerPipe,
   ITransmittable,
+  panMaskerPipe,
 } from '../../../main/ts'
 
 const noop = () => { /* noop */ }
