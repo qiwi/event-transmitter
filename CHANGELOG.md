@@ -1,3 +1,10 @@
+## [1.14.1](https://github.com/qiwi/event-transmitter/compare/v1.14.0...v1.14.1) (2020-11-23)
+
+
+### Performance Improvements
+
+* refactor docs script , update deps, migrate to semrel-toolkit ([#27](https://github.com/qiwi/event-transmitter/issues/27)) ([cf00fad](https://github.com/qiwi/event-transmitter/commit/cf00fad7410446f3649265e8548ea355f7aa020f))
+
 # [1.14.0](https://github.com/qiwi/event-transmitter/compare/v1.13.0...v1.14.0) (2020-08-03)
 
 
