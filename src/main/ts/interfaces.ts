@@ -1,17 +1,5 @@
 import { ICallable, IPromise } from '@qiwi/substrate'
 
-export interface ITransmittable {
-  data: any
-  err?: any
-  meta: {
-    history: Array<IHistoryEntry>
-  }
-}
-
-export interface ITransmitter {
-  push(input: any): IPromise<IPipeOutput>
-}
-
 export interface IHistoryEntry {
   pipeType: string
   pipelineId: string
@@ -20,7 +8,19 @@ export interface IHistoryEntry {
   err: any
 }
 
+export interface ITransmittable {
+  data: any
+  err?: any
+  meta: {
+    history: Array<IHistoryEntry>
+  }
+}
+
 export type IPipeOutput = [any, any]
+
+export interface ITransmitter {
+  push(input: any): IPromise<IPipeOutput>
+}
 
 export interface IPipe {
   type: string

@@ -1,5 +1,5 @@
 import { IPipe, IPipeOutput, ITransmittable } from '../interfaces'
-import { identity } from '.'
+import { identity } from './identity'
 
 export async function executeFailproof (transmittable: ITransmittable, pipeline: IPipe[]): Promise<IPipeOutput> {
   const pipe = pipeline.shift() as IPipe
