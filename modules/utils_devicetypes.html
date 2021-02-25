@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>pipes | @qiwi/event-transmitter</title>
+	<title>utils/deviceTypes | @qiwi/event-transmitter</title>
 	<meta name="description" content="Documentation for @qiwi/event-transmitter">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">/*! normalize.css v1.1.3 | MIT License | git.io/normalize */
@@ -2683,10 +2683,7 @@ img {
 <nav class="tsd-navigation secondary">
 	<ul>
 		<li class=" tsd-kind-function tsd-parent-kind-module">
-			<a href="pipes.html#execute" class="tsd-kind-icon">execute</a>
-		</li>
-		<li class=" tsd-kind-function tsd-parent-kind-module">
-			<a href="pipes.html#getpipelineid" class="tsd-kind-icon">get<wbr>Pipeline<wbr>Id</a>
+			<a href="utils_devicetypes.html#ismobile" class="tsd-kind-icon">is<wbr>Mobile</a>
 		</li>
 	</ul>
 </nav>
@@ -2699,8 +2696,7 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Functions</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-function tsd-parent-kind-module"><a href="pipes.html#execute" class="tsd-kind-icon">execute</a></li>
-							<li class="tsd-kind-function tsd-parent-kind-module"><a href="pipes.html#getpipelineid" class="tsd-kind-icon">get<wbr>Pipeline<wbr>Id</a></li>
+							<li class="tsd-kind-function tsd-parent-kind-module"><a href="utils_devicetypes.html#ismobile" class="tsd-kind-icon">is<wbr>Mobile</a></li>
 						</ul>
 					</section>
 				</div>
@@ -2709,57 +2705,25 @@ img {
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Functions</h2>
 			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-				<a name="execute" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagConst">Const</span> execute</h3>
+				<a name="ismobile" class="tsd-anchor"></a>
+				<h3><span class="tsd-flag ts-flagConst">Const</span> is<wbr>Mobile</h3>
 				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-					<li class="tsd-signature tsd-kind-icon">execute<span class="tsd-signature-symbol">(</span>transmittable<span class="tsd-signature-symbol">: </span><a href="../interfaces/interfaces.itransmittable.html" class="tsd-signature-type" data-tsd-kind="Interface">ITransmittable</a>, pipeline<span class="tsd-signature-symbol">: </span><a href="interfaces.html#tpipeline" class="tsd-signature-type" data-tsd-kind="Type alias">TPipeline</a>, prefix<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, pipelineId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces.html#ipipeoutput" class="tsd-signature-type" data-tsd-kind="Type alias">IPipeOutput</a><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">is<wbr>Mobile<span class="tsd-signature-symbol">(</span>userAgent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/7f6c933/src/main/ts/pipes/index.ts#L13">src/main/ts/pipes/index.ts:13</a></li>
+								<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/7f6c933/src/main/ts/utils/deviceTypes.ts#L1">src/main/ts/utils/deviceTypes.ts:1</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>transmittable: <a href="../interfaces/interfaces.itransmittable.html" class="tsd-signature-type" data-tsd-kind="Interface">ITransmittable</a></h5>
-							</li>
-							<li>
-								<h5>pipeline: <a href="interfaces.html#tpipeline" class="tsd-signature-type" data-tsd-kind="Type alias">TPipeline</a></h5>
-							</li>
-							<li>
-								<h5>prefix: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></h5>
-							</li>
-							<li>
-								<h5>pipelineId: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></h5>
+								<h5>userAgent: <span class="tsd-signature-type">string</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces.html#ipipeoutput" class="tsd-signature-type" data-tsd-kind="Type alias">IPipeOutput</a><span class="tsd-signature-symbol">&gt;</span></h4>
-					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-				<a name="getpipelineid" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>Pipeline<wbr>Id</h3>
-				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-					<li class="tsd-signature tsd-kind-icon">get<wbr>Pipeline<wbr>Id<span class="tsd-signature-symbol">(</span>pipeline<span class="tsd-signature-symbol">: </span><a href="interfaces.html#tpipeline" class="tsd-signature-type" data-tsd-kind="Type alias">TPipeline</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-				</ul>
-				<ul class="tsd-descriptions">
-					<li class="tsd-description">
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/7f6c933/src/main/ts/pipes/index.ts#L5">src/main/ts/pipes/index.ts:5</a></li>
-							</ul>
-						</aside>
-						<h4 class="tsd-parameters-title">Parameters</h4>
-						<ul class="tsd-parameters">
-							<li>
-								<h5>pipeline: <a href="interfaces.html#tpipeline" class="tsd-signature-type" data-tsd-kind="Type alias">TPipeline</a></h5>
-							</li>
-						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 					</li>
 				</ul>
 			</section>

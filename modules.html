@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>pipes | @qiwi/event-transmitter</title>
+	<title>@qiwi/event-transmitter | @qiwi/event-transmitter</title>
 	<meta name="description" content="Documentation for @qiwi/event-transmitter">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style type="text/css">/*! normalize.css v1.1.3 | MIT License | git.io/normalize */
@@ -2652,7 +2652,7 @@ img {
 		<div class="container">
 			<div class="table-wrap">
 				<div class="table-cell">
-					<strong><a href="../index.html">@qiwi/event-transmitter</a></strong>
+					<strong><a href="index.html">@qiwi/event-transmitter</a></strong>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -2682,86 +2682,63 @@ img {
 </header>
 <nav class="tsd-navigation secondary">
 	<ul>
-		<li class=" tsd-kind-function tsd-parent-kind-module">
-			<a href="pipes.html#execute" class="tsd-kind-icon">execute</a>
-		</li>
-		<li class=" tsd-kind-function tsd-parent-kind-module">
-			<a href="pipes.html#getpipelineid" class="tsd-kind-icon">get<wbr>Pipeline<wbr>Id</a>
-		</li>
 	</ul>
 </nav>
 <div class="container container-main">
 	<div class="content-wrap">
+		<div class="tsd-panel tsd-typography">
+			<a href="#event-transmitter" id="event-transmitter" style="color: inherit; text-decoration: none;">
+				<h1>event-transmitter</h1>
+			</a>
+			<p>Async adapter to save &amp; deliver reasonable events to some endpoint</p>
+			<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+				<h2>Install</h2>
+			</a>
+			<pre><code class="language-bash"><span style="color: #000000">yarn add @qiwi/event-transmitter</span>
+</code></pre>
+			<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+				<h2>Usage</h2>
+			</a>
+			<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> {</span><span style="color: #001080">createTransmitter</span><span style="color: #000000">, </span><span style="color: #001080">createHttpPipe</span><span style="color: #000000">, </span><span style="color: #001080">IPipe</span><span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@qiwi/event-transmitter&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">httpPipe</span><span style="color: #000000">: </span><span style="color: #267F99">IPipe</span><span style="color: #000000"> = </span><span style="color: #795E26">createFetchPusher</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">url:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;https://example.qiwi.com/event&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">method:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;POST&#039;</span>
+<span style="color: #000000">})</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">transmitter</span><span style="color: #000000"> = </span><span style="color: #795E26">createTransmitter</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">pipeline:</span><span style="color: #000000"> [</span><span style="color: #001080">httpPipe</span><span style="color: #000000">]</span>
+<span style="color: #000000">})</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">event</span><span style="color: #000000">: </span><span style="color: #267F99">IClientEventDto</span><span style="color: #000000"> = {...}</span>
+
+<span style="color: #001080">transmitter</span><span style="color: #000000">.</span><span style="color: #795E26">push</span><span style="color: #000000">(</span><span style="color: #001080">event</span><span style="color: #000000">)</span>
+</code></pre>
+		</div>
 		<section class="tsd-panel-group tsd-index-group">
 			<h2>Index</h2>
 			<section class="tsd-panel tsd-index-panel">
 				<div class="tsd-index-content">
 					<section class="tsd-index-section ">
-						<h3>Functions</h3>
+						<h3>Modules</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-function tsd-parent-kind-module"><a href="pipes.html#execute" class="tsd-kind-icon">execute</a></li>
-							<li class="tsd-kind-function tsd-parent-kind-module"><a href="pipes.html#getpipelineid" class="tsd-kind-icon">get<wbr>Pipeline<wbr>Id</a></li>
+							<li class="tsd-kind-module"><a href="modules/index.html" class="tsd-kind-icon">index</a></li>
+							<li class="tsd-kind-module"><a href="modules/interfaces.html" class="tsd-kind-icon">interfaces</a></li>
+							<li class="tsd-kind-module"><a href="modules/pipes.html" class="tsd-kind-icon">pipes</a></li>
+							<li class="tsd-kind-module"><a href="modules/pipes_deviceinfo.html" class="tsd-kind-icon">pipes/device<wbr>Info</a></li>
+							<li class="tsd-kind-module"><a href="modules/pipes_flp.html" class="tsd-kind-icon">pipes/flp</a></li>
+							<li class="tsd-kind-module"><a href="modules/pipes_http.html" class="tsd-kind-icon">pipes/http</a></li>
+							<li class="tsd-kind-module"><a href="modules/pipes_httpbatch.html" class="tsd-kind-icon">pipes/http<wbr>Batch</a></li>
+							<li class="tsd-kind-module"><a href="modules/pipes_httpfallback.html" class="tsd-kind-icon">pipes/http<wbr>Fallback</a></li>
+							<li class="tsd-kind-module"><a href="modules/pipes_masker.html" class="tsd-kind-icon">pipes/masker</a></li>
+							<li class="tsd-kind-module"><a href="modules/transmitter.html" class="tsd-kind-icon">transmitter</a></li>
+							<li class="tsd-kind-module"><a href="modules/utils.html" class="tsd-kind-icon">utils</a></li>
+							<li class="tsd-kind-module"><a href="modules/utils_clone.html" class="tsd-kind-icon">utils/clone</a></li>
+							<li class="tsd-kind-module"><a href="modules/utils_deepmap.html" class="tsd-kind-icon">utils/deepmap</a></li>
+							<li class="tsd-kind-module"><a href="modules/utils_devicetypes.html" class="tsd-kind-icon">utils/device<wbr>Types</a></li>
+							<li class="tsd-kind-module"><a href="modules/utils_executefailproof.html" class="tsd-kind-icon">utils/execute<wbr>Failproof</a></li>
+							<li class="tsd-kind-module"><a href="modules/utils_identity.html" class="tsd-kind-icon">utils/identity</a></li>
 						</ul>
 					</section>
 				</div>
-			</section>
-		</section>
-		<section class="tsd-panel-group tsd-member-group ">
-			<h2>Functions</h2>
-			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-				<a name="execute" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagConst">Const</span> execute</h3>
-				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-					<li class="tsd-signature tsd-kind-icon">execute<span class="tsd-signature-symbol">(</span>transmittable<span class="tsd-signature-symbol">: </span><a href="../interfaces/interfaces.itransmittable.html" class="tsd-signature-type" data-tsd-kind="Interface">ITransmittable</a>, pipeline<span class="tsd-signature-symbol">: </span><a href="interfaces.html#tpipeline" class="tsd-signature-type" data-tsd-kind="Type alias">TPipeline</a>, prefix<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, pipelineId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces.html#ipipeoutput" class="tsd-signature-type" data-tsd-kind="Type alias">IPipeOutput</a><span class="tsd-signature-symbol">&gt;</span></li>
-				</ul>
-				<ul class="tsd-descriptions">
-					<li class="tsd-description">
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/7f6c933/src/main/ts/pipes/index.ts#L13">src/main/ts/pipes/index.ts:13</a></li>
-							</ul>
-						</aside>
-						<h4 class="tsd-parameters-title">Parameters</h4>
-						<ul class="tsd-parameters">
-							<li>
-								<h5>transmittable: <a href="../interfaces/interfaces.itransmittable.html" class="tsd-signature-type" data-tsd-kind="Interface">ITransmittable</a></h5>
-							</li>
-							<li>
-								<h5>pipeline: <a href="interfaces.html#tpipeline" class="tsd-signature-type" data-tsd-kind="Type alias">TPipeline</a></h5>
-							</li>
-							<li>
-								<h5>prefix: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></h5>
-							</li>
-							<li>
-								<h5>pipelineId: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></h5>
-							</li>
-						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces.html#ipipeoutput" class="tsd-signature-type" data-tsd-kind="Type alias">IPipeOutput</a><span class="tsd-signature-symbol">&gt;</span></h4>
-					</li>
-				</ul>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-				<a name="getpipelineid" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagConst">Const</span> get<wbr>Pipeline<wbr>Id</h3>
-				<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-					<li class="tsd-signature tsd-kind-icon">get<wbr>Pipeline<wbr>Id<span class="tsd-signature-symbol">(</span>pipeline<span class="tsd-signature-symbol">: </span><a href="interfaces.html#tpipeline" class="tsd-signature-type" data-tsd-kind="Type alias">TPipeline</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-				</ul>
-				<ul class="tsd-descriptions">
-					<li class="tsd-description">
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in <a href="https://github.com/qiwi/event-transmitter/blob/7f6c933/src/main/ts/pipes/index.ts#L5">src/main/ts/pipes/index.ts:5</a></li>
-							</ul>
-						</aside>
-						<h4 class="tsd-parameters-title">Parameters</h4>
-						<ul class="tsd-parameters">
-							<li>
-								<h5>pipeline: <a href="interfaces.html#tpipeline" class="tsd-signature-type" data-tsd-kind="Type alias">TPipeline</a></h5>
-							</li>
-						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-					</li>
-				</ul>
 			</section>
 		</section>
 		<footer>
