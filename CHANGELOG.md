@@ -1,3 +1,10 @@
+## [1.14.2](https://github.com/qiwi/event-transmitter/compare/v1.14.1...v1.14.2) (2021-02-25)
+
+
+### Bug Fixes
+
+* **package:** up deps, fix vuls, update ci flow ([#30](https://github.com/qiwi/event-transmitter/issues/30)) ([7f6c933](https://github.com/qiwi/event-transmitter/commit/7f6c93339756ec7ccdbe9bbf7eae8b996c362059))
+
 ## [1.14.1](https://github.com/qiwi/event-transmitter/compare/v1.14.0...v1.14.1) (2020-11-23)
 
 
