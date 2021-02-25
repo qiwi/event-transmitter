@@ -22,6 +22,7 @@ build
 dist
 lib
 target
+buildstamp.json
 
 #Docs
 docs
