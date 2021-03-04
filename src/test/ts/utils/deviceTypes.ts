@@ -9,7 +9,7 @@ interface ITestCase {
 }
 
 const testCasesCount = 100
-const testArray = Array(testCasesCount).fill('')
+const testArray = new Array(testCasesCount).fill('')
 
 const checkTestCase = (functionToTest: (ua: string) => boolean) =>
   ({ description, userAgents, expected }: ITestCase) => {
