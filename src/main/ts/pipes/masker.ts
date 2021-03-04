@@ -8,7 +8,7 @@ export const createMaskerPipe = (
   fn: (el: any, key?: string) => string,
 ): IPipe => ({
   type,
-  async execute ({ data }) {
+  async execute({ data }) {
     try {
       const maskedData = deepMap(data, fn)
       return [null, maskedData]
@@ -19,10 +19,8 @@ export const createMaskerPipe = (
 })
 
 export const panMaskerFn = (input: string | number): string => {
-  return (input + '').replace(/\d{13,19}/g, v =>
-    luhn(v)
-      ? `${v.slice(0, 4)} **** **** ${v.slice(-4)}`
-      : '' + input,
+  return (input + '').replace(/\d{13,19}/g, (v) =>
+    luhn(v) ? `${v.slice(0, 4)} **** **** ${v.slice(-4)}` : '' + input,
   )
 }
 

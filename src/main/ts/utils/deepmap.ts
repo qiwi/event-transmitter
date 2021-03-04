@@ -1,4 +1,4 @@
-export function deepMap (
+export function deepMap(
   input: any,
   fn: (input: Record<string, any>, key?: string) => any,
   refs = new WeakMap(),
@@ -15,14 +15,16 @@ export function deepMap (
     refs.set(input, n)
     const descriptors = Object.getOwnPropertyDescriptors(input)
 
-    Object.entries(descriptors)
-      .forEach(([key, descriptor]) => {
-        if (isArr && key === 'length') {
-          return
-        }
+    Object.entries(descriptors).forEach(([key, descriptor]) => {
+      if (isArr && key === 'length') {
+        return
+      }
 
-        Object.defineProperty(n, key, { ...descriptor, value: deepMap(descriptor.value, fn, refs, key) })
+      Object.defineProperty(n, key, {
+        ...descriptor,
+        value: deepMap(descriptor.value, fn, refs, key),
       })
+    })
 
     Object.setPrototypeOf(n, Object.getPrototypeOf(input))
 

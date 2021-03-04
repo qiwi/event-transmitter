@@ -7,7 +7,10 @@ import { createTransmitter } from '../../main/ts/transmitter'
 
 describe('transmitter', () => {
   it('processes input through a pipeline', async () => {
-    const httpPipe = createHttpPipe({ url: 'https://reqres.in/api/users', method: HttpMethod.POST })
+    const httpPipe = createHttpPipe({
+      url: 'https://reqres.in/api/users',
+      method: HttpMethod.POST,
+    })
     const transmitter = createTransmitter({
       pipeline: [httpPipe],
     })

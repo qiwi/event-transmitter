@@ -18,7 +18,7 @@ describe('deepMap', () => {
       ],
     }
 
-    expect(deepMap(testObj, el => Number(el) * 10)).toMatchObject({
+    expect(deepMap(testObj, (el) => Number(el) * 10)).toMatchObject({
       a: 10,
       length: 90,
       b: [
@@ -48,12 +48,14 @@ describe('deepMap', () => {
     }
     resObj.foo = resObj
 
-    expect(deepMap(testObj, el => Number(el) * 10)).toMatchObject(resObj)
+    expect(deepMap(testObj, (el) => Number(el) * 10)).toMatchObject(resObj)
   })
 
   it('handle error objects', () => {
     const testObj = new Error('1')
 
-    expect(deepMap(testObj, el => Number(el) * 10)).toMatchObject(new Error('10'))
+    expect(deepMap(testObj, (el) => Number(el) * 10)).toMatchObject(
+      new Error('10'),
+    )
   })
 })

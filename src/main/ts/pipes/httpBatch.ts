@@ -5,32 +5,35 @@ import { IHttpHeaders } from './http'
 import { createHttpPipeFallback } from './httpFallback'
 
 export type IHttpBatchPipeOpts = {
-  url: string | string[],
-  method: HttpMethod,
-  batchUrl?: string | string [],
-  headers?: IHttpHeaders,
+  url: string | string[]
+  method: HttpMethod
+  batchUrl?: string | string[]
+  headers?: IHttpHeaders
 }
 
-export const createHttpBatchPipe = ({ url, batchUrl, headers, method }: IHttpBatchPipeOpts): IPipe => {
+export const createHttpBatchPipe = ({
+  url,
+  batchUrl,
+  headers,
+  method,
+}: IHttpBatchPipeOpts): IPipe => {
   const opts = ([] as string[])
     .concat(url)
-    .map(url => ({ url, headers, method }))
+    .map((url) => ({ url, headers, method }))
 
   const batchOpts = batchUrl
-    ? ([] as string[])
-        .concat(batchUrl)
-        .map(url => ({ url, headers, method }))
+    ? ([] as string[]).concat(batchUrl).map((url) => ({ url, headers, method }))
     : opts
 
   const httpPipe = createHttpPipeFallback(opts)
   const httpPipeBatch = createHttpPipeFallback(batchOpts)
 
-  return ({
+  return {
     type: httpPipe.type,
-    execute (...args) {
+    execute(...args) {
       return Array.isArray(args[0].data.events)
         ? httpPipeBatch.execute(...args)
         : httpPipe.execute(...args)
     },
-  })
+  }
 }

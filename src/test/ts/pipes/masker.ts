@@ -4,18 +4,20 @@ import {
   panMaskerPipe,
 } from '../../../main/ts'
 
-const noop = () => { /* noop */ }
+const noop = () => {
+  /* noop */
+}
 
 describe('maskerPipe', () => {
   it('factory returns IPipe', () => {
-    const maskerPipe = createMaskerPipe(el => el)
+    const maskerPipe = createMaskerPipe((el) => el)
 
     expect(maskerPipe.type).toBe('masker')
     expect(maskerPipe.execute).toEqual(expect.any(Function))
   })
 
   it('return masked elements', async () => {
-    const maskerPipe = createMaskerPipe(el => el.toString() + 'masked')
+    const maskerPipe = createMaskerPipe((el) => el.toString() + 'masked')
     const transmittable: ITransmittable = {
       data: ['foo', 'bar', ['foo2', ['foo3']]],
       meta: { history: [] },

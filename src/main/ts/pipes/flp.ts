@@ -13,7 +13,7 @@ export const type = 'flp-eventify'
 
 export const eventifyPipe: IPipe = {
   type,
-  async execute ({ data }: ITransmittable) {
+  async execute({ data }: ITransmittable) {
     const event: IClientEventDto = {
       message: '',
       meta: {},
@@ -29,15 +29,20 @@ export const eventifyPipe: IPipe = {
         return [new Error('Events array must not be empty'), null]
       }
 
-      const batched = await Promise.all(data
-        // @ts-ignore
-        .map((data) => eventifyPipe.execute({ data }, identity)))
+      const batched = await Promise.all(
+        data
+          // @ts-ignore
+          .map((data) => eventifyPipe.execute({ data }, identity)),
+      )
 
-      const [arrayRejected, arrayResolved] = batched.reduce((acc, [res, rej]) => {
-        res && acc[0].push(res)
-        rej && acc[1].push(rej)
-        return acc
-      }, [[], []])
+      const [arrayRejected, arrayResolved] = batched.reduce(
+        (acc, [res, rej]) => {
+          res && acc[0].push(res)
+          rej && acc[1].push(rej)
+          return acc
+        },
+        [[], []],
+      )
 
       if (arrayRejected.length > 0) {
         return [arrayRejected, null]
@@ -54,7 +59,7 @@ export const eventifyPipe: IPipe = {
       event.level = LogLevel.ERROR
       try {
         const frames = await StackTrace.fromError(data)
-        event.stacktrace = frames.map(v => v.toString()).join('\n')
+        event.stacktrace = frames.map((v) => v.toString()).join('\n')
       } catch {} // eslint-disable-line no-empty
     } else if (typeof data === 'object') {
       Object.assign(event, data)
@@ -68,10 +73,14 @@ export const eventifyPipe: IPipe = {
   },
 }
 
-export const createFlpPipeline =
-  ({ url, batchUrl, headers, method }: IHttpBatchPipeOpts): TPipeline => [
-    panMaskerPipe,
-    eventifyPipe,
-    createDeviceInfoPipe(),
-    createHttpBatchPipe({ url, batchUrl, headers, method }),
-  ]
+export const createFlpPipeline = ({
+  url,
+  batchUrl,
+  headers,
+  method,
+}: IHttpBatchPipeOpts): TPipeline => [
+  panMaskerPipe,
+  eventifyPipe,
+  createDeviceInfoPipe(),
+  createHttpBatchPipe({ url, batchUrl, headers, method }),
+]

@@ -4,13 +4,21 @@ import { IPipeOutput, ITransmittable, TPipeline } from '../interfaces'
 
 export const getPipelineId = (pipeline: TPipeline): string => {
   return pipeline.reduce((acc, pipe, index) => {
-    return acc + (Array.isArray(pipe)
-      ? `{${index}-[${getPipelineId(pipe)}]}`
-      : `{${index}-${pipe.type}}`)
+    return (
+      acc +
+      (Array.isArray(pipe)
+        ? `{${index}-[${getPipelineId(pipe)}]}`
+        : `{${index}-${pipe.type}}`)
+    )
   }, '')
 }
 
-export const execute = async (transmittable: ITransmittable, pipeline: TPipeline, prefix = 0, pipelineId = getPipelineId(pipeline)): Promise<IPipeOutput> => {
+export const execute = async (
+  transmittable: ITransmittable,
+  pipeline: TPipeline,
+  prefix = 0,
+  pipelineId = getPipelineId(pipeline),
+): Promise<IPipeOutput> => {
   const pipe = pipeline[0]
 
   if (Array.isArray(pipe)) {
@@ -21,7 +29,14 @@ export const execute = async (transmittable: ITransmittable, pipeline: TPipeline
     return [null, null]
   }
 
-  const next = once(([err, data]: IPipeOutput) => execute({ ...transmittable, data, err }, pipeline.slice(1), prefix + 1, pipelineId))
+  const next = once(([err, data]: IPipeOutput) =>
+    execute(
+      { ...transmittable, data, err },
+      pipeline.slice(1),
+      prefix + 1,
+      pipelineId,
+    ),
+  )
 
   return pipe.execute(transmittable, next).then(async (output) => {
     transmittable.meta.history.push({

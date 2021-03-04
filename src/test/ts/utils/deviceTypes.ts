@@ -11,14 +11,19 @@ interface ITestCase {
 const testCasesCount = 100
 const testArray = new Array(testCasesCount).fill('')
 
-const checkTestCase = (functionToTest: (ua: string) => boolean) =>
-  ({ description, userAgents, expected }: ITestCase) => {
-    describe(description, () => {
-      userAgents.forEach((userAgent, i) => {
-        test(userAgent, () => expect(functionToTest(userAgent)).toEqual(expected[i]))
-      })
+const checkTestCase = (functionToTest: (ua: string) => boolean) => ({
+  description,
+  userAgents,
+  expected,
+}: ITestCase) => {
+  describe(description, () => {
+    userAgents.forEach((userAgent, i) => {
+      test(userAgent, () =>
+        expect(functionToTest(userAgent)).toEqual(expected[i]),
+      )
     })
-  }
+  })
+}
 
 const mobileUaFactory = () => new UserAgent({ deviceCategory: 'mobile' })
 const desktopUaFactory = () => new UserAgent({ deviceCategory: 'desktop' })
