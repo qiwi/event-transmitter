@@ -30,9 +30,9 @@ export const eventifyPipe: IPipe = {
       }
 
       const batched = await Promise.all(
-        data
-          // @ts-ignore
-          .map((data) => eventifyPipe.execute({ data }, identity)),
+        data.map((data) =>
+          eventifyPipe.execute({ data } as ITransmittable, identity),
+        ),
       )
 
       const [arrayRejected, arrayResolved] = batched.reduce(
