@@ -9,6 +9,7 @@ interface ITestCase {
 }
 
 const testCasesCount = 100
+const testArray = Array(testCasesCount).fill('')
 
 const checkTestCase = (functionToTest: (ua: string) => boolean) =>
   ({ description, userAgents, expected }: ITestCase) => {
@@ -19,13 +20,13 @@ const checkTestCase = (functionToTest: (ua: string) => boolean) =>
     })
   }
 
-const mobileUaFactory = new UserAgent({ deviceCategory: 'mobile' }).random
-const desktopUaFactory = new UserAgent({ deviceCategory: 'desktop' }).random
-const tabletUaFactory = new UserAgent({ deviceCategory: 'tablet' }).random
+const mobileUaFactory = () => new UserAgent({ deviceCategory: 'mobile' })
+const desktopUaFactory = () => new UserAgent({ deviceCategory: 'desktop' })
+const tabletUaFactory = () => new UserAgent({ deviceCategory: 'tablet' })
 
-const mobileUserAgents = [...new Array(testCasesCount)].map(() => mobileUaFactory().data.userAgent)
-const desktopUserAgents = [...new Array(testCasesCount)].map(() => desktopUaFactory().data.userAgent)
-const tabletUserAgents = [...new Array(testCasesCount)].map(() => tabletUaFactory().data.userAgent)
+const mobileUserAgents = testArray.map(() => mobileUaFactory().data.userAgent)
+const desktopUserAgents = testArray.map(() => desktopUaFactory().data.userAgent)
+const tabletUserAgents = testArray.map(() => tabletUaFactory().data.userAgent)
 
 describe('isMobile', () => {
   const testCases: ITestCase[] = [
