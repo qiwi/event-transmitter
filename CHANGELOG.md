@@ -1,3 +1,15 @@
+# [1.15.0](https://github.com/qiwi/event-transmitter/compare/v1.14.2...v1.15.0) (2021-03-04)
+
+
+### Features
+
+* handle armv7l ua ([69580c6](https://github.com/qiwi/event-transmitter/commit/69580c6b160536c4bc9b7e9a61a5dd80cfa84faf))
+
+
+### Performance Improvements
+
+* **package:** migrate to is-moobile ([2e3b3a2](https://github.com/qiwi/event-transmitter/commit/2e3b3a2758ed5ccaecf93b6e820277b82fc4d19c))
+
 ## [1.14.2](https://github.com/qiwi/event-transmitter/compare/v1.14.1...v1.14.2) (2021-02-25)
 
 
