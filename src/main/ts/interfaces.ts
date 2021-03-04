@@ -4,7 +4,7 @@ export interface IHistoryEntry {
   pipeType: string
   pipelineId: string
   pipeId: string
-  res: any,
+  res: any
   err: any
 }
 

@@ -26,7 +26,7 @@ export const getDeviceInfo = (userAgent?: string): IDeviceInfo => {
 
 export const createDeviceInfoPipe = (): IPipe => ({
   type,
-  execute ({ data }: ITransmittable): IPromise<IPipeOutput> {
+  execute({ data }: ITransmittable): IPromise<IPipeOutput> {
     const output = set(clone(data), 'meta.deviceInfo', getDeviceInfo())
     return Promise.resolve([null, output])
   },

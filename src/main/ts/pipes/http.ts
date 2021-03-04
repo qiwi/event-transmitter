@@ -6,22 +6,29 @@ import { IPipe, IPipeOutput, ITransmittable } from '../interfaces'
 export type IHttpHeaders = Record<string, string | (() => string)>
 
 export interface IHttpPipeOpts {
-  method: HttpMethod,
-  url: string,
-  headers?: IHttpHeaders,
+  method: HttpMethod
+  url: string
+  headers?: IHttpHeaders
 }
 
 export const type = 'http'
 
 const getPlainHeaders = (headers: IHttpHeaders): Record<string, string> =>
-  Object.entries(headers).reduce((acc: Record<string, string>, [key, value]) => {
-    acc[key] = typeof value === 'function' ? value() : value
-    return acc
-  }, {})
+  Object.entries(headers).reduce(
+    (acc: Record<string, string>, [key, value]) => {
+      acc[key] = typeof value === 'function' ? value() : value
+      return acc
+    },
+    {},
+  )
 
-export const createHttpPipe = ({ url, method, headers }: IHttpPipeOpts): IPipe => ({
+export const createHttpPipe = ({
+  url,
+  method,
+  headers,
+}: IHttpPipeOpts): IPipe => ({
   type,
-  execute ({ data }: ITransmittable): IPromise<IPipeOutput> {
+  execute({ data }: ITransmittable): IPromise<IPipeOutput> {
     const defaultHeaders = {
       'Content-Type': 'application/json',
     }
@@ -41,6 +48,6 @@ export const createHttpPipe = ({ url, method, headers }: IHttpPipeOpts): IPipe =
 
         return [null, await res.json()]
       })
-      .catch(err => ([err, null])) as IPromise<IPipeOutput>
+      .catch((err) => [err, null]) as IPromise<IPipeOutput>
   },
 })

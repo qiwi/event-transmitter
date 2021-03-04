@@ -1,8 +1,4 @@
-import {
-  ITransmittable,
-  ITransmitter,
-  TPipeline,
-} from './interfaces'
+import { ITransmittable, ITransmitter, TPipeline } from './interfaces'
 import { execute } from './pipes'
 
 export type ITransmitterOpts = {
@@ -16,7 +12,7 @@ export const createTransmittable = (event: any): ITransmittable => ({
 })
 
 export const createTransmitter = (opts: ITransmitterOpts): ITransmitter => ({
-  push (data) {
+  push(data) {
     const transmittable = createTransmittable(data)
 
     return execute(transmittable, opts.pipeline)
