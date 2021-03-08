@@ -1,3 +1,10 @@
+## [1.15.1](https://github.com/qiwi/event-transmitter/compare/v1.15.0...v1.15.1) (2021-03-08)
+
+
+### Bug Fixes
+
+* **pkg:** up deps, fix vuls ([#32](https://github.com/qiwi/event-transmitter/issues/32)) ([6d9fa14](https://github.com/qiwi/event-transmitter/commit/6d9fa14a8418deeab322fa91ebdb3b87032e46b7))
+
 # [1.15.0](https://github.com/qiwi/event-transmitter/compare/v1.14.2...v1.15.0) (2021-03-04)
 
 
