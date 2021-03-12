@@ -1,3 +1,10 @@
+## [1.15.2](https://github.com/qiwi/event-transmitter/compare/v1.15.1...v1.15.2) (2021-03-12)
+
+
+### Bug Fixes
+
+* change module in tsconfig to commonjs ([#33](https://github.com/qiwi/event-transmitter/issues/33)) ([b78e768](https://github.com/qiwi/event-transmitter/commit/b78e768d154c4e45d579dbcfca40bd86068f968d))
+
 ## [1.15.1](https://github.com/qiwi/event-transmitter/compare/v1.15.0...v1.15.1) (2021-03-08)
 
 
