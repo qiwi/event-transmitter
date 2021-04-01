@@ -3,9 +3,9 @@ import StackTrace from 'stacktrace-js'
 
 import { IPipe, ITransmittable, TPipeline } from '../interfaces'
 import { identity } from '../utils'
-import { createDeviceInfoPipe } from './deviceInfo'
 import { createHttpBatchPipe, IHttpBatchPipeOpts } from './httpBatch'
 import { panMaskerPipe } from './masker'
+import { userAgentPipe } from './userAgentPipe'
 
 const DEFAULT_LEVEL = LogLevel.INFO
 
@@ -81,6 +81,6 @@ export const createFlpPipeline = ({
 }: IHttpBatchPipeOpts): TPipeline => [
   panMaskerPipe,
   eventifyPipe,
-  createDeviceInfoPipe(),
+  userAgentPipe,
   createHttpBatchPipe({ url, batchUrl, headers, method }),
 ]

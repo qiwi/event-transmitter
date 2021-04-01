@@ -93,6 +93,13 @@ describe('eventifyPipe', () => {
 })
 
 describe('flpPipeline', () => {
+  beforeAll(()=>{
+    // @ts-ignore
+    navigator.__defineGetter__('userAgent', function () {
+      return 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
+    })
+  })
+
   const url = 'https://reqres.in/api/users/'
   const batchUrl = 'https://reqres.in/api/unknown'
 
@@ -144,6 +151,9 @@ describe('flpPipeline', () => {
   })
 
   it('executes eventify, masker and http pipes consequentially', async () => {
+    const userAgent =
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
+
     const spy = jest.spyOn(window, 'fetch')
     const flpPipeline = createFlpPipeline({
       url,
@@ -165,11 +175,7 @@ describe('flpPipeline', () => {
     expect(JSON.parse(spy.mock.calls[0][1].body)).toMatchObject({
       message: '0000 **** **** 0000',
       meta: {
-        deviceInfo: {
-          browser: expect.any(Object),
-          model: expect.any(Object),
-          os: expect.any(Object),
-        },
+        userAgent,
       },
       level: 'info',
     })
@@ -178,6 +184,9 @@ describe('flpPipeline', () => {
   })
 
   it('executes eventify, masker and http pipes consequentially with object', async () => {
+    const userAgent =
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
+
     const spy = jest.spyOn(window, 'fetch')
     const flpPipeline = createFlpPipeline({
       url,
@@ -200,11 +209,7 @@ describe('flpPipeline', () => {
     expect(JSON.parse(spy.mock.calls[0][1].body)).toMatchObject({
       message: 'message',
       meta: {
-        deviceInfo: {
-          browser: expect.any(Object),
-          model: expect.any(Object),
-          os: expect.any(Object),
-        },
+        userAgent
       },
       level: 'info',
       data: 'data',
