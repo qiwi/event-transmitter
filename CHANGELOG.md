@@ -1,3 +1,15 @@
+# [1.16.0](https://github.com/qiwi/event-transmitter/compare/v1.15.2...v1.16.0) (2021-11-22)
+
+
+### Bug Fixes
+
+* httpbatch nullable data.events, update deps ([#45](https://github.com/qiwi/event-transmitter/issues/45)) ([c21cf8c](https://github.com/qiwi/event-transmitter/commit/c21cf8ca81788f170f4ab53d2565c57fffe2fa14))
+
+
+### Features
+
+* send userAgent instead of deviceInfo ([#48](https://github.com/qiwi/event-transmitter/issues/48)) ([26c27d0](https://github.com/qiwi/event-transmitter/commit/26c27d04c40b3559b804e42cc72c8377328460f0))
+
 ## [1.15.2](https://github.com/qiwi/event-transmitter/compare/v1.15.1...v1.15.2) (2021-03-12)
 
 
