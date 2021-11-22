@@ -3,7 +3,7 @@ export { createHttpPipeFallback } from './pipes/httpFallback'
 export { createMaskerPipe, panMaskerPipe } from './pipes/masker'
 export { createHttpBatchPipe } from './pipes/httpBatch'
 export { createFlpPipeline, eventifyPipe } from './pipes/flp'
-export { createDeviceInfoPipe, getDeviceInfo } from './pipes/deviceInfo'
+export { createDeviceInfoPipe } from './pipes/deviceInfo'
 export { createTransmitter, createTransmittable } from './transmitter'
 
 export * from './interfaces'

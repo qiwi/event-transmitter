@@ -164,13 +164,7 @@ describe('flpPipeline', () => {
     // @ts-ignore
     expect(JSON.parse(spy.mock.calls[0][1].body)).toMatchObject({
       message: '0000 **** **** 0000',
-      meta: {
-        deviceInfo: {
-          browser: expect.any(Object),
-          model: expect.any(Object),
-          os: expect.any(Object),
-        },
-      },
+      meta: {},
       level: 'info',
     })
 
@@ -199,13 +193,7 @@ describe('flpPipeline', () => {
     // @ts-ignore
     expect(JSON.parse(spy.mock.calls[0][1].body)).toMatchObject({
       message: 'message',
-      meta: {
-        deviceInfo: {
-          browser: expect.any(Object),
-          model: expect.any(Object),
-          os: expect.any(Object),
-        },
-      },
+      meta: {},
       level: 'info',
       data: 'data',
     })

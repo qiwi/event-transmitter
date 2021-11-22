@@ -1,6 +1,4 @@
-import { IDeviceInfo } from '@qiwi/substrate'
-
-import { createDeviceInfoPipe, getDeviceInfo } from '../../../main/ts'
+import { createDeviceInfoPipe } from '../../../main/ts'
 
 describe('deviceInfoPipe', () => {
   it('is returned by factory', () => {
@@ -8,30 +6,5 @@ describe('deviceInfoPipe', () => {
 
     expect(maskerPipe.type).toBe('device-info')
     expect(maskerPipe.execute).toEqual(expect.any(Function))
-  })
-})
-
-describe('getDeviceInfo', () => {
-  it('returns device info', () => {
-    const userAgent =
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
-    const expected: IDeviceInfo = {
-      browser: {
-        name: 'Chrome',
-        version: '83.0.4103.116',
-        layout: 'Blink',
-      },
-      model: {
-        name: null,
-        manufacturer: null,
-      },
-      isMobile: false,
-      os: {
-        architecture: 64,
-        family: 'OS X',
-        version: '10.14.6',
-      },
-    }
-    expect<IDeviceInfo>(getDeviceInfo(userAgent)).toMatchObject(expected)
   })
 })
