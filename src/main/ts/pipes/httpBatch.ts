@@ -34,7 +34,7 @@ export const createHttpBatchPipe = ({
   return {
     type: httpPipe.type,
     execute(...args) {
-      return Array.isArray(args[0].data.events)
+      return Array.isArray(args[0]?.data?.events)
         ? httpPipeBatch.execute(...args)
         : httpPipe.execute(...args)
     },
