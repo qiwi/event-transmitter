@@ -9,6 +9,8 @@ const noop = () => {
 }
 
 describe('httpPipe', () => {
+  jest.setTimeout(10000)
+
   it('factory returns IPipe', () => {
     const httpPipe = createHttpPipe({
       url: 'https://reqres.in/api/users/2',
