@@ -1,3 +1,10 @@
+## [1.16.1](https://github.com/qiwi/event-transmitter/compare/v1.16.0...v1.16.1) (2022-01-13)
+
+
+### Bug Fixes
+
+* up deps, fix some vuls ([031dff5](https://github.com/qiwi/event-transmitter/commit/031dff58b354c18d0d24f84839554e720e4ee16a))
+
 # [1.16.0](https://github.com/qiwi/event-transmitter/compare/v1.15.2...v1.16.0) (2021-11-22)
 
 
