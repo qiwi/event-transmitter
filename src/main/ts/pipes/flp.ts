@@ -62,6 +62,11 @@ export const eventifyPipe: IPipe = {
         event.stacktrace = frames.map((v) => v.toString()).join('\n')
       } catch {} // eslint-disable-line no-empty
     } else if (typeof data === 'object') {
+      if (data.message instanceof Error) {
+        const frames = await StackTrace.fromError(data.message)
+        data.stacktrace = frames.map((v) => v.toString()).join('\n')
+        data.message = data.message.message
+      }
       Object.assign(event, data)
     }
 

@@ -9,7 +9,7 @@ const noop = () => {
 }
 
 describe('httpPipe', () => {
-  jest.setTimeout(10000)
+  jest.setTimeout(20000)
 
   it('factory returns IPipe', () => {
     const httpPipe = createHttpPipe({

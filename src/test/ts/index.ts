@@ -1,5 +1,6 @@
 import {
   createFlpPipeline,
+  createFrontLogProxyTransmitter,
   createHttpPipe,
   createMaskerPipe,
   createTransmittable,
@@ -13,5 +14,6 @@ describe('index', () => {
     expect(createFlpPipeline).toEqual(expect.any(Function))
     expect(createTransmittable).toEqual(expect.any(Function))
     expect(createMaskerPipe).toEqual(expect.any(Function))
+    expect(createFrontLogProxyTransmitter).toEqual(expect.any(Function))
   })
 })
