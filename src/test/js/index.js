@@ -1,11 +1,13 @@
-const {
-  createTransmitter,
-  createHttpPipe
-} = require('../../../target/es5')
-
-describe('index.js (target)', () => {
-  it('has proper export', () => {
-    expect(createTransmitter).toEqual(expect.any(Function))
-    expect(createHttpPipe).toEqual(expect.any(Function))
-  })
-})
+// import { test } from 'uvu'
+// import * as assert from 'uvu/assert'
+//
+// import { createHttpPipe,createTransmitter } from '../../../target/es5'
+//
+// test('index.js (target)', () => {
+//   test('has proper export', () => {
+//     assert.instance(createTransmitter, Function)
+//     assert.instance(createHttpPipe, Function)
+//   })
+// })
+//
+// test.run()

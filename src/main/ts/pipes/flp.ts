@@ -2,7 +2,7 @@ import { IClientEventDto, LogLevel } from '@qiwi/substrate'
 import StackTrace from 'stacktrace-js'
 
 import { IPipe, ITransmittable, TPipeline } from '../interfaces'
-import { identity } from '../utils'
+import { identity } from '../utils/index'
 import { createDeviceInfoPipe } from './deviceInfo'
 import { createHttpBatchPipe, IHttpBatchPipeOpts } from './httpBatch'
 import { panMaskerPipe } from './masker'

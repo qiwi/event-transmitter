@@ -4,13 +4,13 @@ import { nanoid } from 'nanoid'
 import { createFlpPipeline, eventifyPipe } from './pipes/flp'
 import { createTransmittable, createTransmitter } from './transmitter'
 import { getCookie, setCookie } from './utils/cookie'
-export { createHttpPipe, IHttpPipeOpts, IHttpHeaders } from './pipes/http'
+export { createHttpPipe } from './pipes/http'
 export { createHttpPipeFallback } from './pipes/httpFallback'
 export { createMaskerPipe, panMaskerPipe } from './pipes/masker'
 export { createHttpBatchPipe } from './pipes/httpBatch'
 export { createDeviceInfoPipe } from './pipes/deviceInfo'
 export * from './interfaces'
-export * from './pipes'
+export * from './pipes/index'
 
 const getClientId = (appName: string): string => {
   const clientIdStorageKey = `${appName}-client-id`
@@ -23,7 +23,10 @@ const getClientId = (appName: string): string => {
   return clientId
 }
 
-type IClientEventDtoFlp = Omit<IClientEventDto, 'level' | 'stacktrace' | 'message'> & {message: Error | string}
+type IClientEventDtoFlp = Omit<
+  IClientEventDto,
+  'level' | 'stacktrace' | 'message'
+> & { message: Error | string }
 
 const createFrontLogProxyTransmitter = (appName: string, url: string) => {
   const appContextId = nanoid()

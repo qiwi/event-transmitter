@@ -1,7 +1,7 @@
 import luhn from 'fast-luhn'
 
 import { IPipe } from '../interfaces'
-import { deepMap } from '../utils'
+import { deepMap } from '../utils/index'
 const type = 'masker'
 
 export const createMaskerPipe = (

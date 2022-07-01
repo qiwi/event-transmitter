@@ -1,3 +1,6 @@
+import { test } from 'uvu'
+import * as assert from 'uvu/assert'
+
 import {
   createFlpPipeline,
   createFrontLogProxyTransmitter,
@@ -5,15 +8,15 @@ import {
   createMaskerPipe,
   createTransmittable,
   createTransmitter,
-} from '../../main/ts'
+} from '../../main/ts/index'
 
-describe('index', () => {
-  it('has proper export', () => {
-    expect(createTransmitter).toEqual(expect.any(Function))
-    expect(createHttpPipe).toEqual(expect.any(Function))
-    expect(createFlpPipeline).toEqual(expect.any(Function))
-    expect(createTransmittable).toEqual(expect.any(Function))
-    expect(createMaskerPipe).toEqual(expect.any(Function))
-    expect(createFrontLogProxyTransmitter).toEqual(expect.any(Function))
-  })
+test('index has proper export', () => {
+  assert.instance(createTransmitter, Function)
+  assert.instance(createHttpPipe, Function)
+  assert.instance(createFlpPipeline, Function)
+  assert.instance(createTransmittable, Function)
+  assert.instance(createMaskerPipe, Function)
+  assert.instance(createFrontLogProxyTransmitter, Function)
 })
+
+test.run()
