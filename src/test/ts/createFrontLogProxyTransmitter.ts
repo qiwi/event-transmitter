@@ -2,7 +2,6 @@ import { test } from 'uvu'
 import * as assert from 'uvu/assert'
 
 import { createFrontLogProxyTransmitter } from '../../main/ts/index'
-
 // @ts-ignore
 global.document = {
   cookie: '',
@@ -23,10 +22,11 @@ global.fetch = async (...data: any[]) => ({
 })
 
 test('createFrontLogProxyTransmitter correctly call fetch with data', async () => {
-  const transmitter = createFrontLogProxyTransmitter(
-    'testApp',
-    'https://reqres.in/api/users/2',
-  )
+  const transmitter = createFrontLogProxyTransmitter({
+    appName: 'testApp',
+    url: 'https://reqres.in/api/users/2',
+  })
+
   const [, res] = await transmitter.info({
     message: 'my-info-message',
     details: { 'my-custom-info': 'foo' },
@@ -55,10 +55,10 @@ test('createFrontLogProxyTransmitter correctly call fetch with data', async () =
 })
 
 test('createFrontLogProxyTransmitter correctly call fetch with Error', async () => {
-  const transmitter = createFrontLogProxyTransmitter(
-    'testApp',
-    'https://reqres.in/api/users/2',
-  )
+  const transmitter = createFrontLogProxyTransmitter({
+    appName: 'testApp',
+    url: 'https://reqres.in/api/users/2',
+  })
   try {
     // @ts-ignore
     undefined()

@@ -1,10 +1,7 @@
 import { test } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import {
-  createHttpPipeFallback,
-  ITransmittable,
-} from '../../../main/ts/index'
+import { createHttpPipeFallback, ITransmittable } from '../../../main/ts/index'
 
 const noop = () => {
   /* noop */
@@ -79,12 +76,26 @@ test('uses fallback urls', async () => {
   ])
   const transmittable: ITransmittable = { data: null, meta: { history: [] } }
 
-  return assert.equal(await httpPipe.execute(transmittable, noop), [null,{"data":["https://reqres.in/api/users/2",{"method":"GET","headers":{"Content-Type":"application/json"},"body":null}]}])
+  return assert.equal(await httpPipe.execute(transmittable, noop), [
+    null,
+    {
+      data: [
+        'https://reqres.in/api/users/2',
+        {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+          body: null,
+        },
+      ],
+    },
+  ])
 })
 
-
 test('throw error when opts is empty', () => {
-  return assert.throws(() => createHttpPipeFallback([]), new Error('createHttpPipeFallback opts must not be empty'))
+  return assert.throws(
+    () => createHttpPipeFallback([]),
+    new Error('createHttpPipeFallback opts must not be empty'),
+  )
 })
 
 test.run()

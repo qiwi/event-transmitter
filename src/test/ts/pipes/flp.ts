@@ -1,4 +1,3 @@
-import StackTrace from 'stacktrace-js'
 import { test } from 'uvu'
 import * as assert from 'uvu/assert'
 
@@ -9,19 +8,15 @@ import {
   eventifyPipe,
 } from '../../../main/ts/index'
 
-
 const noop = () => {
   /* noop */
 }
 
 const stacktracer = (el: any) => {
-  if(el){
-    if(Array.isArray(el)) {
-      el.map((el: any) => {
-        el.stacktrace = ''
-        return el
-    })}
-    else if (el.stacktrace) {
+  if (el) {
+    if (Array.isArray(el)) {
+      el.forEach((el: any) => el.stacktrace)
+    } else if (el.stacktrace) {
       el.stacktrace = ''
     }
   }
@@ -33,7 +28,7 @@ const cases: Array<[string, any, any, any]> = [
     'processes string input',
     'foo',
     null,
-    { level: 'info', message: 'foo', meta: {}},
+    { level: 'info', message: 'foo', meta: {} },
   ],
   [
     'processes error as input',
@@ -55,12 +50,12 @@ const cases: Array<[string, any, any, any]> = [
   ],
   [
     'supports events batches',
-    ['foo', { level: 'info', message: 'bar', meta: {}}],
+    ['foo', { level: 'info', message: 'bar', meta: {} }],
     null,
     {
       events: [
-        { level: 'info', message: 'foo', meta: {}  },
-        { level: 'info', message: 'bar', meta: {}  },
+        { level: 'info', message: 'foo', meta: {} },
+        { level: 'info', message: 'bar', meta: {} },
       ],
     },
   ],
@@ -75,10 +70,7 @@ const cases: Array<[string, any, any, any]> = [
 cases.forEach(([name, input, err, data]) => {
   test(name, async () => {
     const res = await eventifyPipe.execute(createTransmittable(input), noop)
-    assert.equal(
-      [stacktracer(res[0]), stacktracer(res[1])] ,
-      [err, data],
-    )
+    assert.equal([stacktracer(res[0]), stacktracer(res[1])], [err, data])
   })
 })
 
@@ -92,89 +84,88 @@ test('eventifyPipe adds stack trace when processes error', async () => {
   assert.ok(output.stacktrace)
 })
 
-  test('flpPipeline createFlpPipeline factory returns a pipeline', () => {
-    const batchUrl = 'https://reqres.in/api/unknown'
+test('flpPipeline createFlpPipeline factory returns a pipeline', () => {
+  const batchUrl = 'https://reqres.in/api/unknown'
 
-    assert.instance(
-      createFlpPipeline({
-        url: 'https://reqres.in/api/users/2',
-        // @ts-ignore
-        method: 'GET',
-        batchUrl,
-      }),
-      Array,
-    )
-  })
-
-  test('flpPipeline executes eventify, masker and http pipes consequentially with batch', async () => {
-    const batchUrl = 'https://reqres.in/api/unknown'
-    const url = 'https://reqres.in/api/unknown'
-
-    const flpPipeline = createFlpPipeline({
-      url,
+  assert.instance(
+    createFlpPipeline({
+      url: 'https://reqres.in/api/users/2',
       // @ts-ignore
-      method: 'POST',
+      method: 'GET',
       batchUrl,
-    })
-    const transmitter = createTransmitter({
-      pipeline: flpPipeline,
-    })
+    }),
+    Array,
+  )
+})
 
-    const res = await transmitter.push(['4539246180805047', '5101754226671617'])
-    assert.equal(res, [null, ['4539 **** **** 5047', '5101 **** **** 1617']])
+test('flpPipeline executes eventify, masker and http pipes consequentially with batch', async () => {
+  const batchUrl = 'https://reqres.in/api/unknown'
+  const url = 'https://reqres.in/api/unknown'
+
+  const flpPipeline = createFlpPipeline({
+    url,
+    // @ts-ignore
+    method: 'POST',
+    batchUrl,
+  })
+  const transmitter = createTransmitter({
+    pipeline: flpPipeline,
   })
 
-  test('flpPipeline executes eventify, masker and http pipes consequentially', async () => {
-    const batchUrl = 'https://reqres.in/api/unknown'
-    const url = 'https://reqres.in/api/unknown'
+  const res = await transmitter.push(['4539246180805047', '5101754226671617'])
+  assert.equal(res, [null, ['4539 **** **** 5047', '5101 **** **** 1617']])
+})
 
-    const flpPipeline = createFlpPipeline({
-      url,
-      // @ts-ignore
-      method: 'POST',
-      batchUrl,
-    })
-    const transmitter = createTransmitter({
-      pipeline: flpPipeline,
-    })
-    const res = await transmitter.push('0000000000000000')
-    assert.equal(res, [null, '0000 **** **** 0000'])
+test('flpPipeline executes eventify, masker and http pipes consequentially', async () => {
+  const batchUrl = 'https://reqres.in/api/unknown'
+  const url = 'https://reqres.in/api/unknown'
+
+  const flpPipeline = createFlpPipeline({
+    url,
+    // @ts-ignore
+    method: 'POST',
+    batchUrl,
   })
-
-  test('flpPipeline executes eventify, masker and http pipes consequentially with object', async () => {
-    const batchUrl = 'https://reqres.in/api/unknown'
-    const url = 'https://reqres.in/api/unknown'
-
-    const flpPipeline = createFlpPipeline({
-      url,
-      // @ts-ignore
-      method: 'POST',
-      batchUrl,
-    })
-    const transmitter = createTransmitter({
-      pipeline: flpPipeline,
-    })
-    const res = await transmitter.push({ data: 'data', message: 'message' })
-
-    assert.equal(res, [null, { data: 'data', message: 'message' }])
-
+  const transmitter = createTransmitter({
+    pipeline: flpPipeline,
   })
+  const res = await transmitter.push('0000000000000000')
+  assert.equal(res, [null, '0000 **** **** 0000'])
+})
 
-  test('flpPipeline executes eventify, masker and http pipes consequentially with Error', async () => {
-    const batchUrl = 'https://reqres.in/api/unknown'
-    const url = 'https://reqres.in/api/unknown'
+test('flpPipeline executes eventify, masker and http pipes consequentially with object', async () => {
+  const batchUrl = 'https://reqres.in/api/unknown'
+  const url = 'https://reqres.in/api/unknown'
 
-    const flpPipeline = createFlpPipeline({
-      url,
-      // @ts-ignore
-      method: 'POST',
-      batchUrl,
-    })
-    const transmitter = createTransmitter({
-      pipeline: flpPipeline,
-    })
-    const res = await transmitter.push(new Error('0000000000000000'))
-    assert.equal(res, [null, new Error('0000 **** **** 0000')])
+  const flpPipeline = createFlpPipeline({
+    url,
+    // @ts-ignore
+    method: 'POST',
+    batchUrl,
   })
+  const transmitter = createTransmitter({
+    pipeline: flpPipeline,
+  })
+  const res = await transmitter.push({ data: 'data', message: 'message' })
+
+  assert.equal(res, [null, { data: 'data', message: 'message' }])
+})
+
+test('flpPipeline executes eventify, masker and http pipes consequentially with Error', async () => {
+  const batchUrl = 'https://reqres.in/api/unknown'
+  const url = 'https://reqres.in/api/unknown'
+
+  const flpPipeline = createFlpPipeline({
+    url,
+    // @ts-ignore
+    method: 'POST',
+    batchUrl,
+  })
+  const transmitter = createTransmitter({
+    pipeline: flpPipeline,
+  })
+  const res = await transmitter.push(new Error('0000000000000000'))
+  assert.equal(res, [null, new Error('0000 **** **** 0000')])
+})
 
 test.run()

@@ -1,5 +1,4 @@
 import { IClientEventDto, LogLevel } from '@qiwi/substrate'
-import StackTrace from 'stacktrace-js'
 
 import { IPipe, ITransmittable, TPipeline } from '../interfaces'
 import { identity } from '../utils/index'
@@ -57,14 +56,10 @@ export const eventifyPipe: IPipe = {
     } else if (data instanceof Error) {
       event.message = data.message
       event.level = LogLevel.ERROR
-      try {
-        const frames = await StackTrace.fromError(data)
-        event.stacktrace = frames.map((v) => v.toString()).join('\n')
-      } catch {} // eslint-disable-line no-empty
+      event.stacktrace = data.stack
     } else if (typeof data === 'object') {
       if (data.message instanceof Error) {
-        const frames = await StackTrace.fromError(data.message)
-        data.stacktrace = frames.map((v) => v.toString()).join('\n')
+        data.stacktrace = data.message.stack
         data.message = data.message.message
       }
       Object.assign(event, data)

@@ -28,7 +28,13 @@ type IClientEventDtoFlp = Omit<
   'level' | 'stacktrace' | 'message'
 > & { message: Error | string }
 
-const createFrontLogProxyTransmitter = (appName: string, url: string) => {
+const createFrontLogProxyTransmitter = ({
+  appName,
+  url,
+}: {
+  appName: string
+  url: string
+}) => {
   const appContextId = nanoid()
   const clientId = getClientId(appName)
   if (!url) {
