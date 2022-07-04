@@ -31,7 +31,7 @@
     "prebuild": "yarn clean && npx buildstamp --git --out.path buildstamp.json",
     "build": "npm-run-all -p -l build:es5 build:es6 build:ts build:libdef build:bundle docs",
     "build:es5": "mkdirp target/es5 && tsc -p tsconfig.es5.json && yarn build:es5:ext",
-    "build:es5:ext": "rename 's/\\.js$/\\.cjs/' target/es5/*.js",
+    "build:es5:ext": "tsc-esm-fix --target=target/es5 --ext=.cjs",
     "build:es6": "mkdirp target/es6 && tsc -p tsconfig.es6.json && yarn build:es6:ext",
     "build:es6:ext": "tsc-esm-fix --target=target/es6 --ext=.mjs",
     "build:ts": "cpy src/main/ts/ target/ts/",
@@ -66,7 +66,7 @@
     "fast-luhn": "^2.0.0",
     "lodash.once": "^4.1.1",
     "lodash.set": "^4.3.2",
-    "nanoid": "^4.0.0",
+    "nanoid": "^3.0.0",
     "safe-json-stringify": "^1.2.0",
     "tslib": "^2.4.0",
     "uvu": "^0.5.4"
