@@ -9,10 +9,18 @@ yarn add @qiwi/event-transmitter
 ## Usage
 ```typescript
 import { createFrontLogProxyTransmitter } from '@qiwi/event-transmitter'
-const transmitter = createFrontLogProxyTransmitter('my-app', 'https://example.qiwi.com/event', )
+const transmitter = createFrontLogProxyTransmitter({
+  appName: 'my-app',
+  url: 'https://example.qiwi.com/event'
+})
 
-
+transmitter.error(new Error('some error'))
+transmitter.info('some-event')
+transmitter.debug('debug')
+transmitter.warn('warn')
+transmitter.trace('trace')
 ```
+
 ```typescript
 import {createTransmitter, createHttpPipe, IPipe} from '@qiwi/event-transmitter'
 
