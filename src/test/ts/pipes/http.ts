@@ -2,7 +2,6 @@ import { test } from 'uvu'
 import * as assert from 'uvu/assert'
 
 import { createHttpPipe, ITransmittable } from '../../../main/ts/index'
-import { json } from 'stream/consumers'
 
 const noop = () => {
   /* noop */
