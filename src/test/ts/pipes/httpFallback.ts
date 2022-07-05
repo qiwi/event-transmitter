@@ -1,85 +1,101 @@
-import 'cross-fetch/polyfill'
+import { test } from 'uvu'
+import * as assert from 'uvu/assert'
 
-import { HttpMethod } from '@qiwi/substrate'
-
-import { createHttpPipeFallback, ITransmittable } from '../../../main/ts'
+import { createHttpPipeFallback, ITransmittable } from '../../../main/ts/index'
 
 const noop = () => {
   /* noop */
 }
 
-describe('httpPipe', () => {
-  it('factory returns IPipe', () => {
-    const httpPipeFallback = createHttpPipeFallback([
-      { url: 'https://reqres.in/api/users/2', method: HttpMethod.GET },
-    ])
-    expect(httpPipeFallback.type).toBe('http-fallback')
-    expect(httpPipeFallback.execute).toEqual(expect.any(Function))
-  })
-
-  it('returns remote data if succeeds', async () => {
-    const httpPipe = createHttpPipeFallback([
-      { url: 'https://reqres.in/api/users/2', method: HttpMethod.GET },
-    ])
-    const transmittable: ITransmittable = { data: null, meta: { history: [] } }
-
-    return expect(httpPipe.execute(transmittable, noop)).resolves.toMatchObject(
-      [
-        null,
-        {
-          data: {
-            id: 2,
-            email: 'janet.weaver@reqres.in',
-            first_name: 'Janet',
-            last_name: 'Weaver',
-            avatar: expect.any(String),
-          },
-        },
-      ],
-    )
-  })
-
-  it('uses fallback urls', () => {
-    const httpPipe = createHttpPipeFallback([
-      { url: 'https://reqres.in/api/users/23', method: HttpMethod.GET },
-      { url: 'https://reqres.in/api/unknown/23', method: HttpMethod.GET },
-      { url: 'https://reqres.in/api/users/2', method: HttpMethod.GET },
-    ])
-    const transmittable: ITransmittable = { data: null, meta: { history: [] } }
-
-    return expect(httpPipe.execute(transmittable, noop)).resolves.toMatchObject(
-      [
-        null,
-        {
-          data: {
-            id: 2,
-            email: 'janet.weaver@reqres.in',
-            first_name: 'Janet',
-            last_name: 'Weaver',
-            avatar: expect.any(String),
-          },
-        },
-      ],
-    )
-  })
-
-  it('handle errors', () => {
-    const httpPipe = createHttpPipeFallback([
-      { url: 'https://reqres.in/api/users/23', method: HttpMethod.GET },
-      { url: 'https://reqres.in/api/unknown/23', method: HttpMethod.GET },
-      { url: 'https://reqres.in/api/users/23', method: HttpMethod.GET },
-    ])
-    const transmittable: ITransmittable = { data: null, meta: { history: [] } }
-
-    return expect(httpPipe.execute(transmittable, noop)).resolves.toEqual([
-      new Error('Not Found'),
-      null,
-    ])
-  })
-
-  it('throw error when opts is empty', () => {
-    return expect(() => createHttpPipeFallback([])).toThrow(
-      new Error('createHttpPipeFallback opts must not be empty'),
-    )
-  })
+// @ts-ignore
+global.fetch = async (...data: any[]) => ({
+  ok: data,
+  json: async () => ({ data }),
 })
+
+test('factory returns IPipe', () => {
+  const httpPipeFallback = createHttpPipeFallback([
+    {
+      url: 'https://reqres.in/api/users/2',
+      // @ts-ignore
+      method: 'GET',
+    },
+  ])
+  assert.is(httpPipeFallback.type, 'http-fallback')
+  assert.instance(httpPipeFallback.execute, Function)
+})
+
+test('returns remote data if succeeds', async () => {
+  // @ts-ignore
+  global.fetch = async (...data: any[]) => ({
+    ok: data,
+    json: async () => ({ data }),
+  })
+
+  const httpPipe = createHttpPipeFallback([
+    {
+      url: 'https://reqres.in/api/users/2',
+      // @ts-ignore
+      method: 'GET',
+    },
+  ])
+  const transmittable: ITransmittable = { data: null, meta: { history: [] } }
+
+  return assert.equal(await httpPipe.execute(transmittable, noop), [
+    null,
+    {
+      data: [
+        'https://reqres.in/api/users/2',
+        {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+          body: null,
+        },
+      ],
+    },
+  ])
+})
+
+test('uses fallback urls', async () => {
+  const httpPipe = createHttpPipeFallback([
+    {
+      url: 'https://reqres.in/api/users/23',
+      // @ts-ignore
+      method: 'GET',
+    },
+    {
+      url: 'https://reqres.in/api/unknown/23',
+      // @ts-ignore
+      method: 'GET',
+    },
+    {
+      url: 'https://reqres.in/api/users/2',
+      // @ts-ignore
+      method: 'GET',
+    },
+  ])
+  const transmittable: ITransmittable = { data: null, meta: { history: [] } }
+
+  return assert.equal(await httpPipe.execute(transmittable, noop), [
+    null,
+    {
+      data: [
+        'https://reqres.in/api/users/2',
+        {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+          body: null,
+        },
+      ],
+    },
+  ])
+})
+
+test('throw error when opts is empty', () => {
+  return assert.throws(
+    () => createHttpPipeFallback([]),
+    new Error('createHttpPipeFallback opts must not be empty'),
+  )
+})
+
+test.run()

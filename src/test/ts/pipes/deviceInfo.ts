@@ -1,10 +1,13 @@
-import { createDeviceInfoPipe } from '../../../main/ts'
+import { test } from 'uvu'
+import * as assert from 'uvu/assert'
 
-describe('deviceInfoPipe', () => {
-  it('is returned by factory', () => {
-    const maskerPipe = createDeviceInfoPipe()
+import { createDeviceInfoPipe } from '../../../main/ts/index'
 
-    expect(maskerPipe.type).toBe('device-info')
-    expect(maskerPipe.execute).toEqual(expect.any(Function))
-  })
+test('deviceInfoPipe is returned by factory', () => {
+  const maskerPipe = createDeviceInfoPipe()
+
+  assert.is(maskerPipe.type, 'device-info')
+  assert.instance(maskerPipe.execute, Function)
 })
+
+test.run()

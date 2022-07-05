@@ -1,7 +1,7 @@
 import { IPromise } from '@qiwi/substrate'
 
 import { IPipe, IPipeOutput, ITransmittable } from '../interfaces'
-import { executeFailproof } from '../utils'
+import { executeFailproof } from '../utils/index'
 import { createHttpPipe, IHttpPipeOpts } from './http'
 
 export const type = 'http-fallback'

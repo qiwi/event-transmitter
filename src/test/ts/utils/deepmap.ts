@@ -1,24 +1,28 @@
-import { deepMap } from '../../../main/ts/utils'
+import { test } from 'uvu'
+import * as assert from 'uvu/assert'
 
-describe('deepMap', () => {
-  it('handle object', () => {
-    const testObj = {
-      a: 1,
-      length: 9,
-      b: [
-        1,
-        2,
-        {
-          c: 4,
-          d: {
-            e: 6,
-            f: [7, 8],
-          },
+import { deepMap } from '../../../main/ts/utils/index'
+
+test('deepMap handle object', () => {
+  const testObj = {
+    a: 1,
+    length: 9,
+    b: [
+      1,
+      2,
+      {
+        c: 4,
+        d: {
+          e: 6,
+          f: [7, 8],
         },
-      ],
-    }
+      },
+    ],
+  }
 
-    expect(deepMap(testObj, (el) => Number(el) * 10)).toMatchObject({
+  assert.equal(
+    deepMap(testObj, (el) => Number(el) * 10),
+    {
       a: 10,
       length: 90,
       b: [
@@ -32,30 +36,17 @@ describe('deepMap', () => {
           },
         },
       ],
-    })
-  })
-
-  it('handle circular deps', () => {
-    const testObj: Record<string, any> = {
-      a: 1,
-      b: 2,
-    }
-    testObj.foo = testObj
-
-    const resObj: Record<string, any> = {
-      a: 10,
-      b: 20,
-    }
-    resObj.foo = resObj
-
-    expect(deepMap(testObj, (el) => Number(el) * 10)).toMatchObject(resObj)
-  })
-
-  it('handle error objects', () => {
-    const testObj = new Error('1')
-
-    expect(deepMap(testObj, (el) => Number(el) * 10)).toMatchObject(
-      new Error('10'),
-    )
-  })
+    },
+  )
 })
+
+test('deepMap handle error objects', () => {
+  const testObj = new Error('1')
+
+  assert.equal(
+    deepMap(testObj, (el) => Number(el) * 10),
+    new Error('10'),
+  )
+})
+
+test.run()

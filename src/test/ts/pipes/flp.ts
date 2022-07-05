@@ -1,215 +1,171 @@
-import 'cross-fetch/polyfill'
-
-import { HttpMethod } from '@qiwi/substrate'
-import StackTrace from 'stacktrace-js'
+import { test } from 'uvu'
+import * as assert from 'uvu/assert'
 
 import {
   createFlpPipeline,
   createTransmittable,
   createTransmitter,
   eventifyPipe,
-} from '../../../main/ts'
+} from '../../../main/ts/index'
 
 const noop = () => {
   /* noop */
 }
 
-describe('eventifyPipe', () => {
-  const cases: Array<[string, any, any, any]> = [
-    [
-      'processes string input',
-      'foo',
-      null,
-      { level: 'info', message: 'foo', meta: {} },
-    ],
-    [
-      'processes error as input',
-      new Error('foobar'),
-      null,
-      { level: 'error', message: 'foobar', meta: {} },
-    ],
-    [
-      'returns err if no arg passed',
-      undefined,
-      new Error('Event message must not be empty'),
-      null,
-    ],
-    [
-      'verifies events batch not to be empty',
-      [],
-      new Error('Events array must not be empty'),
-      null,
-    ],
-    [
-      'errors in array',
-      [undefined, []],
-      [
-        new Error('Event message must not be empty'),
-        new Error('Events array must not be empty'),
+const stacktracer = (el: any) => {
+  if (el) {
+    if (Array.isArray(el)) {
+      el.forEach((el: any) => el.stacktrace)
+    } else if (el.stacktrace) {
+      el.stacktrace = ''
+    }
+  }
+  return el
+}
+
+const cases: Array<[string, any, any, any]> = [
+  [
+    'processes string input',
+    'foo',
+    null,
+    { level: 'info', message: 'foo', meta: {} },
+  ],
+  [
+    'processes error as input',
+    new Error('foobar'),
+    null,
+    { level: 'error', message: 'foobar', meta: {}, stacktrace: '' },
+  ],
+  [
+    'returns err if no arg passed',
+    undefined,
+    new Error('Event message must not be empty'),
+    null,
+  ],
+  [
+    'verifies events batch not to be empty',
+    [],
+    new Error('Events array must not be empty'),
+    null,
+  ],
+  [
+    'supports events batches',
+    ['foo', { level: 'info', message: 'bar', meta: {} }],
+    null,
+    {
+      events: [
+        { level: 'info', message: 'foo', meta: {} },
+        { level: 'info', message: 'bar', meta: {} },
       ],
-      null,
-    ],
-    [
-      'supports events batches',
-      ['foo', { level: 'info', message: 'bar', meta: {} }],
-      null,
-      {
-        events: [
-          { level: 'info', message: 'foo', meta: {} },
-          { level: 'info', message: 'bar', meta: {} },
-        ],
-      },
-    ],
-    [
-      'assures message not to be empty',
-      '',
-      new Error('Event message must not be empty'),
-      null,
-    ],
-  ]
+    },
+  ],
+  [
+    'assures message not to be empty',
+    '',
+    new Error('Event message must not be empty'),
+    null,
+  ],
+]
 
-  cases.forEach(([name, input, err, data]) => {
-    it(name, async () => {
-      expect(
-        await eventifyPipe.execute(createTransmittable(input), noop),
-      ).toMatchObject([err, data])
-    })
-  })
-
-  it('adds stack trace when processes error', async () => {
-    const spy = jest.spyOn(StackTrace, 'fromError')
-
-    const error = new Error('bar')
-    const [, output] = await eventifyPipe.execute(
-      createTransmittable(error),
-      noop,
-    )
-    expect(output.stacktrace).toBeDefined()
-    expect(output.stacktrace).not.toHaveLength(0)
-    expect(spy).toHaveBeenCalledWith(error)
-
-    spy.mockClear()
+cases.forEach(([name, input, err, data]) => {
+  test(name, async () => {
+    const res = await eventifyPipe.execute(createTransmittable(input), noop)
+    assert.equal([stacktracer(res[0]), stacktracer(res[1])], [err, data])
   })
 })
 
-describe('flpPipeline', () => {
-  const url = 'https://reqres.in/api/users/'
+test('eventifyPipe adds stack trace when processes error', async () => {
+  const error = new Error('bar')
+  const [, output] = await eventifyPipe.execute(
+    createTransmittable(error),
+    noop,
+  )
+
+  assert.ok(output.stacktrace)
+})
+
+test('flpPipeline createFlpPipeline factory returns a pipeline', () => {
   const batchUrl = 'https://reqres.in/api/unknown'
 
-  it('createFlpPipeline factory returns a pipeline', () => {
-    expect(
-      createFlpPipeline({
-        url: 'https://reqres.in/api/users/2',
-        method: HttpMethod.GET,
-        batchUrl,
-      }),
-    ).toEqual(expect.any(Array))
-  })
-
-  it('executes eventify, masker and http pipes consequentially with batch', async () => {
-    const spy = jest.spyOn(window, 'fetch')
-    const flpPipeline = createFlpPipeline({
-      url,
-      method: HttpMethod.POST,
+  assert.instance(
+    createFlpPipeline({
+      url: 'https://reqres.in/api/users/2',
+      // @ts-ignore
+      method: 'GET',
       batchUrl,
-    })
-    const transmitter = createTransmitter({
-      pipeline: flpPipeline,
-    })
-    const res = await transmitter.push(['4539246180805047', '5101754226671617'])
-
-    expect(res).toEqual([null, ['4539 **** **** 5047', '5101 **** **** 1617']])
-    expect(spy.mock.calls[0][0]).toBe(batchUrl)
-    expect(spy.mock.calls[0][1]?.method).toBe(HttpMethod.POST)
-    expect(spy.mock.calls[0][1]?.headers).toMatchObject({
-      'Content-Type': 'application/json',
-    })
-    // @ts-ignore
-    expect(JSON.parse(spy.mock.calls[0][1].body)).toMatchObject({
-      events: [
-        {
-          message: '4539 **** **** 5047',
-          meta: {},
-          level: 'info',
-        },
-        {
-          message: '5101 **** **** 1617',
-          meta: {},
-          level: 'info',
-        },
-      ],
-    })
-
-    spy.mockClear()
-  })
-
-  it('executes eventify, masker and http pipes consequentially', async () => {
-    const spy = jest.spyOn(window, 'fetch')
-    const flpPipeline = createFlpPipeline({
-      url,
-      method: HttpMethod.POST,
-      batchUrl,
-    })
-    const transmitter = createTransmitter({
-      pipeline: flpPipeline,
-    })
-    const res = await transmitter.push('0000000000000000')
-
-    expect(res).toEqual([null, '0000 **** **** 0000'])
-    expect(spy.mock.calls[0][0]).toBe(url)
-    expect(spy.mock.calls[0][1]?.method).toBe(HttpMethod.POST)
-    expect(spy.mock.calls[0][1]?.headers).toMatchObject({
-      'Content-Type': 'application/json',
-    })
-    // @ts-ignore
-    expect(JSON.parse(spy.mock.calls[0][1].body)).toMatchObject({
-      message: '0000 **** **** 0000',
-      meta: {},
-      level: 'info',
-    })
-
-    spy.mockClear()
-  })
-
-  it('executes eventify, masker and http pipes consequentially with object', async () => {
-    const spy = jest.spyOn(window, 'fetch')
-    const flpPipeline = createFlpPipeline({
-      url,
-      method: HttpMethod.POST,
-      batchUrl,
-    })
-    const transmitter = createTransmitter({
-      pipeline: flpPipeline,
-    })
-    const res = await transmitter.push({ data: 'data', message: 'message' })
-
-    expect(res).toEqual([null, { data: 'data', message: 'message' }])
-
-    expect(spy.mock.calls[0][0]).toBe(url)
-    expect(spy.mock.calls[0][1]?.method).toBe(HttpMethod.POST)
-    expect(spy.mock.calls[0][1]?.headers).toMatchObject({
-      'Content-Type': 'application/json',
-    })
-    // @ts-ignore
-    expect(JSON.parse(spy.mock.calls[0][1].body)).toMatchObject({
-      message: 'message',
-      meta: {},
-      level: 'info',
-      data: 'data',
-    })
-    spy.mockClear()
-  })
-
-  it('executes eventify, masker and http pipes consequentially with Error', async () => {
-    const flpPipeline = createFlpPipeline({
-      url,
-      method: HttpMethod.POST,
-      batchUrl,
-    })
-    const transmitter = createTransmitter({
-      pipeline: flpPipeline,
-    })
-    const res = await transmitter.push(new Error('0000000000000000'))
-    expect(res).toMatchObject([null, new Error('0000 **** **** 0000')])
-  })
+    }),
+    Array,
+  )
 })
+
+test('flpPipeline executes eventify, masker and http pipes consequentially with batch', async () => {
+  const batchUrl = 'https://reqres.in/api/unknown'
+  const url = 'https://reqres.in/api/unknown'
+
+  const flpPipeline = createFlpPipeline({
+    url,
+    // @ts-ignore
+    method: 'POST',
+    batchUrl,
+  })
+  const transmitter = createTransmitter({
+    pipeline: flpPipeline,
+  })
+
+  const res = await transmitter.push(['4539246180805047', '5101754226671617'])
+  assert.equal(res, [null, ['4539 **** **** 5047', '5101 **** **** 1617']])
+})
+
+test('flpPipeline executes eventify, masker and http pipes consequentially', async () => {
+  const batchUrl = 'https://reqres.in/api/unknown'
+  const url = 'https://reqres.in/api/unknown'
+
+  const flpPipeline = createFlpPipeline({
+    url,
+    // @ts-ignore
+    method: 'POST',
+    batchUrl,
+  })
+  const transmitter = createTransmitter({
+    pipeline: flpPipeline,
+  })
+  const res = await transmitter.push('0000000000000000')
+  assert.equal(res, [null, '0000 **** **** 0000'])
+})
+
+test('flpPipeline executes eventify, masker and http pipes consequentially with object', async () => {
+  const batchUrl = 'https://reqres.in/api/unknown'
+  const url = 'https://reqres.in/api/unknown'
+
+  const flpPipeline = createFlpPipeline({
+    url,
+    // @ts-ignore
+    method: 'POST',
+    batchUrl,
+  })
+  const transmitter = createTransmitter({
+    pipeline: flpPipeline,
+  })
+  const res = await transmitter.push({ data: 'data', message: 'message' })
+
+  assert.equal(res, [null, { data: 'data', message: 'message' }])
+})
+
+test('flpPipeline executes eventify, masker and http pipes consequentially with Error', async () => {
+  const batchUrl = 'https://reqres.in/api/unknown'
+  const url = 'https://reqres.in/api/unknown'
+
+  const flpPipeline = createFlpPipeline({
+    url,
+    // @ts-ignore
+    method: 'POST',
+    batchUrl,
+  })
+  const transmitter = createTransmitter({
+    pipeline: flpPipeline,
+  })
+  const res = await transmitter.push(new Error('0000000000000000'))
+  assert.equal(res, [null, new Error('0000 **** **** 0000')])
+})
+
+test.run()

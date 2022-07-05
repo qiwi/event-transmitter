@@ -1,29 +1,39 @@
-import 'cross-fetch/polyfill'
+// import 'cross-fetch/polyfill'
 
-import { HttpMethod } from '@qiwi/substrate'
+import { test } from 'uvu'
+import * as assert from 'uvu/assert'
 
-import { createHttpPipe } from '../../main/ts/pipes/http'
-import { createTransmitter } from '../../main/ts/transmitter'
+import { createHttpPipe, createTransmitter } from '../../main/ts/index'
 
-describe('transmitter', () => {
-  it('processes input through a pipeline', async () => {
-    const httpPipe = createHttpPipe({
-      url: 'https://reqres.in/api/users',
-      method: HttpMethod.POST,
-    })
-    const transmitter = createTransmitter({
-      pipeline: [httpPipe],
-    })
-    const data = {
-      name: 'morpheus',
-      job: 'leader',
-    }
-    const [err, json] = await transmitter.push(data)
-
-    expect(err).toBeNull()
-    expect(json).toMatchObject({
-      id: expect.any(String),
-      createdAt: expect.any(String),
-    })
-  })
+// @ts-ignore
+global.fetch = async (...data: any[]) => ({
+  ok: data,
+  json: async () => ({ data }),
 })
+
+test('transmitter processes input through a pipeline', async () => {
+  // @ts-ignore
+  global.fetch = async (...data: any[]) => ({
+    ok: data,
+    json: async () => ({ data }),
+  })
+
+  const httpPipe = createHttpPipe({
+    url: 'https://reqres.in/api/users',
+    // @ts-ignore
+    method: 'POST',
+  })
+  const transmitter = createTransmitter({
+    pipeline: [httpPipe],
+  })
+  const data = {
+    name: 'morpheus',
+    job: 'leader',
+  }
+  const [err, json] = await transmitter.push(data)
+
+  assert.equal(err, null)
+  assert.is(json.data[1].body, '{"name":"morpheus","job":"leader"}')
+})
+
+test.run()

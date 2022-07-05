@@ -1,99 +1,96 @@
-import 'cross-fetch/polyfill'
+import { test } from 'uvu'
+import * as assert from 'uvu/assert'
 
-import { HttpMethod } from '@qiwi/substrate'
-
-import { createHttpPipe, ITransmittable } from '../../../main/ts'
+import { createHttpPipe, ITransmittable } from '../../../main/ts/index'
 
 const noop = () => {
   /* noop */
 }
 
-describe('httpPipe', () => {
-  jest.setTimeout(10000)
+// @ts-ignore
+global.fetch = async (...data: any[]) => ({
+  ok: data,
+  json: async () => ({ data }),
+})
 
-  it('factory returns IPipe', () => {
-    const httpPipe = createHttpPipe({
-      url: 'https://reqres.in/api/users/2',
-      method: HttpMethod.GET,
-    })
-
-    expect(httpPipe.type).toBe('http')
-    expect(httpPipe.execute).toEqual(expect.any(Function))
+test('httpPipe factory returns IPipe', () => {
+  const httpPipe = createHttpPipe({
+    url: 'https://reqres.in/api/users/2',
+    // @ts-ignore
+    method: 'GET',
   })
 
-  it('returns remote data if succeeds', async () => {
-    const httpPipe = createHttpPipe({
-      url: 'https://reqres.in/api/users/2',
-      method: HttpMethod.GET,
-    })
-    const transmittable: ITransmittable = { data: null, meta: { history: [] } }
+  assert.is(httpPipe.type, 'http')
+  assert.instance(httpPipe.execute, Function)
+})
 
-    return expect(httpPipe.execute(transmittable, noop)).resolves.toMatchObject(
-      [
-        null,
+test('httpPipe returns remote data if succeeds', async () => {
+  const httpPipe = createHttpPipe({
+    url: 'https://reqres.in/api/users/2',
+    // @ts-ignore
+    method: 'GET',
+  })
+  const transmittable: ITransmittable = { data: null, meta: { history: [] } }
+
+  assert.equal(await httpPipe.execute(transmittable, noop), [
+    null,
+    {
+      data: [
+        'https://reqres.in/api/users/2',
         {
-          data: {
-            id: 2,
-            email: 'janet.weaver@reqres.in',
-            first_name: 'Janet',
-            last_name: 'Weaver',
-            avatar: expect.any(String),
-          },
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+          body: null,
         },
       ],
-    )
-  })
-
-  it('execute functions passed in header', async () => {
-    const spy = jest.spyOn(window, 'fetch')
-
-    const httpPipe = createHttpPipe({
-      url: 'https://reqres.in/api/users/1',
-      method: HttpMethod.GET,
-      headers: {
-        a: 'foo',
-        b: () => 'bar',
-      },
-    })
-    const transittable: ITransmittable = {
-      data: { message: 'bar' },
-      meta: { history: [] },
-    }
-
-    await httpPipe.execute(transittable, noop)
-    expect(spy).toHaveBeenCalledWith('https://reqres.in/api/users/1', {
-      method: HttpMethod.GET,
-      body: '{"message":"bar"}',
-      headers: {
-        'Content-Type': 'application/json',
-        a: 'foo',
-        b: 'bar',
-      },
-    })
-
-    spy.mockClear()
-  })
-
-  it('handles 4** status as error', () => {
-    const httpPipe = createHttpPipe({
-      url: 'https://github.com',
-      method: HttpMethod.POST,
-    })
-    const transittable: ITransmittable = { data: 'test', meta: { history: [] } }
-
-    return expect(httpPipe.execute(transittable, noop)).resolves.toEqual([
-      new Error('Not Found'),
-      null,
-    ])
-  })
-
-  it('returns an error otherwise', () => {
-    const httpPipe = createHttpPipe({ url: 'foobar', method: HttpMethod.GET })
-    const transittable: ITransmittable = { data: null, meta: { history: [] } }
-
-    return expect(httpPipe.execute(transittable, noop)).resolves.toEqual([
-      new TypeError('Only absolute URLs are supported'),
-      null,
-    ])
-  })
+    },
+  ])
 })
+
+test('httpPipe execute functions passed in header', async () => {
+  const httpPipe = createHttpPipe({
+    url: 'https://reqres.in/api/users/1',
+    // @ts-ignore
+    method: 'GET',
+    headers: {
+      a: 'foo',
+      b: () => 'bar',
+    },
+  })
+  const transittable: ITransmittable = {
+    data: { message: 'bar' },
+    meta: { history: [] },
+  }
+
+  assert.equal(await httpPipe.execute(transittable, noop), [
+    null,
+    {
+      data: [
+        'https://reqres.in/api/users/1',
+        {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json', a: 'foo', b: 'bar' },
+          body: '{"message":"bar"}',
+        },
+      ],
+    },
+  ])
+})
+
+test('httpPipe returns an error otherwise', async () => {
+  const error = new Error('test')
+  // @ts-ignore
+  global.fetch = async () => Promise.reject(error)
+
+  const httpPipe = createHttpPipe({
+    url: 'foobar',
+    // @ts-ignore
+    method: 'GET',
+  })
+  const transittable: ITransmittable = { data: null, meta: { history: [] } }
+
+  const res = await httpPipe.execute(transittable, noop)
+  assert.is(res[0], error)
+})
+
+test.run()
