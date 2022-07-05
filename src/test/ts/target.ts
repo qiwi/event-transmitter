@@ -1,7 +1,11 @@
 import { test } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import { createHttpPipe,createTransmitter, createFrontLogProxyTransmitter } from '../../../target/ts/index'
+import {
+  createFrontLogProxyTransmitter,
+  createHttpPipe,
+  createTransmitter,
+} from '../../../target/ts/index'
 
 test('index.js (target)', () => {
   test('has proper export', () => {
