@@ -7,7 +7,7 @@ import {
   createTransmitter,
 } from '../../../target/ts/index'
 
-test('index.js (target)', () => {
+test('index.ts (target)', () => {
   test('has proper export', () => {
     assert.instance(createTransmitter, Function)
     assert.instance(createHttpPipe, Function)
