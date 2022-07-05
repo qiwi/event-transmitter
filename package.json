@@ -3,9 +3,14 @@
   "version": "1.16.1",
   "description": "Async adapter to save & deliver reasonable events to some endpoint",
   "private": false,
-  "main": "target/es5/index.js",
+  "main": "./target/es5/index.cjs",
   "source": "target/ts/index.ts",
   "type": "module",
+  "exports": {
+    "require": "./target/es5/index.cjs",
+    "import": "./target/es6/index.mjs",
+    "module": "./target/es6/index.mjs"
+  },
   "types": "typings/index.d.ts",
   "typescript": {
     "definition": "typings/index.d.ts"
