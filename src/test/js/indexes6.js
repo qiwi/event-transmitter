@@ -1,7 +1,7 @@
 import { test } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import { createFrontLogProxyTransmitter,createHttpPipe,createTransmitter } from '../../../target/es6/index.mjs'
+import { createFrontLogProxyTransmitter,createHttpPipe,createTransmitter } from '../../../target/es6/index'
 
 test('index es6 (target)', () => {
   test('has proper export', () => {

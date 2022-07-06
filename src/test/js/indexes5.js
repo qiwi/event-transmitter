@@ -1,7 +1,7 @@
 import { test } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import { createHttpPipe,createTransmitter } from '../../../target/es5/index.cjs'
+import { createHttpPipe,createTransmitter } from '../../../target/es5/index'
 
 test('index es5 (target)', () => {
   test('has proper export', () => {

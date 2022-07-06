@@ -3,13 +3,12 @@
   "version": "1.16.1",
   "description": "Async adapter to save & deliver reasonable events to some endpoint",
   "private": false,
-  "main": "./target/es5/index.cjs",
+  "main": "./target/es5/index.js",
   "source": "target/ts/index.ts",
-  "type": "module",
   "exports": {
-    "require": "./target/es5/index.cjs",
-    "import": "./target/es6/index.mjs",
-    "module": "./target/es6/index.mjs"
+    "require": "./target/es5/index.js",
+    "import": "./target/es6/index.js",
+    "module": "./target/es6/index.js"
   },
   "types": "typings/index.d.ts",
   "typescript": {
@@ -31,14 +30,13 @@
     "test:depcheck": "npx depcheck --ignores tslib,@swissquote/crafty-preset-jest,@types/jest,@types/node,typedoc",
     "test:depaudit": "yarn audit --groups dependencies --level=moderate; [[ $? -ge 4 ]] && exit 1 || exit 0",
     "test:depauditfix": "npx yarn-audit-fix --audit-level=moderate",
-    "test": "yarn test:unit && yarn lint",
-    "test:unit": "c8 -r html -r text -r lcov loadr -- uvu 'src/test/' -i fixturess",
+    "test": "yarn test:unit && yarn test:target && yarn lint",
+    "test:unit": "c8 -r html -r text -r lcov loadr -- uvu 'src/test/ts'",
+    "test:target": "uvu -r esm 'src/test/js'",
     "prebuild": "yarn clean && npx buildstamp --git --out.path buildstamp.json",
     "build": "npm-run-all -p -l build:es5 build:es6 build:ts build:libdef build:bundle docs",
-    "build:es5": "mkdirp target/es5 && tsc -p tsconfig.es5.json && yarn build:es5:ext",
-    "build:es5:ext": "tsc-esm-fix --target=target/es5 --ext=.cjs",
-    "build:es6": "mkdirp target/es6 && tsc -p tsconfig.es6.json && yarn build:es6:ext",
-    "build:es6:ext": "tsc-esm-fix --target=target/es6 --ext=.mjs",
+    "build:es5": "mkdirp target/es5 && tsc -p tsconfig.es5.json && yarn",
+    "build:es6": "mkdirp target/es6 && tsc -p tsconfig.es6.json && yarn",
     "build:ts": "globby-cp ./src/main/ts/ ./target/ts/",
     "build:bundle": "microbundle --tsconfig tsconfig.es5.json build src/main/ts/index.ts -o target/bundle",
     "build:libdef": "libdefkit --tsconfig=tsconfig.es5.json --tsconfig=tsconfig.es6.json",
@@ -63,13 +61,13 @@
   },
   "homepage": "https://github.com/qiwi/event-transmitter#readme",
   "dependencies": {
+    "@qiwi/substrate": "^1.20.14",
     "fast-luhn": "^2.0.0",
     "lodash.once": "^4.1.1",
     "lodash.set": "^4.3.2",
     "nanoid": "3.3.4",
     "safe-json-stringify": "^1.2.0",
-    "tslib": "^2.4.0",
-    "@qiwi/substrate": "^1.20.14"
+    "tslib": "^2.4.0"
   },
   "devDependencies": {
     "@qiwi/libdefkit": "^4.0.8",
@@ -84,6 +82,7 @@
     "eslint": "^8.18.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-qiwi": "^1.17.3",
+    "esm": "^3.2.25",
     "globby-cp": "^0.0.2",
     "loadr": "^0.1.1",
     "microbundle": "^0.15.0",
