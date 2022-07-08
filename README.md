@@ -11,20 +11,6 @@ yarn add @qiwi/event-transmitter
 ```
 
 ## Usage
-```ts
-import {createTransmitter, createHttpPipe, IPipe} from '@qiwi/event-transmitter'
-
-const httpPipe: IPipe = createFetchPusher({
-  url: 'https://example.qiwi.com/event',
-  method: 'POST'
-})
-const transmitter = createTransmitter({
-  pipeline: [httpPipe]
-})
-const event: IClientEventDto = {...}
-
-transmitter.push(event)
-```
 
 ### FLP integration
 ```ts
@@ -41,6 +27,55 @@ transmitter.info('some-event')
 transmitter.debug('debug')
 transmitter.warn('warn')
 transmitter.trace('trace')
+```
+
+### FLP integration with React
+```javascript
+import { createFrontLogProxyTransmitter } from '@qiwi/event-transmitter'
+
+const transmitter = createFrontLogProxyTransmitter({
+  appName: 'my=app',
+  url: 'https://example.qiwi.com/event'
+})
+
+class ErrorBoundary extends Component {
+  public state = {
+    hasError: false
+  };
+
+  public static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  public componentDidCatch(error, errorInfo) {
+    transmitter.error({message: error, details: {errorInfo}})
+  }
+
+  public render() {
+    if (this.state.hasError) {
+      return <h1>Sorry.. there was an error</h1>;
+    }
+
+    return this.props.children;
+  }
+}
+```
+
+### Custom usage
+```ts
+import {createTransmitter, createHttpPipe, IPipe} from '@qiwi/event-transmitter'
+
+const httpPipe: IPipe = createHttpPipe({
+  url: 'https://example.qiwi.com/event',
+  method: 'POST'
+})
+
+const transmitter = createTransmitter({
+  pipeline: [httpPipe]
+})
+const event: IClientEventDto = {...}
+
+transmitter.push(event)
 ```
 See also [https://github.com/qiwi/flp-njs](https://github.com/qiwi/flp-njs)
 
