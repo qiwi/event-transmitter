@@ -78,3 +78,7 @@ export {
   eventifyPipe,
   createFrontLogProxyTransmitter,
 }
+
+export type {
+  IClientEventDtoFlp
+}

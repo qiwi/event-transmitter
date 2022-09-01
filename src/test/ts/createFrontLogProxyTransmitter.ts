@@ -97,4 +97,20 @@ test('createFrontLogProxyTransmitter correctly call fetch with Error', async () 
   }
 })
 
+test('createFrontLogProxyTransmitter does not throw an error on several calls', async () => {
+  const transmitter = createFrontLogProxyTransmitter({
+    appName: 'testApp',
+    url: 'https://reqres.in/api/users/2',
+  })
+
+  const callAndCheck = async (message: string) => {
+    const [, res] = await transmitter.info({ message })
+    assert.equal(res.message, message)
+  }
+
+  await callAndCheck('foo')
+  await callAndCheck('bar')
+  await callAndCheck('baz')
+})
+
 test.run()
