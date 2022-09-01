@@ -11,10 +11,11 @@ export const createHttpPipeFallback = (opts: IHttpPipeOpts[]): IPipe => {
     throw new Error('createHttpPipeFallback opts must not be empty')
   }
 
+  const httpPipes = opts.map(createHttpPipe)
   return {
     type,
     execute(transmittable: ITransmittable): IPromise<IPipeOutput> {
-      return executeFailproof(transmittable, opts.map(createHttpPipe))
+      return executeFailproof(transmittable, [...httpPipes])
     },
   }
 }
