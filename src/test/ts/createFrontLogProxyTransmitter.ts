@@ -104,8 +104,9 @@ test('createFrontLogProxyTransmitter does not throw an error on several calls', 
   })
 
   const callAndCheck = async (message: string) => {
-    const [, res] = await transmitter.info({ message })
+    const [err, res] = await transmitter.info({ message })
     assert.equal(res.message, message)
+    assert.equal(err, null)
   }
 
   await callAndCheck('foo')
