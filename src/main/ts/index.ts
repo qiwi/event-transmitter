@@ -1,6 +1,7 @@
 import { IClientEventDto, LogLevel } from '@qiwi/substrate'
 import { nanoid } from 'nanoid'
 
+import { IPipeOutput } from './interfaces'
 import { createFlpPipeline, eventifyPipe } from './pipes/flp'
 import { createTransmittable, createTransmitter } from './transmitter'
 import { getCookie, setCookie } from './utils/cookie'
@@ -66,7 +67,7 @@ const createFrontLogProxyTransmitter = ({
       })
     }
     return acc
-  }, {} as Record<LogLevel, (data: IClientEventDtoFlp) => Promise<any>>)
+  }, {} as Record<LogLevel, (data: IClientEventDtoFlp) => Promise<IPipeOutput>>)
 }
 
 export {
