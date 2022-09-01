@@ -15,7 +15,7 @@ export const createHttpPipeFallback = (opts: IHttpPipeOpts[]): IPipe => {
   return {
     type,
     execute(transmittable: ITransmittable): IPromise<IPipeOutput> {
-      return executeFailproof(transmittable, httpPipes)
+      return executeFailproof(transmittable, [...httpPipes])
     },
   }
 }
