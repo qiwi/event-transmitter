@@ -2,6 +2,7 @@ import { IClientEventDto, LogLevel } from '@qiwi/substrate'
 
 import { IPipe, ITransmittable, TPipeline } from '../interfaces'
 import { identity } from '../utils/index'
+import { createBrowserLocationHrefPipe } from './browserLocationHref'
 import { createDeviceInfoPipe } from './deviceInfo'
 import { createHttpBatchPipe, IHttpBatchPipeOpts } from './httpBatch'
 import { panMaskerPipe } from './masker'
@@ -82,5 +83,6 @@ export const createFlpPipeline = ({
   panMaskerPipe,
   eventifyPipe,
   createDeviceInfoPipe(),
+  createBrowserLocationHrefPipe(),
   createHttpBatchPipe({ url, batchUrl, headers, method }),
 ]
