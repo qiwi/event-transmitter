@@ -11,7 +11,7 @@ test('browserLocationHref is returned by factory', async () => {
   )
   assert.equal(res, [
     null,
-    { details: { href: 'https://github.com/qiwi/event-transmitter' } },
+    { meta: { location: 'https://github.com/qiwi/event-transmitter' } },
   ])
 })
 
