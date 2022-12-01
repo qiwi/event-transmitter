@@ -10,6 +10,7 @@ export { createHttpPipeFallback } from './pipes/httpFallback'
 export { createMaskerPipe, panMaskerPipe } from './pipes/masker'
 export { createHttpBatchPipe } from './pipes/httpBatch'
 export { createDeviceInfoPipe } from './pipes/deviceInfo'
+export { createBrowserLocationHrefPipe } from './pipes/browserLocationHref'
 export * from './interfaces'
 export * from './pipes/index'
 
@@ -80,6 +81,4 @@ export {
   createFrontLogProxyTransmitter,
 }
 
-export type {
-  IClientEventDtoFlp
-}
+export type { IClientEventDtoFlp }

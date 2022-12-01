@@ -13,6 +13,10 @@ global.window = {
   navigator: {
     userAgent: '',
   },
+  // @ts-ignore
+  location: {
+    href: 'https://github.com/qiwi/event-transmitter',
+  },
 }
 
 // @ts-ignore
@@ -35,7 +39,6 @@ test('createFrontLogProxyTransmitter correctly call fetch with data', async () =
     code: '211',
     tags: ['frontend', 'qiwi'],
   })
-
   res.details.appContextId = ''
   res.details.clientId = ''
 
