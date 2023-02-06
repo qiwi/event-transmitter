@@ -13,6 +13,7 @@ export interface ITransmittable {
   err?: any
   meta: {
     history: Array<IHistoryEntry>
+    [key: string]: any
   }
 }
 

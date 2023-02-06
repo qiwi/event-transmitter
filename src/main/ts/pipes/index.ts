@@ -2,16 +2,16 @@ import once from 'lodash.once'
 
 import { IPipeOutput, ITransmittable, TPipeline } from '../interfaces'
 
-export const getPipelineId = (pipeline: TPipeline): string => {
-  return pipeline.reduce((acc, pipe, index) => {
-    return (
+export const getPipelineId = (pipeline: TPipeline): string =>
+  pipeline.reduce((acc, pipe, index) =>
+    (
       acc +
       (Array.isArray(pipe)
         ? `{${index}-[${getPipelineId(pipe)}]}`
         : `{${index}-${pipe.type}}`)
-    )
-  }, '')
-}
+    ),
+    ''
+  )
 
 export const execute = async (
   transmittable: ITransmittable,
@@ -21,12 +21,12 @@ export const execute = async (
 ): Promise<IPipeOutput> => {
   const pipe = pipeline[0]
 
-  if (Array.isArray(pipe)) {
-    return execute(transmittable, pipe)
-  }
-
   if (!pipe) {
     return [null, null]
+  }
+
+  if (Array.isArray(pipe)) {
+    return execute(transmittable, pipe)
   }
 
   const next = once(([err, data]: IPipeOutput) =>

@@ -72,8 +72,6 @@ const createFrontLogProxyTransmitter = ({
 }
 
 export {
-  getCookie,
-  setCookie,
   createTransmitter,
   createTransmittable,
   createFlpPipeline,
