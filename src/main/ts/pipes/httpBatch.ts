@@ -1,4 +1,4 @@
-import { Extends, HttpMethod } from '@qiwi/substrate'
+import { HttpMethod } from '@qiwi/substrate'
 
 import { IPipe } from '../interfaces'
 import { IHttpHeaders } from './http'
@@ -11,8 +11,8 @@ export type IHttpBatchPipeOpts = {
   headers?: IHttpHeaders
 }
 
-const asArray = <T>(value: T): Extends<T, any[], T, T[]> =>
-  (Array.isArray(value) ? value : [value]) as Extends<T, any[], T, T[]>
+const asArray = <T>(value: T): Array<T extends any[] ? T[number] : T> =>
+  (Array.isArray(value) ? value : [value]) as any
 
 export const createHttpBatchPipe = ({
   url,
@@ -25,7 +25,7 @@ export const createHttpBatchPipe = ({
     .map((url) => ({ url, headers, method }))
 
   const batchOpts = batchUrl
-    ? (asArray(batchUrl) as string[]).map((url) => ({ url, headers, method }))
+    ? asArray(batchUrl).map((url) => ({ url, headers, method }))
     : opts
 
   const httpPipe = createHttpPipeFallback(opts)
