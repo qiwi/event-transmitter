@@ -25,7 +25,7 @@ export interface ITransmitter {
 
 export interface IPipe {
   type: string
-  execute: (data: ITransmittable, next: ICallable) => Promise<IPipeOutput>
+  execute: (data: ITransmittable, next: ICallable) => IPromise<IPipeOutput>
 }
 
 export type TPipeline = Array<IPipe | TPipeline>
