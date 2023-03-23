@@ -63,7 +63,8 @@ const createFrontLogProxyTransmitter = ({
         typeof data === 'number' ||
         typeof data === 'boolean' ||
         data === null ||
-        data === undefined
+        data === undefined ||
+        data instanceof Error
       ) {
         return transmitter.push(({
           message: data,
@@ -71,15 +72,6 @@ const createFrontLogProxyTransmitter = ({
           meta: { appName },
           level,
         }))
-      }
-
-      if (data instanceof Error) {
-        return transmitter.push({
-          message: data,
-          level,
-          details: { appContextId, clientId },
-          meta: { appName },
-        })
       }
 
       return transmitter.push({
