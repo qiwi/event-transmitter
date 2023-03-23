@@ -61,6 +61,7 @@ const createFrontLogProxyTransmitter = ({
       if (
         typeof data === 'string' ||
         typeof data === 'number' ||
+        typeof data === 'boolean' ||
         data === null ||
         data === undefined
       ) {

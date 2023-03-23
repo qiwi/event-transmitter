@@ -180,4 +180,19 @@ test('createFrontLogProxyTransmitter accepts number', async () => {
   assert.equal(res.level, 'info')
 })
 
+test('createFrontLogProxyTransmitter accepts boolean', async () => {
+  const transmitter = createFrontLogProxyTransmitter({
+    appName: 'testApp',
+    url: 'https://reqres.in/api/users/2',
+  })
+
+  const [err, res] = await transmitter.info(true)
+  assert.equal(err, null)
+  assert.equal(res.message, 'true')
+  assert.ok(res.details.clientId)
+  assert.ok(res.details.appContextId)
+  assert.equal(res.meta, { appName: 'testApp' })
+  assert.equal(res.level, 'info')
+})
+
 test.run()
