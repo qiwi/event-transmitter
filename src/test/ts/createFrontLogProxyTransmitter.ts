@@ -117,4 +117,84 @@ test('createFrontLogProxyTransmitter does not throw an error on several calls', 
   await callAndCheck('baz')
 })
 
+test('createFrontLogProxyTransmitter accepts error as input', async () => {
+  const transmitter = createFrontLogProxyTransmitter({
+    appName: 'testApp',
+    url: 'https://reqres.in/api/users/2',
+  })
+
+  const error = new Error('foo')
+  const [err, res] = await transmitter.error(error)
+  assert.equal(err, null)
+  assert.equal(res.message, error.message)
+  assert.equal(res.stacktrace, error.stack)
+  assert.ok(res.details.clientId)
+  assert.ok(res.details.appContextId)
+  assert.equal(res.meta, { appName: 'testApp' })
+  assert.equal(res.level, 'error')
+})
+
+test('createFrontLogProxyTransmitter accepts different ', async () => {
+  const transmitter = createFrontLogProxyTransmitter({
+    appName: 'testApp',
+    url: 'https://reqres.in/api/users/2',
+  })
+
+  const error = new Error('foo')
+  const [err, res] = await transmitter.error(error)
+  assert.equal(err, null)
+  assert.equal(res.message, error.message)
+  assert.equal(res.stacktrace, error.stack)
+  assert.ok(res.details.clientId)
+  assert.ok(res.details.appContextId)
+  assert.equal(res.meta, { appName: 'testApp' })
+  assert.equal(res.level, 'error')
+})
+
+test('createFrontLogProxyTransmitter does not throw on invalid arg type', async () => {
+  const transmitter = createFrontLogProxyTransmitter({
+    appName: 'testApp',
+    url: 'https://reqres.in/api/users/2',
+  })
+
+  await assert.not.throws(async () => {
+    // @ts-ignore
+    await transmitter.info(undefined) // eslint-disable-line unicorn/no-useless-undefined
+  })
+  await assert.not.throws(async () => {
+    // @ts-ignore
+    await transmitter.info(null)
+  })
+})
+
+test('createFrontLogProxyTransmitter accepts string', async () => {
+  const transmitter = createFrontLogProxyTransmitter({
+    appName: 'testApp',
+    url: 'https://reqres.in/api/users/2',
+  })
+
+  const [err, res] = await transmitter.info('string')
+  assert.equal(err, null)
+  assert.equal(res.message, 'string')
+  assert.ok(res.details.clientId)
+  assert.ok(res.details.appContextId)
+  assert.equal(res.meta, { appName: 'testApp' })
+  assert.equal(res.level, 'info')
+})
+
+test('createFrontLogProxyTransmitter accepts number', async () => {
+  const transmitter = createFrontLogProxyTransmitter({
+    appName: 'testApp',
+    url: 'https://reqres.in/api/users/2',
+  })
+
+  const [err, res] = await transmitter.info(42)
+  assert.equal(err, null)
+  assert.equal(res.message, 42)
+  assert.ok(res.details.clientId)
+  assert.ok(res.details.appContextId)
+  assert.equal(res.meta, { appName: 'testApp' })
+  assert.equal(res.level, 'info')
+})
+
 test.run()

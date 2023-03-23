@@ -35,7 +35,7 @@ const createFrontLogProxyTransmitter = ({
   url,
 }: {
   appName: string
-  url: string
+  url?: string
 }) => {
   const appContextId = nanoid()
   const clientId = getClientId(appName)
@@ -57,18 +57,39 @@ const createFrontLogProxyTransmitter = ({
     LogLevel.DEBUG,
     LogLevel.WARN,
   ].reduce((acc, level) => {
-    acc[level] = (data: IClientEventDtoFlp) => {
-      const { details, meta } = data
+    acc[level] = (data: IClientEventDtoFlp | Error | string | number) => {
+      if (
+        typeof data === 'string' ||
+        typeof data === 'number' ||
+        data === null ||
+        data === undefined
+      ) {
+        return transmitter.push(({
+          message: data,
+          details: { appContextId, clientId },
+          meta: { appName },
+          level,
+        }))
+      }
+
+      if (data instanceof Error) {
+        return transmitter.push({
+          message: data,
+          level,
+          details: { appContextId, clientId },
+          meta: { appName },
+        })
+      }
 
       return transmitter.push({
         ...data,
         level,
-        details: { ...details, appContextId, clientId },
-        meta: { ...meta, appName },
+        details: { ...data.details, appContextId, clientId },
+        meta: { ...data.meta, appName },
       })
     }
     return acc
-  }, {} as Record<LogLevel, (data: IClientEventDtoFlp) => Promise<IPipeOutput>>)
+  }, {} as Record<LogLevel, (data: IClientEventDtoFlp | Error | string | number) => Promise<IPipeOutput>>)
 }
 
 export {
