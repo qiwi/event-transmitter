@@ -3,14 +3,13 @@ import once from 'lodash.once'
 import { IPipeOutput, ITransmittable, TPipeline } from '../interfaces'
 
 export const getPipelineId = (pipeline: TPipeline): string =>
-  pipeline.reduce((acc, pipe, index) =>
-    (
+  pipeline.reduce(
+    (acc, pipe, index) =>
       acc +
       (Array.isArray(pipe)
         ? `{${index}-[${getPipelineId(pipe)}]}`
-        : `{${index}-${pipe.type}}`)
-    ),
-    ''
+        : `{${index}-${pipe.type}}`),
+    '',
   )
 
 export const execute = async (

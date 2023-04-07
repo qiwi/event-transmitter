@@ -1,7 +1,7 @@
 import { IClientEventDto, LogLevel } from '@qiwi/substrate'
 import { nanoid } from 'nanoid'
 
-import { IPipeOutput } from './interfaces'
+import { IPipeOutput, TPipeline } from './interfaces'
 import { createFlpPipeline, eventifyPipe } from './pipes/flp'
 import { createTransmittable, createTransmitter } from './transmitter'
 import { getCookie, setCookie } from './utils/cookie'
@@ -33,9 +33,11 @@ type IClientEventDtoFlp = Omit<
 const createFrontLogProxyTransmitter = ({
   appName,
   url,
+  pipeline,
 }: {
   appName: string
   url?: string
+  pipeline?: TPipeline
 }) => {
   const appContextId = nanoid()
   const clientId = getClientId(appName)
@@ -44,10 +46,12 @@ const createFrontLogProxyTransmitter = ({
   }
 
   const transmitter = createTransmitter({
-    pipeline: createFlpPipeline({
-      url,
-      method: 'POST' as any,
-    }),
+    pipeline:
+      pipeline ||
+      createFlpPipeline({
+        url,
+        method: 'POST' as any,
+      }),
   })
 
   return [
@@ -66,12 +70,12 @@ const createFrontLogProxyTransmitter = ({
         data === undefined ||
         data instanceof Error
       ) {
-        return transmitter.push(({
+        return transmitter.push({
           message: data,
           details: { appContextId, clientId },
           meta: { appName },
           level,
-        }))
+        })
       }
 
       return transmitter.push({
