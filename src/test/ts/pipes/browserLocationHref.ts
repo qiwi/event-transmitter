@@ -7,7 +7,9 @@ test('browserLocationHref is returned by factory', async () => {
   const browserLocationHrefPipe = createBrowserLocationHrefPipe()
   const res = await browserLocationHrefPipe.execute(
     { data: {}, err: null, meta: { history: [] } },
-    () => { /* noop */ },
+    () => {
+      /* noop */
+    },
   )
   assert.equal(res, [
     null,
