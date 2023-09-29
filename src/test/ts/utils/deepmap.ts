@@ -49,4 +49,20 @@ test('deepMap handle error objects', () => {
   )
 })
 
+test('deepMap handles accessor property descriptor', async () => {
+  const objectWithDataPropertyDescriptor = {}
+  Object.defineProperty(objectWithDataPropertyDescriptor, 'bar', { value: 42  })
+  assert.equal(
+    deepMap(objectWithDataPropertyDescriptor, (el) => el + 'foo').bar,
+    '42foo',
+  )
+
+  const objectWithAccessorPropertyDescriptor = {}
+  Object.defineProperty(objectWithAccessorPropertyDescriptor, 'bar', { get: () => 42  })
+  assert.equal(
+    deepMap(objectWithAccessorPropertyDescriptor, (el) => el + 'foo').bar,
+    '42foo',
+  )
+})
+
 test.run()
