@@ -20,14 +20,14 @@ export function deepMap(
         return
       }
 
-      const value = descriptor.get ? descriptor.get() : descriptor.value
       // descriptor cannot contain both accessor method and value
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty#description
-      delete descriptor.get
-      delete descriptor.set
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { get, set, ...rest } = descriptor
+      const value = get ? get() : descriptor.value
 
       Object.defineProperty(n, key, {
-        ...descriptor,
+        ...rest,
         value: deepMap(value, fn, refs, key),
       })
     })
